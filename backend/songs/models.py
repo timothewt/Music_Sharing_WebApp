@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from users.models import User
 
 
 class Album(models.Model):
@@ -17,7 +17,7 @@ class Album(models.Model):
 
 class Song(models.Model):
 
-	date_uploaded = models.DateTimeField(auto_now_add=True)
+	date_uploaded = models.DateTimeField(auto_now_add=True, editable=False)
 	release_year = models.IntegerField()
 	name = models.CharField(max_length=255)
 	artist = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -52,3 +52,32 @@ class AlbumTag(models.Model):
 
 	def __str__(self):
 		return self.tag
+
+
+class Playlist(models.Model):
+
+	date_created = models.DateTimeField(auto_now_add=True)
+	date_updated = models.DateTimeField(auto_now=True)
+	name = models.CharField(max_length=255)
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	description = models.TextField(blank=True)
+
+	class Meta:
+		constraints = [
+			models.UniqueConstraint(
+				fields=['name', 'user'],
+				name='Unique playlist names for each user'
+			)
+		]
+
+	def __str__(self):
+		return f"{self.name} by {self.user}"
+
+
+class PlaylistElement(models.Model):
+
+	playlist = models.ForeignKey(Playlist, on_delete=models.CASCADE)
+	song = models.ForeignKey(Song, on_delete=models.CASCADE)
+
+	def __str__(self):
+		return f"Song {self.song} in playlist {self.playlist}"

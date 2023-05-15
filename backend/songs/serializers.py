@@ -1,5 +1,5 @@
-from rest_framework.serializers import ModelSerializer, SlugRelatedField
-from songs.models import Song, Album, SongTag, AlbumTag
+from rest_framework.serializers import ModelSerializer
+from songs.models import Song, Album, SongTag, AlbumTag, Playlist, PlaylistElement
 
 
 class AlbumTagSerializer(ModelSerializer):
@@ -27,4 +27,18 @@ class SongSerializer(ModelSerializer):
 
 	class Meta:
 		model = Song
+		fields = '__all__'
+
+
+class PlaylistSerializer(ModelSerializer):
+
+	class Meta:
+		model = Playlist
+		fields = '__all__'
+
+
+class PlaylistElementSerializer(ModelSerializer):
+
+	class Meta:
+		model = PlaylistElement
 		fields = '__all__'
