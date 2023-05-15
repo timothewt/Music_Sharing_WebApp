@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 
-from songs.models import Album, Song, AlbumTag, SongTag
-from songs.serializers import AlbumSerializer, SongSerializer, AlbumTagSerializer, SongTagSerializer
+from songs.models import Album, Song, AlbumTag, SongTag, Playlist, PlaylistElement
+from songs.serializers import AlbumSerializer, SongSerializer, AlbumTagSerializer, SongTagSerializer, PlaylistSerializer, PlaylistElementSerializer
 
 
 class AlbumViewset(ModelViewSet):
@@ -41,3 +41,20 @@ class SongTagViewset(ModelViewSet):
 
 	def get_queryset(self):
 		return SongTag.objects.all()
+
+
+class PlaylistViewset(ModelViewSet):
+
+	serializer_class = PlaylistSerializer
+
+	def get_queryset(self):
+		return Playlist.objects.all()
+
+
+
+class PlaylistElementViewset(ModelViewSet):
+
+	serializer_class = PlaylistElementSerializer
+
+	def get_queryset(self):
+		return PlaylistElement.objects.all()
