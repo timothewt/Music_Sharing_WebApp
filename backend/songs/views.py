@@ -1,9 +1,12 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import permission_classes
 
 from songs.models import Album, Song, AlbumTag, SongTag, Playlist, PlaylistElement
 from songs.serializers import AlbumSerializer, SongSerializer, AlbumTagSerializer, SongTagSerializer, PlaylistSerializer, PlaylistElementSerializer
 
 
+# @permission_classes([IsAuthenticated])  # used to only grant access to authenticated users (JWT access token in request header)
 class AlbumViewset(ModelViewSet):
 
 	serializer_class = AlbumSerializer
