@@ -11,6 +11,14 @@ class Album(models.Model):
 	description = models.TextField(blank=True)
 	cover_link = models.CharField(max_length=255, blank=True)
 
+	class Meta:
+		constraints = [
+			models.UniqueConstraint(
+				fields=['name', 'artist'],
+				name='Unique album names for each artist'
+			)
+		]
+
 	def __str__(self):
 		return f"{self.name} by {self.artist}, {self.release_year}"
 
