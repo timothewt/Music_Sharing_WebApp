@@ -9,4 +9,5 @@ class UserViewset(ModelViewSet):
 	serializer_class = UserSerializer
 
 	def get_queryset(self):
+			
 		return User.objects.all()

@@ -16,7 +16,7 @@ class AlbumViewset(ModelViewSet):
 		queryset = Album.objects.all()
 			
 		artist_id = self.request.GET.get('artist_id')
-		if album_id is not None:
+		if artist_id is not None:
 			queryset = queryset.filter(artist_id=artist_id)
 
 		return queryset
@@ -46,7 +46,14 @@ class AlbumTagViewset(ModelViewSet):
 	serializer_class = AlbumTagSerializer
 
 	def get_queryset(self):
-		return AlbumTag.objects.all()
+
+		queryset = AlbumTag.objects.all()
+		
+		album_id = self.request.GET.get('album_id')
+		if album_id is not None:
+			queryset = queryset.filter(album_id=album_id)
+
+		return queryset
 
 
 class SongTagViewset(ModelViewSet):
@@ -54,7 +61,14 @@ class SongTagViewset(ModelViewSet):
 	serializer_class = SongTagSerializer
 
 	def get_queryset(self):
-		return SongTag.objects.all()
+
+		queryset = SongTag.objects.all()
+		
+		song_id = self.request.GET.get('song_id')
+		if song_id is not None:
+			queryset = queryset.filter(song_id=song_id)
+			
+		return queryset
 
 
 class PlaylistViewset(ModelViewSet):
@@ -62,7 +76,14 @@ class PlaylistViewset(ModelViewSet):
 	serializer_class = PlaylistSerializer
 
 	def get_queryset(self):
-		return Playlist.objects.all()
+
+		queryset = Playlist.objects.all()
+
+		user_id = self.request.GET.get('user_id')
+		if user_id is not None:
+			queryset = queryset.filter(user_id=user_id)
+
+		return queryset
 
 
 
@@ -71,4 +92,11 @@ class PlaylistElementViewset(ModelViewSet):
 	serializer_class = PlaylistElementSerializer
 
 	def get_queryset(self):
-		return PlaylistElement.objects.all()
+
+		queryset = PlaylistElement.objects.all()
+
+		playlist_id = self.request.GET.get('playlist_id')
+		if playlist_id is not None:
+			queryset = queryset.filter(playlist_id=playlist_id)
+			
+		return queryset
