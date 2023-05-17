@@ -13,6 +13,14 @@ class Album(models.Model):
 	cover_file = models.ImageField(blank=True)
 	listenings = models.IntegerField(default=0)
 
+	def save(self, *args, **kwargs):
+			
+		super(Album, self).save(*args, **kwargs)
+
+		if bool(self.cover_file.name):  # checks if the file exists
+			self.cover_link = SERVER_URL + self.cover_file.url
+			super(Album, self).save(*args, **kwargs)
+
 	class Meta:
 		constraints = [
 			models.UniqueConstraint(
@@ -36,6 +44,14 @@ class Song(models.Model):
 	duration_ms = models.IntegerField(blank=True, default=0)
 	listenings = models.IntegerField(default=0)
 	lyrics = models.TextField(blank=True)
+
+	def save(self, *args, **kwargs):
+			
+		super(Song, self).save(*args, **kwargs)
+
+		if bool(self.recording_file.name):  # checks if the file exists
+			self.recording_link = SERVER_URL + self.recording_file.url
+			super(Song, self).save(*args, **kwargs)
 
 	def __str__(self):
 		return f"{self.name} by {self.artist} from {self.album.name}, {self.release_year}"
