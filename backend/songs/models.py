@@ -10,6 +10,8 @@ class Album(models.Model):
 	artist = models.ForeignKey(User, on_delete=models.CASCADE)
 	description = models.TextField(blank=True)
 	cover_link = models.CharField(max_length=255, blank=True)
+	cover_file = models.ImageField(blank=True)
+	listenings = models.IntegerField(default=0)
 
 	class Meta:
 		constraints = [
@@ -29,8 +31,11 @@ class Song(models.Model):
 	name = models.CharField(max_length=255)
 	artist = models.ForeignKey(User, on_delete=models.CASCADE)
 	album = models.ForeignKey(Album, on_delete=models.CASCADE)
-	recording_link = models.CharField(max_length=255)
+	recording_link = models.CharField(max_length=255, blank=True)
+	recording_file = models.FileField(upload_to="media/uploaded_songs/", blank=True)
 	duration_ms = models.IntegerField(blank=True, default=0)
+	listenings = models.IntegerField(default=0)
+	lyrics = models.TextField(blank=True)
 
 	def __str__(self):
 		return f"{self.name} by {self.artist} from {self.album.name}, {self.release_year}"

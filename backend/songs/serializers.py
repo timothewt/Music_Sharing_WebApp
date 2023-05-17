@@ -20,14 +20,14 @@ class AlbumSerializer(ModelSerializer):
 	
 	class Meta:
 		model = Album
-		fields = '__all__'
+		fields = ('id','release_year','name','artist','description','cover_link','listenings')
 
 
 class SongSerializer(ModelSerializer):
 
 	class Meta:
 		model = Song
-		fields = '__all__'
+		fields = ('id','release_year','name','artist','album','recording_link','duration_ms','listenings','lyrics')
 
 
 class PlaylistSerializer(ModelSerializer):
