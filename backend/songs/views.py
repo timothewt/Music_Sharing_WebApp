@@ -12,7 +12,14 @@ class AlbumViewset(ModelViewSet):
 	serializer_class = AlbumSerializer
 
 	def get_queryset(self):
-		return Album.objects.all()
+
+		queryset = Album.objects.all()
+			
+		artist_id = self.request.GET.get('artist_id')
+		if album_id is not None:
+			queryset = queryset.filter(artist_id=artist_id)
+
+		return queryset
 
 
 class SongViewset(ModelViewSet):
@@ -26,6 +33,10 @@ class SongViewset(ModelViewSet):
 		album_id = self.request.GET.get('album_id')
 		if album_id is not None:
 			queryset = queryset.filter(album_id=album_id)
+
+		artist_id = self.request.GET.get('artist_id')
+		if album_id is not None:
+			queryset = queryset.filter(artist_id=artist_id)
 		
 		return queryset
 
