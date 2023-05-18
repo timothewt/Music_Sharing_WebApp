@@ -8,7 +8,10 @@ import string
 def insert_artists():  # execute first
 	artists = pd.read_csv("db_data/artists.csv")
 	for i in range(len(artists)):
-		User.objects.create_user(artists.loc[i,"name"], password=''.join(random.choices(string.ascii_uppercase + string.digits, k=16)))
+		artist = User.objects.filter(username=artists.loc[i, "name"]).first()
+		artist.profile_pic_link = artists.loc[i, "profile_pic"]
+		artist.save()
+		# User.objects.create_user(artists.loc[i,"name"], password=''.join(random.choices(string.ascii_uppercase + string.digits, k=16)))
 
 
 def insert_albums():  # execute second
