@@ -35,12 +35,7 @@ export class PlayerComponent {
 
 	ngOnInit(){
 		if (this.currentSong != undefined) {
-			this.audio.src = this.currentSong.recordingLink;
-
-			this.audio.addEventListener('loadedmetadata', () => {  // fetches the length of the song when it has been loaded
-				this.songLength = this.audio.duration;
-				this.songLengthAsStr = this.timeToTimeAsStr(this.songLength);				
-			});
+			this.loadCurrentSong(this.currentSong);
 
 			this.audio.addEventListener('timeupdate', () => { // when the time
 				this.currentTime = this.audio.currentTime;
@@ -48,6 +43,17 @@ export class PlayerComponent {
 			});
 
 		}
+	}
+	
+	private loadCurrentSong(song: Song) {
+		this.currentTime = 0;
+		this.currentTimeAsStr = "0:00";
+		this.audio.src = song.recordingLink;
+
+		this.audio.addEventListener('loadedmetadata', () => {  // fetches the length of the song when it has been loaded
+			this.songLength = this.audio.duration;
+			this.songLengthAsStr = this.timeToTimeAsStr(this.songLength);				
+		});
 	}
 
 	private timeToTimeAsStr(timeInSeconds: number): string {
@@ -67,6 +73,18 @@ export class PlayerComponent {
 	public pauseAudio() {
 		this.currentlyPlaying = false;
 		this.audio.pause();
+	}
+
+	public previousSong() {
+		if (this.currentTime < 1) {
+			console.log("go to previous song");
+		} else {
+			this.audio.currentTime = 0;
+		}
+	}
+
+	public nextSong() {
+		console.log("go to next song");
 	}
 
 	public changeCurrentTime(input: any) {

@@ -15,7 +15,7 @@
 	</div>
 	<div id="player">
 		<div id="player-controls">
-			<button>
+			<button (click)="previousSong()">
 				<img src="../../assets/previous-icon.svg" class="songs-nav">
 			</button>
 			<button (click)="resumeAudio()" *ngIf="!currentlyPlaying">
@@ -24,7 +24,7 @@
 			<button (click)="pauseAudio()" *ngIf="currentlyPlaying">
 				<img src="../../assets/pause-icon.svg">
 			</button>
-			<button>
+			<button (click)="nextSong()">
 				<img src="../../assets/next-icon.svg" class="songs-nav">
 			</button>
 		</div>
