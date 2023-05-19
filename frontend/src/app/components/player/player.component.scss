@@ -51,8 +51,12 @@ $bg_color: #111;
 				cursor: pointer;
 
 				img {
-					filter: invert(100%);
+					filter: invert(80%);
 					height: 30px;
+
+					&:hover {
+					filter: invert(100%);
+					}
 				}
 
 				img.songs-nav {
@@ -154,9 +158,15 @@ $bg_color: #111;
 		button {
 			border: none;
 			background: none;
+			cursor: pointer;
+
 			img {
+				filter: invert(80%);
 				height: 20px;
+
+				&:hover {
 				filter: invert(100%);
+				}
 			}
 		}
 	}

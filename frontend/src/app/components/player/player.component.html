@@ -35,6 +35,9 @@
 		</div>
 	</div>
 	<div id="songs-control">
+		<button>
+			<img src="../../assets/playlist-icon.svg">
+		</button>
 		<button (click)="toggleVolume()">
 			<img src="../../assets/volume-off-icon.svg" *ngIf="volumeDisabled">
 			<img src="../../assets/volume-zero-icon.svg" *ngIf="!volumeDisabled && audio.volume == 0">
