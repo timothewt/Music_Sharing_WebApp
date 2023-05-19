@@ -37,7 +37,6 @@ class Song(models.Model):
 
 	release_year = models.IntegerField()
 	name = models.CharField(max_length=255)
-	artist = models.ForeignKey(User, on_delete=models.CASCADE)
 	album = models.ForeignKey(Album, on_delete=models.CASCADE)
 	recording_link = models.CharField(max_length=255, blank=True)
 	recording_file = models.FileField(upload_to="media/uploaded_songs/", blank=True)
@@ -54,7 +53,7 @@ class Song(models.Model):
 			super(Song, self).save(*args, **kwargs)
 
 	def __str__(self):
-		return f"{self.name} by {self.artist} from {self.album.name}, {self.release_year}"
+		return f"{self.name} by {self.album.artist} from {self.album.name}, {self.release_year}"
 
 
 class AlbumTag(models.Model):
