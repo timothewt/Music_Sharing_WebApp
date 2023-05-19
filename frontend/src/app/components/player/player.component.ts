@@ -17,7 +17,9 @@ export class PlayerComponent {
 	currentTime: number;
 	currentTimeAsStr: string;
 	currentTimeElement: any;
-	currentlyPlaying: boolean = false;
+	currentlyPlaying: boolean;
+	volumeBeforeDisabled: number;
+	volumeDisabled: boolean;
 
 	constructor() {
 		this.currentSong = undefined;
@@ -25,6 +27,10 @@ export class PlayerComponent {
 		this.currentTimeAsStr = "0:00";
 		this.songLength = 0;
 		this.songLengthAsStr = "0:00";
+		this.currentlyPlaying = false;
+		this.audio.volume = .5
+		this.volumeBeforeDisabled = this.audio.volume;
+		this.volumeDisabled = false;
 	}
 
 	ngOnInit(){
@@ -69,5 +75,15 @@ export class PlayerComponent {
 
 	public changeVolume(input: any) {
 		this.audio.volume = input.value;
+	}
+
+	public toggleVolume(){
+		if (this.volumeDisabled) {
+			this.audio.volume = this.volumeBeforeDisabled;
+		} else {
+			this.volumeBeforeDisabled = this.audio.volume;
+			this.audio.volume = 0;
+		}
+		this.volumeDisabled = !this.volumeDisabled;
 	}
 }

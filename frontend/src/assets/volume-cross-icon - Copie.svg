@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 640 512"
+   version="1.1"
+   id="svg132"
+   sodipodi:docname="volume-cross-icon - Copie.svg"
+   width="640"
+   height="512"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs136" />
+  <sodipodi:namedview
+     id="namedview134"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="1.1449053"
+     inkscape:cx="276.00536"
+     inkscape:cy="293.47405"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg132" />
+  <!-- Font Awesome Pro 6.0.0-alpha2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
+  <path
+     id="path130"
+     d="m 287.97852,32 c -7.497,0 -14.8989,2.630901 -20.79688,7.712891 L 164.19922,159.99609 H 32 c -17.671964,0 -32,14.32604 -32,32 v 128.00196 c 0,17.67196 14.328036,32 32,32 h 132.19922 l 102.98242,120.2832 c 5.90598,5.09398 13.31252,7.71875 20.8125,7.71875 4.529,0 9.09205,-0.9685 13.37305,-2.9375 11.34398,-5.21798 18.625,-16.56252 18.625,-29.0625 V 63.994141 c 0,-12.499976 -7.28102,-23.844512 -18.625,-29.0625 C 297.07819,32.962645 292.5115,32 287.97852,32 Z m 0,16 c 2.32198,0 4.58317,0.495799 6.70117,1.466797 5.65598,2.600994 9.3125,8.304356 9.3125,14.527344 V 448 c 0,6.22298 -3.6566,11.92439 -9.3086,14.52539 -2.12898,0.979 -4.37845,1.47461 -6.68945,1.47461 -3.476,0 -6.84403,-1.13303 -9.58203,-3.20703 L 176.35156,341.5918 171.5625,335.99805 H 32 c -8.823982,0 -16,-7.17802 -16,-16 V 191.99609 c 0,-8.82198 7.176018,-16 16,-16 h 139.5625 l 4.78906,-5.59375 L 278.4082,51.203125 C 281.1502,49.131129 284.50952,48 287.97852,48 Z" />
+</svg>
