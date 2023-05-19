@@ -1,1 +1,40 @@
-<p>player works!</p>
+<div id="player-container" *ngIf="currentSong == undefined">
+	<p>Undefined song</p>
+</div>	
+<div id="player-container" *ngIf="currentSong != undefined">
+	<div id="song-infos">
+		<img [src]="currentSong.album.cover">
+		<div id="song-titles">
+			<h2 id="songName">
+				{{currentSong.name}}
+			</h2>
+			<h3 id="artist">
+				{{currentSong.album.artist.username}}
+			</h3>
+		</div>
+	</div>
+	<div id="player">
+		<div id="player-controls">
+			<button>
+				<img src="../../assets/previous-icon.svg" class="songs-nav">
+			</button>
+			<button (click)="resumeAudio()" *ngIf="!currentlyPlaying">
+				<img src="../../assets/play-icon.svg">
+			</button>
+			<button (click)="pauseAudio()" *ngIf="currentlyPlaying">
+				<img src="../../assets/pause-icon.svg">
+			</button>
+			<button>
+				<img src="../../assets/next-icon.svg" class="songs-nav">
+			</button>
+		</div>
+		<div id="player-song-time">
+			<p id="player-current-time">{{currentTimeAsStr}}</p>
+			<input type="range" id="player-timeline" min="0" max="1" (input)="changeCurrentTime($event.target)" [value]="currentTime / songLength" step=".0001" [style.backgroundImage]="'linear-gradient(to right, #AAA 0%, #AAA ' + (currentTime / songLength) * 100 + '%, #555 ' + (currentTime / songLength) * 100 + '%, #555 100%)'">
+			<p id="player-song-duration">{{songLengthAsStr}}</p>
+		</div>
+	</div>
+	<div id="sound-control">
+		<input type="range" (input)="changeVolume($event.target)" min="0" max="1" step=".001">
+	</div>
+</div>

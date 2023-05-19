@@ -1,17 +1,17 @@
 export class User {
 	username: string;
 	email: string;
-	date_joined: Date;
+	dateJoined: Date;
 	description: string;
-	profile_pic: string; // url of the image
+	profilePic: string; // url of the image
 	banner: string; // url of the image
 
-	constructor(username: string, email: string, date_joined: date, description: string, profile_pic: string, banner: string) {
+	constructor(username: string, email: string, dateJoined: Date, description: string, profilePic: string, banner: string) {
 		this.username = username;
 		this.email = email;
-		this.date_joined = date_joined;
+		this.dateJoined = dateJoined;
 		this.description = description;
-		this.profile_pic = profile_pic;
+		this.profilePic = profilePic;
 		this.banner = banner;
 	}
 }
