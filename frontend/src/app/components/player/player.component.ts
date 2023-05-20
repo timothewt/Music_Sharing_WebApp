@@ -152,4 +152,10 @@ export class PlayerComponent {
 	public nextLoopType() {
 		this.loopType = (this.loopType + 1) % 3;
 	}
+
+	public displayQueue() {
+		this.queue.songs.forEach((song, index) => {
+			console.log(index + " " + song.name);
+		});
+	}
 }
