@@ -1,9 +1,12 @@
 <div class="interface">
   <!--Navbar component-->
-  <app-navbar></app-navbar>
+  <app-navbar class="nav"></app-navbar>
 
   <!--Affiche la bonne page-->
-  <router-outlet class="main"></router-outlet>
+  <div class="main">
+    <router-outlet></router-outlet>
+  </div>
+  
 </div>
 <!--Player component-->
 <app-player [songsQueue]="queue"></app-player>

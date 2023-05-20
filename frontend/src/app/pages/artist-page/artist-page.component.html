@@ -1,1 +1,25 @@
-<p>artist-page works!</p>
+<div class="artist-infos">
+    <h1 id="artist-name">{{artist.username}}</h1>
+    <p id="monthly-audience">108 837 113 auditeurs mensuels</p>
+    <img class="back" [src]="artist.banner"> 
+</div>
+<div class="more">
+    <div>
+        <h2>Discographie</h2>
+        <div class="list-style1">
+            <div *ngFor="let album of artistAlbums">
+                <app-album [album]="album"></app-album>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h2>Discographie</h2>
+        <div class="list-style1">
+            <div *ngFor="let album of artistAlbums">
+                <app-album [album]="album"></app-album>
+            </div>
+        </div>
+    </div>
+    
+</div>

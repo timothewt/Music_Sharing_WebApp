@@ -8,6 +8,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ArtistPageComponent } from './pages/artist-page/artist-page.component';
 import { SongPageComponent } from './pages/song-page/song-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { AlbumComponent } from './components/album/album.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     NavbarComponent,
     ArtistPageComponent,
     SongPageComponent,
-    HomePageComponent
+    HomePageComponent,
+    AlbumComponent
   ],
   imports: [
     BrowserModule,
