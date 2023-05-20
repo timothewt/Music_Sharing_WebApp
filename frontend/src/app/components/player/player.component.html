@@ -33,8 +33,9 @@
 		</div>
 	</div>
 	<div id="songs-control">
-		<button>
-			<img src="../../assets/loop-icon.svg">
+		<button (click)="nextLoopType()" id="loop-type">
+			<img src="../../assets/loop-icon.svg" [style.borderBottom]="(loopType == 0) ? 'none' : '1px solid black'">
+			<p *ngIf="loopType == 2">1</p>
 		</button>
 		<button>
 			<img src="../../assets/playlist-icon.svg">

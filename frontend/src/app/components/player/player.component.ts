@@ -68,10 +68,15 @@ export class PlayerComponent {
 		this.currentTimeAsStr = this.timeToTimeAsStr(this.currentTime);
 
 		if (this.currentTime == this.songLength) {
-			this.nextSong();
+			if (this.loopType == 2) {
+				this.restartSong();
+				return;
+			}
 			if (this.queue.songs.length - 1 == this.queue.currentSongIndex) {
 				this.queue.currentSongIndex = 0;
-				this.loadCurrentSong(false);
+				this.loadCurrentSong(this.loopType == 1);
+			} else {
+				this.nextSong();
 			}
 		}
 	}
@@ -95,20 +100,35 @@ export class PlayerComponent {
 		this.audio.pause();
 	}
 
+	private restartSong() {
+		this.audio.currentTime = 0;
+		this.resumeAudio();
+	}
+
 	public previousSong() {
-		if (this.currentTime >= 1) {
+		if (this.currentTime >= 1 || this.loopType == 2) {
 			this.audio.currentTime = 0;
 			return;
 		}
-		if (this.queue.currentSongIndex == 0) return;
+		if (this.queue.currentSongIndex == 0) {
+			if (this.loopType == 0) return;
+			this.queue.currentSongIndex = this.queue.songs.length;
+		}
 		this.queue.currentSongIndex -= 1;
-		this.loadCurrentSong(true);
+		this.loadCurrentSong(this.currentlyPlaying);
 	}
 
 	public nextSong() {
-		if (this.queue.songs.length - 1 == this.queue.currentSongIndex) return;
+		if (this.loopType == 2) {
+			this.restartSong();
+			return;
+		}
+		if (this.queue.songs.length - 1 == this.queue.currentSongIndex) {
+			if (this.loopType == 0) return;
+			this.queue.currentSongIndex = -1;
+		};
 		this.queue.currentSongIndex += 1;
-		this.loadCurrentSong(true);
+		this.loadCurrentSong(this.currentlyPlaying);
 	}
 
 	public changeCurrentTime(input: any) {
@@ -119,7 +139,7 @@ export class PlayerComponent {
 		this.audio.volume = input.value;
 	}
 
-	public toggleVolume(){
+	public toggleVolume() {
 		if (this.volumeDisabled) {
 			this.audio.volume = this.volumeBeforeDisabled;
 		} else {
@@ -127,5 +147,9 @@ export class PlayerComponent {
 			this.audio.volume = 0;
 		}
 		this.volumeDisabled = !this.volumeDisabled;
+	}
+
+	public nextLoopType() {
+		this.loopType = (this.loopType + 1) % 3;
 	}
 }
