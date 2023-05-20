@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { User } from '../../models/user';
 import { Album } from '../../models/album';
 import { Song } from '../../models/song';
+import { Queue } from '../../models/queue';
 
 @Component({
 	selector: 'app-player',
@@ -10,7 +11,7 @@ import { Song } from '../../models/song';
 })
 
 export class PlayerComponent {
-	@Input() currentSong: Song | undefined;
+	@Input() songsQueue: Queue | undefined;
 	audio = new Audio();
 	songLength: number;
 	songLengthAsStr: string;
@@ -22,7 +23,7 @@ export class PlayerComponent {
 	volumeDisabled: boolean;
 
 	constructor() {
-		this.currentSong = undefined;
+		this.songsQueue = undefined;
 		this.currentTime = 0;
 		this.currentTimeAsStr = "0:00";
 		this.songLength = 0;
@@ -34,8 +35,8 @@ export class PlayerComponent {
 	}
 
 	ngOnInit(){
-		if (this.currentSong != undefined) {
-			this.loadCurrentSong(this.currentSong);
+		if (this.songsQueue != undefined) {
+			this.loadCurrentSong(this.songsQueue.songs[this.songsQueue.currentSongIndex]);
 
 			this.audio.addEventListener('timeupdate', () => { // when the time
 				this.currentTime = this.audio.currentTime;

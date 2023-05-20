@@ -1,15 +1,15 @@
-<div id="player-container" *ngIf="currentSong == undefined">
+<div id="player-container" *ngIf="songsQueue == undefined">
 	<p>Undefined song</p>
 </div>	
-<div id="player-container" *ngIf="currentSong != undefined">
+<div id="player-container" *ngIf="songsQueue != undefined">
 	<div id="song-infos">
-		<img [src]="currentSong.album.cover">
+		<img [src]="songsQueue.songs[songsQueue.currentSongIndex].album.cover">
 		<div id="song-titles">
 			<h2 id="songName">
-				{{currentSong.name}}
+				{{songsQueue.songs[songsQueue.currentSongIndex].name}}
 			</h2>
 			<h3 id="artist">
-				{{currentSong.album.artist.username}}
+				{{songsQueue.songs[songsQueue.currentSongIndex].album.artist.username}}
 			</h3>
 		</div>
 	</div>
