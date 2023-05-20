@@ -1,3 +1,9 @@
-<router-outlet>
-  <app-player [songsQueue]="queue"></app-player>
-</router-outlet>
+<div class="interface">
+  <!--Navbar component-->
+  <app-navbar></app-navbar>
+
+  <!--Affiche la bonne page-->
+  <router-outlet class="main"></router-outlet>
+</div>
+<!--Player component-->
+<app-player [songsQueue]="queue"></app-player>

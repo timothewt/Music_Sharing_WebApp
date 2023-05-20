@@ -1,0 +1,32 @@
+/*Reset the CSS */ 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+
+
+.interface {
+    display: flex;
+    flex-direction: row;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+    
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+
