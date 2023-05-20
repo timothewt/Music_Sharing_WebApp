@@ -17,7 +17,8 @@ html, body {
     grid-template-rows: 1fr;
 
     grid-template-areas: 
-        "navbar main";
+        "navbar main"
+        "player player";
 
     min-height: 100vh;
     max-height: 100vh;
@@ -37,6 +38,10 @@ html, body {
     &::-webkit-scrollbar {
         display: none;
     }
+}
+
+.player {
+    grid-area: player;
 }
 
 @media screen and (max-width: 800px) {

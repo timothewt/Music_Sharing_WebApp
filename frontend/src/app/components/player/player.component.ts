@@ -21,6 +21,7 @@ export class PlayerComponent {
 	currentlyPlaying: boolean;
 	volumeBeforeDisabled: number;
 	volumeDisabled: boolean;
+	loopType: number; // 0: no loop, 1: loop the playlist, 2: loop the song
 
 	constructor() {
 		this.queue = new Queue();
@@ -33,6 +34,7 @@ export class PlayerComponent {
 		this.audio.volume = .5
 		this.volumeBeforeDisabled = this.audio.volume;
 		this.volumeDisabled = false;
+		this.loopType = 0;
 	}
 
 	ngOnInit(){
