@@ -11,8 +11,8 @@ import { Queue } from '../../models/queue';
 })
 
 export class PlayerComponent {
-	@Input() songsQueue: Queue | undefined;
-	audio = new Audio();
+	@Input() queue: Queue;
+	audio: any;
 	songLength: number;
 	songLengthAsStr: string;
 	currentTime: number;
@@ -23,7 +23,8 @@ export class PlayerComponent {
 	volumeDisabled: boolean;
 
 	constructor() {
-		this.songsQueue = undefined;
+		this.queue = new Queue();
+		this.audio = new Audio();
 		this.currentTime = 0;
 		this.currentTimeAsStr = "0:00";
 		this.songLength = 0;
@@ -35,30 +36,46 @@ export class PlayerComponent {
 	}
 
 	ngOnInit(){
-		if (this.songsQueue != undefined) {
-			this.loadCurrentSong(this.songsQueue.songs[this.songsQueue.currentSongIndex]);
+		this.loadCurrentSong(false);
 
-			this.audio.addEventListener('timeupdate', () => { // when the time
-				this.currentTime = this.audio.currentTime;
-				this.currentTimeAsStr = this.timeToTimeAsStr(this.currentTime);
-			});
-
-		}
+		this.audio.addEventListener('timeupdate', () => { // when the time of the audio changes
+			this.onAudioTimeUpdate()
+		});
 	}
 	
-	private loadCurrentSong(song: Song) {
+	private loadCurrentSong(playAudio: boolean = false) {
+		if (this.queue.songs.length == 0) return;
+		this.audio.src = this.queue.songs[this.queue.currentSongIndex].recordingLink;
 		this.currentTime = 0;
 		this.currentTimeAsStr = "0:00";
-		this.audio.src = song.recordingLink;
 
 		this.audio.addEventListener('loadedmetadata', () => {  // fetches the length of the song when it has been loaded
 			this.songLength = this.audio.duration;
 			this.songLengthAsStr = this.timeToTimeAsStr(this.songLength);				
 		});
+
+		if (playAudio) {
+			this.resumeAudio();
+		} else {
+			this.pauseAudio();
+		}
+	}
+
+	private onAudioTimeUpdate() {
+		this.currentTime = this.audio.currentTime;
+		this.currentTimeAsStr = this.timeToTimeAsStr(this.currentTime);
+
+		if (this.currentTime == this.songLength) {
+			this.nextSong();
+			if (this.queue.songs.length - 1 == this.queue.currentSongIndex) {
+				this.queue.currentSongIndex = 0;
+				this.loadCurrentSong(false);
+			}
+		}
 	}
 
 	private timeToTimeAsStr(timeInSeconds: number): string {
-		let seconds: number | string = Math.ceil(timeInSeconds % 60);
+		let seconds: number | string = Math.floor(timeInSeconds % 60);
 		if (seconds < 10) {
 			seconds = '0' + seconds;
 		}
@@ -77,15 +94,19 @@ export class PlayerComponent {
 	}
 
 	public previousSong() {
-		if (this.currentTime < 1) {
-			console.log("go to previous song");
-		} else {
+		if (this.currentTime >= 1) {
 			this.audio.currentTime = 0;
+			return;
 		}
+		if (this.queue.currentSongIndex == 0) return;
+		this.queue.currentSongIndex -= 1;
+		this.loadCurrentSong(true);
 	}
 
 	public nextSong() {
-		console.log("go to next song");
+		if (this.queue.songs.length - 1 == this.queue.currentSongIndex) return;
+		this.queue.currentSongIndex += 1;
+		this.loadCurrentSong(true);
 	}
 
 	public changeCurrentTime(input: any) {

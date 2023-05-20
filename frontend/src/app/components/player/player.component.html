@@ -1,18 +1,16 @@
-<div id="player-container" *ngIf="songsQueue == undefined">
-	<p>Undefined song</p>
-</div>	
-<div id="player-container" *ngIf="songsQueue != undefined">
-	<div id="song-infos">
-		<img [src]="songsQueue.songs[songsQueue.currentSongIndex].album.cover">
+<div id="player-container">
+	<div id="song-infos" *ngIf="queue.songs.length > 0">
+		<img [src]="queue.songs[queue.currentSongIndex].album.cover">
 		<div id="song-titles">
 			<h2 id="songName">
-				{{songsQueue.songs[songsQueue.currentSongIndex].name}}
+				{{queue.songs[queue.currentSongIndex].name}}
 			</h2>
 			<h3 id="artist">
-				{{songsQueue.songs[songsQueue.currentSongIndex].album.artist.username}}
+				{{queue.songs[queue.currentSongIndex].album.artist.username}}
 			</h3>
 		</div>
 	</div>
+	<div id="song-infos" *ngIf="queue.songs.length == 0"></div>
 	<div id="player">
 		<div id="player-controls">
 			<button (click)="previousSong()">
