@@ -4,6 +4,7 @@ import { User } from './models/user';
 import { Album } from './models/album';
 import { Song } from './models/song';
 import { Queue } from './models/queue';
+import { APIService } from './services/api.service';
 
 @Component({
 	selector: 'app-root',
@@ -19,7 +20,7 @@ export class AppComponent {
 	album: Album;
 	queue: Queue;
 
-	constructor() {
+	constructor(private apiService: APIService) {
 		this.playerComponent = new PlayerComponent();
 		this.artist = new User(802, "Mogwai", "", new Date(), "", "https://i.scdn.co/image/ab6761610000e5ebae7e4f81c7fe0747a61722ed", "");
 		this.album = new Album(1228, "Young Team", this.artist, 1997, "", "https://i.scdn.co/image/ab67616d00001e029b6e9909a1ce872eac9501aa", 0);
@@ -31,7 +32,16 @@ export class AppComponent {
 		this.queue.songs.push(new Song(9285, "Radar Maker", this.album, 1997, "https://p.scdn.co/mp3-preview/374337753e9b9024bed15d1cfea1a2763b210e28?cid=774b29d4f13844c495f206cafdad9c86", "", 0));
 	}
 
-	ngOnInit() {}
+	ngOnInit() {
+		this.apiService.getArtistById(802).subscribe(
+			(response: any) => {
+				console.log(response);
+			},
+			(error: any) => {
+				console.log("No artist known by id " + 802);
+			}
+		);
+	}
 
 	public loadCurrentSongInPlayer(): void {
 		this.playerComponent.loadCurrentSong(this.playerComponent.currentlyPlaying);

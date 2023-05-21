@@ -37,6 +37,30 @@
 					margin: 0;
 				}
 			}
+
+			.queue-reorder {
+				margin-left: auto;
+				margin-right: 10px;
+				display: flex;
+				flex-direction: column;
+
+				img {
+					margin: 5px 0;
+					filter: invert(80%);
+					height: 15px;
+					width: auto;
+					transition-duration: .1s;
+					pointer: cursor;
+
+					&:hover {
+						filter: invert(100%);
+					}
+
+					&.move-song-after {
+						transform: rotate(180deg);
+					}
+				}
+			}
 		}
 	}
 }

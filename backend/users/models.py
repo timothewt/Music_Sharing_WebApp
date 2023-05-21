@@ -9,6 +9,7 @@ class User(AbstractUser):
 	profile_pic_link = models.CharField(max_length=255, blank=True)
 	banner = models.ImageField(blank=True)
 	banner_link = models.CharField(max_length=255, blank=True)
+	listenings = models.IntegerField(default=0)
 
 	def save(self, *args, **kwargs):
 			

@@ -21,4 +21,20 @@ export class QueueComponent {
 		this.queue.currentSongIndex = newIndex;
 		this.loadCurrentSongInPlayer.emit();
 	}
+
+	public moveSongInQueue(event: MouseEvent, songIndex: number, delta: number): void {
+		event.stopImmediatePropagation();
+
+		if (songIndex + delta < 0 || songIndex + delta + 1 > this.queue.songs.length) return;
+
+		var temp: Song = this.queue.songs[songIndex];
+		this.queue.songs[songIndex] = this.queue.songs[songIndex + delta];
+		this.queue.songs[songIndex + delta] = temp;
+
+		if (this.queue.currentSongIndex == songIndex) {
+			this.queue.currentSongIndex += delta;
+		} else if (this.queue.currentSongIndex - delta == songIndex) {
+			this.queue.currentSongIndex -= delta;
+		}
+	}
 }
