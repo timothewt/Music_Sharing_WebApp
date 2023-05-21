@@ -47,7 +47,7 @@ export class PlayerComponent {
 		});
 	}
 	
-	private loadCurrentSong(playAudio: boolean = false) {
+	public loadCurrentSong(playAudio: boolean = false) {
 		if (this.queue.songs.length == 0) return;
 		this.audio.src = this.queue.songs[this.queue.currentSongIndex].recordingLink;
 		this.currentTime = 0;

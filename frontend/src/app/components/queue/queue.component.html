@@ -1,7 +1,7 @@
 <div id="queue-container">
 	<h2>Songs Queue</h2>
 	<div id="queue-songs">
-		<div class="queue-element" *ngFor="let song of queue.songs; let index = index;" (click)="changeQueueSongIndex(index);">
+		<div class="queue-element" *ngFor="let song of queue.songs; let index = index;" (click)="changeQueueSongIndex(index);" [style.backgroundColor]="(queue.currentSongIndex == index) ? '#333' : '#252525'">
 			<p class="song-index">{{index + 1}}</p>
 			<img [src]="song.album.cover">
 			<div class="song-titles">
