@@ -13,15 +13,15 @@ html, body {
 .interface {
     display: grid;
     
-    grid-template-columns: 0.05fr 0.95fr;
-    grid-template-rows: 1fr;
+    grid-template-columns: 0.5fr 9.5fr;
+    grid-template-rows: 1fr 0.1fr;
 
     grid-template-areas: 
         "navbar main"
         "player player";
 
-    min-height: 100vh;
-    max-height: 100vh;
+    height: 100vh;
+
 }
 
 .nav {
@@ -47,15 +47,12 @@ html, body {
 @media screen and (max-width: 800px) {
     .interface {
         grid-template-columns: 1fr;
-        grid-template-rows: 8vh 74vh 18vh;
+        grid-template-rows: 8fr 1fr 1fr;
 
         grid-template-areas: 
-            "navbar"
             "main"
+            "navbar"
             "player";
+        height: 100vh;
     }
 }
-
-
-
-
