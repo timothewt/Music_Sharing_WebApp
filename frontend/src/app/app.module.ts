@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +11,7 @@ import { SongPageComponent } from './pages/song-page/song-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { AlbumComponent } from './components/album/album.component';
 import { QueueComponent } from './components/queue/queue.component';
+import { APIService } from "./services/api.service";
 
 @NgModule({
   declarations: [
@@ -20,13 +22,16 @@ import { QueueComponent } from './components/queue/queue.component';
     SongPageComponent,
     HomePageComponent,
     AlbumComponent,
-    QueueComponent
+    QueueComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [APIService,],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}
