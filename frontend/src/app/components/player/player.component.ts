@@ -39,7 +39,7 @@ export class PlayerComponent {
 		this.visibleQueue = false;
 	}
 
-	ngOnInit(){
+	ngOnInit(): void {
 		this.loadCurrentSong(false);
 
 		this.audio.addEventListener('timeupdate', () => { // when the time of the audio changes
@@ -47,7 +47,7 @@ export class PlayerComponent {
 		});
 	}
 	
-	public loadCurrentSong(playAudio: boolean = false) {
+	public loadCurrentSong(playAudio: boolean = false): void {
 		if (this.queue.songs.length == 0) return;
 		this.audio.src = this.queue.songs[this.queue.currentSongIndex].recordingLink;
 		this.currentTime = 0;
@@ -65,7 +65,7 @@ export class PlayerComponent {
 		}
 	}
 
-	private onAudioTimeUpdate() {
+	private onAudioTimeUpdate(): void {
 		this.currentTime = this.audio.currentTime;
 		this.currentTimeAsStr = this.timeToTimeAsStr(this.currentTime);
 
@@ -92,22 +92,22 @@ export class PlayerComponent {
 		return minutes + ":" + seconds;
 	}
 
-	public resumeAudio() {
+	public resumeAudio(): void {
 		this.currentlyPlaying = true;
 		this.audio.play();	
 	}
 
-	public pauseAudio() {
+	public pauseAudio(): void {
 		this.currentlyPlaying = false;
 		this.audio.pause();
 	}
 
-	private restartSong() {
+	private restartSong(): void {
 		this.audio.currentTime = 0;
 		this.resumeAudio();
 	}
 
-	public previousSong() {
+	public previousSong(): void {
 		if (this.currentTime >= 1 || this.loopType == 2) {
 			this.audio.currentTime = 0;
 			return;
@@ -120,7 +120,7 @@ export class PlayerComponent {
 		this.loadCurrentSong(this.currentlyPlaying);
 	}
 
-	public nextSong() {
+	public nextSong(): void {
 		if (this.loopType == 2) {
 			this.restartSong();
 			return;
@@ -136,15 +136,15 @@ export class PlayerComponent {
 		this.loadCurrentSong(this.currentlyPlaying);
 	}
 
-	public changeCurrentTime(input: any) {
+	public changeCurrentTime(input: any): void {
 		this.audio.currentTime = input.value * this.songLength;
 	}
 
-	public changeVolume(input: any) {
+	public changeVolume(input: any): void {
 		this.audio.volume = input.value;
 	}
 
-	public toggleVolume() {
+	public toggleVolume(): void {
 		if (this.volumeDisabled) {
 			this.audio.volume = this.volumeBeforeDisabled;
 		} else {
@@ -154,14 +154,11 @@ export class PlayerComponent {
 		this.volumeDisabled = !this.volumeDisabled;
 	}
 
-	public nextLoopType() {
+	public nextLoopType(): void {
 		this.loopType = (this.loopType + 1) % 3;
 	}
 
-	public toggleQueueVisibility() {
-		// this.queue.songs.forEach((song, index) => {
-		// 	console.log(index + " " + song.name);
-		// });
+	public toggleQueueVisibility(): void {
 		this.visibleQueue = !this.visibleQueue;
 	}
 }

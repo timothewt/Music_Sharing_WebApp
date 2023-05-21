@@ -17,7 +17,7 @@ export class QueueComponent {
 		this.queue = new Queue();
 	}
 
-	public changeQueueSongIndex(newIndex: number) {
+	public changeQueueSongIndex(newIndex: number): void {
 		this.queue.currentSongIndex = newIndex;
 		this.loadCurrentSongInPlayer.emit();
 	}
