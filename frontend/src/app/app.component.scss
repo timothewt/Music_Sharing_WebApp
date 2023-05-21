@@ -47,12 +47,12 @@ html, body {
 @media screen and (max-width: 800px) {
     .interface {
         grid-template-columns: 1fr;
-        grid-template-rows: 0.9fr 0.1fr;
+        grid-template-rows: 8vh 74vh 18vh;
 
         grid-template-areas: 
+            "navbar"
             "main"
-            "navbar";
-        height: 85vh;
+            "player";
     }
 }
 

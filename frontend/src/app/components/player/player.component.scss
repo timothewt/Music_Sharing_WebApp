@@ -1,23 +1,48 @@
 $bg_color: #111;
+$player_height: 10vh;
 
 #player-container {
+	height: $player_height;
+	display: grid;
+	
+	grid-template-columns: .2fr .6fr .2fr;
+	grid-template-rows: $player_height;
+
+	grid-template-areas: 
+		"song-infos player songs-control";
+
 	background-color: $bg_color;
 	color: white;
-	padding: 10px;
+	padding: 0 10px;
 	width: 100%;
 	box-sizing: border-box;
-	bottom: 0;
-	display: flex;
 	align-items: center;
-	justify-content: space-between;
-	height: 10vh;
 
+	@media screen and (max-width: 800px) {
+		height: 18vh;
+		grid-template-columns: .5fr .5fr;
+		grid-template-rows: 10vh 8vh;
+		grid-template-areas: 
+			"song-infos songs-control"
+			"player player";
+
+		#player {
+			order: 3;
+			grid-column: span 2;
+			#player-song-time {
+				#player-timeline {
+					width: 80% !important;
+				}
+			}
+		}
+	}
+	
 	#song-infos {
 		display: flex;
 		align-items: center;
 		justify-content: left;
-		height: 100%;
-		width: 20%;
+		height: 90%;
+		grid-areas: song-infos;
 
 		img {
 			height: 90%;
@@ -34,11 +59,11 @@ $bg_color: #111;
 	}
 
 	#player {
-		width: 60%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		vertical-align: middle;
+		grid-areas: player;
 
 		#player-controls {
 			display: flex;
@@ -122,11 +147,11 @@ $bg_color: #111;
 	}
 
 	#songs-control {
-		width: 20%;
 		display: flex;
 		align-items: center;
 		justify-content: right;
 		cursor: pointer;
+		grid-areas: songs-control;
 
 		#volume-slider {
 			height: 5px;
