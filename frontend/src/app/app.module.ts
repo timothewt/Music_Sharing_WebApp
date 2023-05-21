@@ -10,6 +10,7 @@ import { SongPageComponent } from './pages/song-page/song-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { AlbumComponent } from './components/album/album.component';
 import { QueueComponent } from './components/queue/queue.component';
+import { SongComponent } from './components/song/song.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { QueueComponent } from './components/queue/queue.component';
     SongPageComponent,
     HomePageComponent,
     AlbumComponent,
-    QueueComponent
+    QueueComponent,
+    SongComponent
   ],
   imports: [
     BrowserModule,
