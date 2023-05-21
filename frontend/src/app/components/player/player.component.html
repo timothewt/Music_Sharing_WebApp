@@ -38,7 +38,8 @@
 			<p *ngIf="loopType == 2">1</p>
 		</button>
 		<button (click)="toggleQueueVisibility()">
-			<img src="../../assets/playlist-icon.svg">
+			<img src="../../assets/playlist-icon.svg" *ngIf="!visibleQueue">
+			<img src="../../assets/close-playlist-icon.svg" *ngIf="visibleQueue">
 		</button>
 		<button (click)="toggleVolume()">
 			<img src="../../assets/volume-off-icon.svg" *ngIf="volumeDisabled">
@@ -48,6 +49,6 @@
 			<img src="../../assets/volume-high-icon.svg" *ngIf="!volumeDisabled && audio.volume > .7">
 		</button>
 		<input type="range" (input)="changeVolume($event.target)" min="0" max="1" step=".001" [value]="audio.volume" id="volume-slider" [style.backgroundImage]="'linear-gradient(to right, #AAA 0%, #AAA ' + (audio.volume) * 100 + '%, #555 ' + (audio.volume) * 100 + '%, #555 100%)'">
-		<app-queue id="queue" [queue]="queue" [class.visible]="!visibleQueue" [class.invisible]="visibleQueue"></app-queue>
+		<app-queue id="queue" [queue]="queue" [class.visible]="visibleQueue" [class.invisible]="!visibleQueue"></app-queue>
 	</div>
 </div>

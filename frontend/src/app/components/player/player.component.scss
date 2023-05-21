@@ -43,7 +43,10 @@ $player_height: 10vh;
 
 			::ng-deep #queue.visible #queue-container {
 				height: 450px !important;
-				width: 300px !important;
+				width: 100% !important;
+			}
+			#queue.visible {
+				width: 100%;
 			}
 		}
 	}

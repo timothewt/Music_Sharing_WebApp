@@ -2,6 +2,11 @@
 	overflow-y: scroll;
 	background-color: #222;
 
+	&.not-visible {
+		height: 0;
+		width: 0;
+	}
+
 	h2 {
 		padding-left: 15px;
 		letter-spacing: .5px;
