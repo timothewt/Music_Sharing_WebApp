@@ -22,12 +22,10 @@ html, body {
 
     height: 100vh;
 
-    border: rgb(0, 177, 30) solid 1px;
 }
 
 .nav {
     grid-area: navbar;
-    border: solid 1px red;
 }
 
 .main {
@@ -44,7 +42,6 @@ html, body {
 
 .player {
     grid-area: player;
-    border: coral solid 1px;
 }
 
 @media screen and (max-width: 800px) {
