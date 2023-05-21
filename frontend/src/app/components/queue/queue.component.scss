@@ -1,0 +1,44 @@
+#queue-container {
+	overflow-y: scroll;
+	background-color: #222;
+
+	h2 {
+		padding-left: 15px;
+		letter-spacing: .5px;
+	}
+
+	#queue-songs {
+
+		.queue-element {
+			height: 70px;
+			display: flex;
+			align-items: center;
+			cursor: pointer;
+
+			.song-index {
+				margin: 8px;
+			}
+
+			img {
+				height: 80%;
+			}
+
+			&:nth-child(odd) {
+				background-color: #444;
+			}
+			&:nth-child(even) {
+				background-color: #333;
+			}
+
+			.song-titles {
+				margin-left: 8px;
+				h3 {
+					margin: 0;
+				}
+				h4 {
+					margin: 0;
+				}
+			}
+		}
+	}
+}

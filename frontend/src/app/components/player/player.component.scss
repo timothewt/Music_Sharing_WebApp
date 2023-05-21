@@ -35,6 +35,17 @@ $player_height: 10vh;
 				}
 			}
 		}
+
+		#songs-control {
+			#queue {
+				bottom: 26vh !important;
+			}
+
+			::ng-deep #queue.visible #queue-container {
+				height: 450px !important;
+				width: 300px !important;
+			}
+		}
 	}
 	
 	#song-infos {
@@ -150,7 +161,6 @@ $player_height: 10vh;
 		display: flex;
 		align-items: center;
 		justify-content: right;
-		cursor: pointer;
 		grid-areas: songs-control;
 
 		#volume-slider {
@@ -207,5 +217,27 @@ $player_height: 10vh;
 				}
 			}
 		}
+
+		#queue {
+			position: absolute;
+			bottom: 10vh;
+			right: 0;
+		}
+
+		::ng-deep #queue #queue-container {
+			transition: .5s;
+		}
+
+		::ng-deep #queue.invisible #queue-container {
+			height: 0;
+			width: 0;
+		}
+
+		::ng-deep #queue.visible #queue-container {
+			height: 500px;
+			width: 400px;
+		}
+
+
 	}
 }

@@ -1,0 +1,17 @@
+<div id="queue-container">
+	<h2>Songs Queue</h2>
+	<div id="queue-songs">
+		<div class="queue-element" *ngFor="let song of queue.songs; let index = index;" (click)="changeQueueSongIndex(index);">
+			<p class="song-index">{{index + 1}}</p>
+			<img [src]="song.album.cover">
+			<div class="song-titles">
+				<h3>
+					{{song.name}}
+				</h3>
+				<h4>
+					{{song.album.artist.username}}
+				</h4>
+			</div>
+		</div>
+	</div>
+</div>

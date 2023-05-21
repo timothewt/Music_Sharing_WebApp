@@ -22,6 +22,7 @@ export class PlayerComponent {
 	volumeBeforeDisabled: number;
 	volumeDisabled: boolean;
 	loopType: number; // 0: no loop, 1: loop the playlist, 2: loop the song
+	visibleQueue: boolean;
 
 	constructor() {
 		this.queue = new Queue();
@@ -35,6 +36,7 @@ export class PlayerComponent {
 		this.volumeBeforeDisabled = this.audio.volume;
 		this.volumeDisabled = false;
 		this.loopType = 0;
+		this.visibleQueue = false;
 	}
 
 	ngOnInit(){
@@ -124,7 +126,10 @@ export class PlayerComponent {
 			return;
 		}
 		if (this.queue.songs.length - 1 == this.queue.currentSongIndex) {
-			if (this.loopType == 0) return;
+			if (this.loopType == 0) {
+				this.audio.currentTime = this.songLength;
+				return;
+			}
 			this.queue.currentSongIndex = -1;
 		};
 		this.queue.currentSongIndex += 1;
@@ -153,9 +158,10 @@ export class PlayerComponent {
 		this.loopType = (this.loopType + 1) % 3;
 	}
 
-	public displayQueue() {
-		this.queue.songs.forEach((song, index) => {
-			console.log(index + " " + song.name);
-		});
+	public toggleQueueVisibility() {
+		// this.queue.songs.forEach((song, index) => {
+		// 	console.log(index + " " + song.name);
+		// });
+		this.visibleQueue = !this.visibleQueue;
 	}
 }
