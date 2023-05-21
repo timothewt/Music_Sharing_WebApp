@@ -13,19 +13,21 @@ html, body {
 .interface {
     display: grid;
     
-    grid-template-columns: 0.05fr 0.95fr;
-    grid-template-rows: 1fr;
+    grid-template-columns: 0.5fr 9.5fr;
+    grid-template-rows: 1fr 0.1fr;
 
     grid-template-areas: 
         "navbar main"
         "player player";
 
-    min-height: 100vh;
-    max-height: 100vh;
+    height: 100vh;
+
+    border: rgb(0, 177, 30) solid 1px;
 }
 
 .nav {
     grid-area: navbar;
+    border: solid 1px red;
 }
 
 .main {
@@ -42,17 +44,19 @@ html, body {
 
 .player {
     grid-area: player;
+    border: coral solid 1px;
 }
 
 @media screen and (max-width: 800px) {
     .interface {
         grid-template-columns: 1fr;
-        grid-template-rows: 0.9fr 0.1fr;
+        grid-template-rows: 8fr 1fr 1fr;
 
         grid-template-areas: 
             "main"
-            "navbar";
-        height: 85vh;
+            "navbar"
+            "player";
+        height: 100vh;
     }
 }
 
