@@ -110,7 +110,7 @@ $player_height: 10vh;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-
+			padding: 0 5px;
 
 			&:hover {
 				#player-timeline
@@ -133,6 +133,8 @@ $player_height: 10vh;
 				height: 3px;
 				margin: 0 10px;
 				cursor: pointer;
+				padding: 10px 0;
+				background-clip: content-box;
 
 				&::-webkit-slider-runnable-track { 
 					height: 100%;
@@ -173,6 +175,8 @@ $player_height: 10vh;
 			outline: none;
 			-webkit-appearance: none;
 			margin-top: -1px;
+			padding: 8px 0;
+			background-clip: content-box;
 
 			&::-webkit-slider-runnable-track { 
 				height: 100%;

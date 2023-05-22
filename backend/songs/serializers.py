@@ -1,5 +1,6 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, SlugRelatedField
 from songs.models import Song, Album, SongTag, AlbumTag, Playlist, PlaylistElement
+from users.serializers import UserSerializer
 
 
 class AlbumTagSerializer(ModelSerializer):
@@ -17,6 +18,7 @@ class SongTagSerializer(ModelSerializer):
 
 
 class AlbumSerializer(ModelSerializer):
+	artist = UserSerializer(read_only=True)
 	
 	class Meta:
 		model = Album
@@ -24,6 +26,7 @@ class AlbumSerializer(ModelSerializer):
 
 
 class SongSerializer(ModelSerializer):
+	album = AlbumSerializer(read_only=True)
 
 	class Meta:
 		model = Song
