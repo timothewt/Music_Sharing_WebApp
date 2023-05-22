@@ -2,7 +2,6 @@ $bg_color: #111;
 $player_height: 10vh;
 
 #player-container {
-	height: $player_height;
 	display: grid;
 	
 	grid-template-columns: .2fr .6fr .2fr;
