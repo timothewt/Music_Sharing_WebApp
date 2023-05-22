@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.song-page {
+    display: flex;
+    flex-direction: column;
+
+    background-color: rgb(255, 153, 0);
+
+    padding-top: 10px;
+
+    min-height: 90vh;
+
+    .song-header {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: left;
+
+        padding: 10px;
+
+        .cover {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                width: 70%;
+                height: 70%;
+                object-fit: cover;
+
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+            }
+        }
+
+        .text {
+
+            font-family: 'Roboto', sans-serif;
+
+            .title {
+                font-weight: bold;
+                font-size: 4rem;
+                color: white;
+                margin-bottom: 0;
+            }
+
+            .infos {
+                color: aliceblue;
+                display: flex;
+                flex-direction: row;
+                font-size: 1.2rem;
+
+                gap: 4px;
+            }
+        }
+    }
+    .more-of-song {
+        display: flex;
+        flex-direction: column;
+        background: #1c1c1c;
+        min-height: 90vh;
+
+        padding: 10px;
+
+        .actions {
+            height: 10vh;
+            
+            .play-button {
+                background: rgb(47, 172, 47);
+        
+                border: none;
+                border-radius: 50%;
+                
+                position: relative;
+
+                height: 80%;
+                width: auto;
+
+                padding:10px;
+        
+                transition: transform 0.1s ease-in-out, background-color 0.1s ease-in-out;
+        
+                img {
+                    height: 100%;
+                    width: 100%;
+        
+                }
+        
+                &:active {
+                    transform: scale(0.9);
+                    background: rgb(30, 105, 30);
+        
+                    img {
+                        filter: brightness(0.8);
+                    }
+        
+                }
+            }
+
+            .like-button {
+                background: none;
+                border: none;
+                        
+                height: 70px;
+                width: 70px;
+
+                img {
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
