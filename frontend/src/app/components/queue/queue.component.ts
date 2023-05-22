@@ -12,6 +12,7 @@ import { Queue } from '../../models/queue';
 export class QueueComponent {
 	@Input() queue: Queue;
 	@Output("loadCurrentSongInPlayer") loadCurrentSongInPlayer: EventEmitter<any> = new EventEmitter();
+	@Output("toggleQueueVisibility") toggleQueueVisibility: EventEmitter<any> = new EventEmitter();
 
 	constructor() {
 		this.queue = new Queue();
