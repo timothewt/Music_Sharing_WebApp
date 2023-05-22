@@ -12,6 +12,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { AlbumComponent } from './components/album/album.component';
 import { QueueComponent } from './components/queue/queue.component';
 import { APIService } from "./services/api.service";
+import { SongComponent } from './components/song/song.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { APIService } from "./services/api.service";
     HomePageComponent,
     AlbumComponent,
     QueueComponent,
+    SongComponent,
   ],
   imports: [
     BrowserModule,
