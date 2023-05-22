@@ -19,6 +19,14 @@ class AlbumViewset(ModelViewSet):
 		if artist_id is not None:
 			queryset = queryset.filter(artist_id=artist_id)
 
+		search = self.request.GET.get('search')
+		if search is not None:
+			queryset = queryset.filter(name__contains=search)
+
+		most_popular = self.request.GET.get('most_popular')
+		if most_popular is not None:
+			queryset = queryset.order_by("-listenings")[:int(most_popular)]
+
 		return queryset
 
 
@@ -37,6 +45,14 @@ class SongViewset(ModelViewSet):
 		artist_id = self.request.GET.get('artist_id')
 		if album_id is not None:
 			queryset = queryset.filter(artist_id=artist_id)
+
+		search = self.request.GET.get('search')
+		if search is not None:
+			queryset = queryset.filter(name__contains=search)
+
+		most_popular = self.request.GET.get('most_popular')
+		if most_popular is not None:
+			queryset = queryset.order_by("-listenings")[:int(most_popular)]
 		
 		return queryset
 

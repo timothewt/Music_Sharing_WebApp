@@ -13,4 +13,14 @@ class UserViewset(ModelViewSet):
 			
 		# self.request.user  # get current user 
 
-		return User.objects.all()
+		queryset = User.objects.all()
+
+		search = self.request.GET.get('search')
+		if search is not None:
+			queryset = queryset.filter(username__contains=search)
+
+		most_popular = self.request.GET.get('most_popular')
+		if most_popular is not None:
+			queryset = queryset.order_by("-listenings")[:int(most_popular)]
+
+		return queryset
