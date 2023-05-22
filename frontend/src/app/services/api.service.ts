@@ -9,7 +9,15 @@ export class APIService {
 
 	constructor(private http: HttpClient) {}
 
-	public getArtistById(id: number): Observable<any> {
+	public getUserById(id: number): Observable<any> {
 		return this.http.get(this.apiURL + 'user/' + id + "/");
+	}
+
+	public getAlbumById(id: number): Observable<any> {
+		return this.http.get(this.apiURL + 'album/' + id + "/");
+	}
+
+	public getSongById(id: number): Observable<any> {
+		return this.http.get(this.apiURL + 'song/' + id + "/");
 	}
 }
