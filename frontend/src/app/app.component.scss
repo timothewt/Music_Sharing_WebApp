@@ -12,14 +12,15 @@ html, body {
 .interface {
 	display: grid;
 	
-	grid-template-columns: 0.05fr 0.95fr;
-	grid-template-rows: 1fr;
+	grid-template-columns: 0.5fr 9.5fr;
+	grid-template-rows: 9fr 1fr; 
 
 	grid-template-areas: 
 		"navbar main"
 		"player player";
-
+	
 	height: 100vh;
+
 }
 
 .nav {
@@ -36,10 +37,13 @@ html, body {
 	&::-webkit-scrollbar {
 		display: none;
 	}
+
+	
 }
 
 .player {
 	grid-area: player;
+
 }
 
 @media screen and (max-width: 800px) {
