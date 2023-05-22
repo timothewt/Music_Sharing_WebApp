@@ -24,16 +24,14 @@ export class AppComponent {
 	}
 
 	ngOnInit() {
-		for (let i = 0; i < 5; i++) {
-			this.apiService.getSongById(4000 + i).subscribe(
-				(response: any) => {
-					this.queue.songs.push(new Song().deserialize(response));
-				},
-				(error: any) => {
-					alert("No song of id " + (i + 4000));
-				}
-			);
-		}
+		this.apiService.getMostPopularSongs(5, 600).subscribe(
+			(response: any) => {
+				console.log(response);
+			},
+			(error: any) => {
+				alert("Error");
+			}
+		);
 	}
 
 	public loadCurrentSongInPlayer(): void {

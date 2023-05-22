@@ -20,4 +20,24 @@ export class APIService {
 	public getSongById(id: number): Observable<any> {
 		return this.http.get(this.apiURL + 'song/' + id + "/");
 	}
+
+	public getMostPopularArtists(numberOfArtists: number) {
+		return this.http.get(this.apiURL + 'user/?most_popular=' + numberOfArtists);
+	}
+
+	public getMostPopularAlbums(numberOfAlbum: number, artistId?: number) {
+		let reqURL: string = this.apiURL + 'album/?most_popular=' + numberOfAlbum;
+		if (artistId) {
+			reqURL += "&artist_id=" + artistId;
+		}
+		return this.http.get(reqURL);
+	}
+
+	public getMostPopularSongs(numberOfSongs: number, artistId?: number) {
+		let reqURL: string = this.apiURL + 'song/?most_popular=' + numberOfSongs;
+		if (artistId) {
+			reqURL += "&artist_id=" + artistId;
+		}
+		return this.http.get(reqURL);
+	}
 }
