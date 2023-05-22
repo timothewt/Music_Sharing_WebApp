@@ -12,9 +12,12 @@
 					{{song.album.artist.username}}
 				</h4>
 			</div>
-			<div class="queue-reorder">
-				<img src="../../assets/triangle-icon.svg" class="move-song-before" (click)="moveSongInQueue($event, index, -1)">
-				<img src="../../assets/triangle-icon.svg" class="move-song-after" (click)="moveSongInQueue($event, index, +1)">
+			<div class="queue-controler">
+				<img src="../../assets/delete-icon.svg" (click)="deleteSongFromQueue($event, index)" class="delete-song-btn">
+				<div class="queue-reorder">
+					<img src="../../assets/triangle-icon.svg" class="move-song-before" (click)="moveSongInQueue($event, index, -1)">
+					<img src="../../assets/triangle-icon.svg" class="move-song-after" (click)="moveSongInQueue($event, index, +1)">
+				</div>
 			</div>
 		</div>
 	</div>

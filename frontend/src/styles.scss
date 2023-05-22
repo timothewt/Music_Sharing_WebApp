@@ -3,13 +3,16 @@ body {
 	overflow: hidden;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Source+Sans+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Source+Sans+Pro&display=swap'); // importing google font families
 
 * {
 	font-family: 'Source Sans Pro', 'Montserrat', sans-serif;
 }
+
+// Changing the scrollbar in all the website
+
 ::-webkit-scrollbar {
-	width: 5px;
+	width: 4px;
 }
 
 ::-webkit-scrollbar-track {

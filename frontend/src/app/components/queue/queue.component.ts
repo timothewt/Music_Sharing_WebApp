@@ -37,4 +37,18 @@ export class QueueComponent {
 			this.queue.currentSongIndex -= delta;
 		}
 	}
+
+	public deleteSongFromQueue(event: MouseEvent, songIndex: number): void {
+		event.stopImmediatePropagation();
+
+		if (songIndex <= this.queue.currentSongIndex) {
+			this.queue.currentSongIndex -= 1;
+		}
+
+		this.queue.songs.splice(songIndex, 1);
+
+		if (songIndex == this.queue.currentSongIndex) {
+			this.loadCurrentSongInPlayer.emit();
+		}
+	}
 }
