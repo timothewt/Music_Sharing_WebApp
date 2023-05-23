@@ -13,6 +13,7 @@ import { AlbumComponent } from './components/album/album.component';
 import { QueueComponent } from './components/queue/queue.component';
 import { APIService } from "./services/api.service";
 import { SongComponent } from './components/song/song.component';
+import { TimePipe } from './models/timePipe';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { SongComponent } from './components/song/song.component';
     AlbumComponent,
     QueueComponent,
     SongComponent,
+    TimePipe,
   ],
   imports: [
     BrowserModule,

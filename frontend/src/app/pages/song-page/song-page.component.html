@@ -13,7 +13,7 @@
                 <p class="dot">-</p>
                 <p class="date"> {{this.song.releaseYear}} </p>
                 <p class="dot">-</p>
-                <p class="duration"> 0:30 </p>
+                <p class="duration"> {{this.song.duration | nicetime}}</p>
             </div>
         </div> 
     </div>
@@ -26,9 +26,6 @@
             <button class="like-button">
                 <img src="../../assets/heart-icon.svg" alt="Like">
             </button>
-        </div>
-        <div>
-            <h2>Popular</h2>
-        </div>
+        </div>  
     </div>
 </div>
