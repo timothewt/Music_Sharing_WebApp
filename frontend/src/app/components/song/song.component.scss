@@ -1,6 +1,5 @@
 .track-details {
     /*Temp solution to width issue*/
-    width: 70vw;
     height: 7vh;
     
 
@@ -20,8 +19,19 @@
 
     transition: background-color 0.2s ease-in-out;
 
+
+    a {
+        text-decoration: none;
+        color: white;
+
+        &:hover {
+            text-decoration: underline;
+            color: white;
+        }
+    }
+
     &:hover {
-        background-color: #222;
+        background-color: rgba(255, 255, 255, 0.1);
 
         .play-or-index {
             .play {
@@ -64,9 +74,6 @@
             background: none;
 
             img {
-                width: 40px;
-                height: 40px;
-
                 transform: translate(-10px, 5px);
             }
         }
@@ -87,6 +94,8 @@
         display: flex;
         justify-content: left;
         align-items: center;
+
+        font-size: 1.2rem;
     }
     
     

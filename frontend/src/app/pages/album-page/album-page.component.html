@@ -1,0 +1,34 @@
+<div class="song-page"> 
+    <div class="banner-img">
+        <img src="{{this.album.cover}}" alt="">
+    </div>
+    <div class="song-header">
+        <div class="cover">
+            <img src="{{this.album.cover}}" alt="">
+        </div>
+        <div class="text">
+            <h1 class="title">{{this.album.name}}</h1>
+            <div class="infos">
+                <a routerLink="/artist/{{this.album.artist.id}}" class="artist"> {{this.album.artist.username}}</a>
+                <p class="dot">-</p>
+                <p class="date"> {{this.album.releaseYear}} </p>
+            </div>
+        </div> 
+    </div>
+    <div class="more-of-song">
+        <div class="actions">
+            <button class="play-button">
+                <img src="../../assets/play-icon-2.svg" alt="Play">
+            </button>
+
+            <button class="like-button">
+                <img src="../../assets/heart-icon.svg" alt="Like">
+            </button>
+        </div>  
+        <div>
+            <div *ngFor="let song of songs; let index = index">
+                <app-song [song]="song" [index]="index+1"></app-song>
+            </div>
+        </div>
+    </div>
+</div>

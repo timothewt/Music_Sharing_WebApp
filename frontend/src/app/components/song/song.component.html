@@ -8,12 +8,12 @@
         </button>
     </div>
     <div class="cover">
-        <img src="https://i.scdn.co/image/ab67616d00001e02c7d6fe09dfe4af1580e59705" alt="">
+        <img src="{{song.album.cover}}" alt="">
     </div>
     <div class="title">
-        <p>{{song.name}}</p>
+        <a routerLink="/song/{{this.song.id}}">{{song.name}}</a>
     </div>
     <div class="listened">
-        <p>{{song.listenings}}</p>
+        <p>{{song.duration | nicetime}}</p>
     </div>
 </div>
