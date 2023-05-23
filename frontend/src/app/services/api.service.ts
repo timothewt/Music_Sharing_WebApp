@@ -21,12 +21,22 @@ export class APIService {
 		return this.http.get(this.apiURL + 'song/' + id + "/");
 	}
 
-	public getMostPopularArtists(limit: number) {
-		return this.http.get(this.apiURL + 'user/?most_popular&limit=' + limit);
+	public getArtists(limit: number, mostPopular: boolean = true, offset?: number) {
+		let reqUrl: string = this.apiURL + 'user/?limit=' + limit;
+		if (mostPopular) {
+			reqURL += "&most_popular";
+		}
+		if (offset) {
+			reqURL += "&offset=" + offset;
+		}
+		return this.http.get(reqURL);
 	}
 
-	public getMostPopularAlbums(limit: number, offset?: number, artistId?: number) {
-		let reqURL: string = this.apiURL + 'album/?most_popular&limit=' + limit;
+	public getAlbums(limit: number, mostPopular: boolean = true, offset?: number, artistId?: number) {
+		let reqURL: string = this.apiURL + 'album/?limit=' + limit;
+		if (mostPopular) {
+			reqURL += "&most_popular";
+		}
 		if (offset) {
 			reqURL += "&offset=" + offset;
 		}
@@ -36,13 +46,19 @@ export class APIService {
 		return this.http.get(reqURL);
 	}
 
-	public getMostPopularSongs(limit: number, offset?: number, artistId?: number) {
+	public getSongs(limit: number, mostPopular: boolean = true, offset?: number, artistId?: number, albumId?: number) {
 		let reqURL: string = this.apiURL + 'song/?most_popular&limit=' + limit;
+		if (mostPopular) {
+			reqURL += "&most_popular";
+		}
 		if (offset) {
 			reqURL += "&offset=" + offset;
 		}
 		if (artistId) {
 			reqURL += "&artist_id=" + artistId;
+		}
+		if (albumId) {
+			reqURL += "&album_id=" + artistId;
 		}
 		return this.http.get(reqURL);
 	}
