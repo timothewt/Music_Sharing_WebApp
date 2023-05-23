@@ -1,16 +1,16 @@
 <div id="player-container">
-	<div id="song-infos" *ngIf="queue.songs.length > 0">
-		<img [src]="queue.songs[queue.currentSongIndex].album.cover">
+	<div id="song-infos" *ngIf="getQueue().songs.length > 0">
+		<img [src]="getCurrentSong().album.cover">
 		<div id="song-titles">
 			<h2 id="songName">
-				{{queue.songs[queue.currentSongIndex].name}}
+				{{getCurrentSong().name}}
 			</h2>
 			<h3 id="artist">
-				{{queue.songs[queue.currentSongIndex].album.artist.username}}
+				{{getCurrentSong().album.artist.username}}
 			</h3>
 		</div>
 	</div>
-	<div id="song-infos" *ngIf="queue.songs.length == 0"></div>
+	<div id="song-infos" *ngIf="getQueue().songs.length == 0"></div>
 	<div id="player">
 		<div id="player-controls">
 			<button (click)="previousSong()">
@@ -49,6 +49,6 @@
 			<img src="../../assets/volume-high-icon.svg" *ngIf="!volumeDisabled && audio.volume > .7">
 		</button>
 		<input type="range" (input)="changeVolume($event.target)" min="0" max="1" step=".001" [value]="audio.volume" id="volume-slider" [style.backgroundImage]="'linear-gradient(to right, #AAA 0%, #AAA ' + (audio.volume) * 100 + '%, #555 ' + (audio.volume) * 100 + '%, #555 100%)'">
-		<app-queue id="queue" (loadCurrentSongInPlayer)="loadCurrentSong(currentlyPlaying)" (toggleQueueVisibility)="toggleQueueVisibility()" [queue]="queue" [class.visible]="visibleQueue" [class.invisible]="!visibleQueue"></app-queue>
+		<app-queue id="queue" (loadCurrentSongInPlayer)="loadCurrentSong(currentlyPlaying)" (toggleQueueVisibility)="toggleQueueVisibility()" [class.visible]="visibleQueue" [class.invisible]="!visibleQueue"></app-queue>
 	</div>
 </div>

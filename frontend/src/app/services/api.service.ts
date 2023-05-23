@@ -11,7 +11,10 @@ export class APIService {
 	constructor(private http: HttpClient) {}
 
 	private buildRequestParemeters(options: APIGetOptions) {
-		let requestParameters: string = "?limit=" + options.limit;
+		let requestParameters: string = "?";
+		if (options.limit) {
+			requestParameters += "&limit=" + options.limit;
+		}
 		if (options.mostPopular) {
 			requestParameters += "&most_popular";
 		}

@@ -3,6 +3,7 @@ import { User } from '../../models/user';
 import { Album } from '../../models/album';
 import { Song } from '../../models/song';
 import { Queue } from '../../models/queue';
+import { SharedQueueService } from 'src/app/services/shared-queue.service';
 
 @Component({
 	selector: 'app-player',
@@ -11,7 +12,7 @@ import { Queue } from '../../models/queue';
 })
 
 export class PlayerComponent {
-	@Input() queue: Queue;
+	lastKnownCurrentSongIndex: number;
 	audio: any;
 	songLength: number;
 	songLengthAsStr: string;
@@ -24,8 +25,8 @@ export class PlayerComponent {
 	loopType: number; // 0: no loop, 1: loop the playlist, 2: loop the song
 	visibleQueue: boolean;
 
-	constructor() {
-		this.queue = new Queue();
+	constructor(private sharedQueueService: SharedQueueService) {
+		this.lastKnownCurrentSongIndex = -1;
 		this.audio = new Audio();
 		this.currentTime = 0;
 		this.currentTimeAsStr = "0:00";
@@ -40,16 +41,32 @@ export class PlayerComponent {
 	}
 
 	ngOnInit(): void {
-		this.loadCurrentSong(false);
+		this.sharedQueueService.queue$.subscribe((value: any) => {
+			setTimeout(() => {
+				this.loadCurrentSong(this.currentlyPlaying);
+			}, 200);
+		});
 
 		this.audio.addEventListener('timeupdate', () => { // when the time of the audio changes
 			this.onAudioTimeUpdate()
 		});
 	}
+
+	public getQueue(): Queue {
+		return this.sharedQueueService.getQueueObject();
+	}
+
+	public getCurrentSongIndex(): number {
+		return this.sharedQueueService.getQueueObject().currentSongIndex;
+	}
+
+	public getCurrentSong(): Song {
+		return this.getQueue().songs[this.getCurrentSongIndex()];
+	}
 	
 	public loadCurrentSong(playAudio: boolean = false): void {
-		if (this.queue.songs.length == 0) return;
-		this.audio.src = this.queue.songs[this.queue.currentSongIndex].recordingLink;
+		if (this.getQueue().songs.length == 0) return;
+		this.audio.src = this.getCurrentSong().recordingLink;
 		this.currentTime = 0;
 		this.currentTimeAsStr = "0:00";
 
@@ -74,8 +91,8 @@ export class PlayerComponent {
 				this.restartSong();
 				return;
 			}
-			if (this.queue.songs.length - 1 == this.queue.currentSongIndex) {
-				this.queue.currentSongIndex = 0;
+			if (this.getQueue().songs.length - 1 == this.getCurrentSongIndex()) {
+				this.getQueue().setCurrentSongIndex(0);
 				this.loadCurrentSong(this.loopType == 1);
 			} else {
 				this.nextSong();
@@ -112,11 +129,11 @@ export class PlayerComponent {
 			this.audio.currentTime = 0;
 			return;
 		}
-		if (this.queue.currentSongIndex == 0) {
+		if (this.getCurrentSongIndex() == 0) {
 			if (this.loopType == 0) return;
-			this.queue.currentSongIndex = this.queue.songs.length;
+			this.getQueue().setCurrentSongIndex(this.getQueue().songs.length);
 		}
-		this.queue.currentSongIndex -= 1;
+		this.getQueue().setCurrentSongIndex(this.getCurrentSongIndex() - 1);
 		this.loadCurrentSong(this.currentlyPlaying);
 	}
 
@@ -125,14 +142,14 @@ export class PlayerComponent {
 			this.restartSong();
 			return;
 		}
-		if (this.queue.songs.length - 1 == this.queue.currentSongIndex) {
+		if (this.getQueue().songs.length - 1 == this.getCurrentSongIndex()) {
 			if (this.loopType == 0) {
 				this.audio.currentTime = this.songLength;
 				return;
 			}
-			this.queue.currentSongIndex = -1;
+			this.getQueue().setCurrentSongIndex(-1);
 		};
-		this.queue.currentSongIndex += 1;
+		this.getQueue().setCurrentSongIndex(this.getCurrentSongIndex() + 1);
 		this.loadCurrentSong(this.currentlyPlaying);
 	}
 

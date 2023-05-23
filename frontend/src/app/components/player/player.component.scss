@@ -226,7 +226,7 @@ $player_height: 12vh;
 
 		#queue {
 			position: absolute;
-			bottom: 10vh;
+			bottom: $player_height;
 			right: 0;
 		}
 

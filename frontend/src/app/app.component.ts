@@ -1,10 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { PlayerComponent } from './components/player/player.component';
-import { User } from './models/user';
-import { Album } from './models/album';
-import { Song } from './models/song';
 import { Queue } from './models/queue';
+import { Song } from './models/song';
 import { APIService } from './services/api.service';
+import { SharedQueueService } from 'src/app/services/shared-queue.service';
 
 @Component({
 	selector: 'app-root',
@@ -13,28 +11,24 @@ import { APIService } from './services/api.service';
 })
 export class AppComponent {
 	title = 'frontend';
-
-	@ViewChild("player", {static:false}) playerComponent: PlayerComponent;
-
 	queue: Queue;
 
-	constructor(private apiService: APIService) {
-		this.playerComponent = new PlayerComponent();
+	constructor(private apiService: APIService, private sharedQueueService: SharedQueueService) {
 		this.queue = new Queue();
+		this.sharedQueueService.setQueue(this.queue);
+		setTimeout(() => {
+		this.apiService.getSongs({albumId: 1228}).subscribe(
+						(response: any) => {
+							for(let i = 0; i < response.length; i++) {
+								let song = new Song().deserialize(response[i]);
+								let queue: Queue = this.sharedQueueService.getQueueObject();
+								queue.addSong(song);
+								this.sharedQueueService.setQueue(queue);
+							}
+						}
+					);
+		}, 0)
 	}
 
-	ngOnInit() {
-		this.apiService.getSongs({limit:5, searchedValue: "super"}).subscribe(
-			(response: any) => {
-				console.log(response);
-			},
-			(error: any) => {
-				alert("Error");
-			}
-		);
-	}
-
-	public loadCurrentSongInPlayer(): void {
-		this.playerComponent.loadCurrentSong(this.playerComponent.currentlyPlaying);
-	}
+	ngOnInit() {}
 }

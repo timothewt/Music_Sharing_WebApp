@@ -1,5 +1,5 @@
 export interface APIGetOptions {
-	limit: number;
+	limit?: number;
 	offset?: number;
 	mostPopular?: boolean;
 	searchedValue?: string;
