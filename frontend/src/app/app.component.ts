@@ -1,4 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
+import { PlayerComponent } from './components/player/player.component';
+import { ArrowsNavComponent } from './arrows-nav/arrows-nav.component';
 import { Queue } from './models/queue';
 import { Song } from './models/song';
 import { APIService } from './services/api.service';

@@ -28,7 +28,7 @@ html, body {
 }
 
 .main {
-
+	position: relative;
 	grid-area: main;
 
 	overflow-x: hidden;
@@ -37,13 +37,18 @@ html, body {
 	&::-webkit-scrollbar {
 		display: none;
 	}
-
 	
 }
 
 .player {
 	grid-area: player;
 
+}
+
+.arrows-nav {
+	position: fixed;
+	left: calc(5vw + 20px);
+	top: 20px;
 }
 
 @media screen and (max-width: 800px) {
