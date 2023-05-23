@@ -2,8 +2,8 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes
 
-from songs.models import Album, Song, Playlist, PlaylistElement
-from songs.serializers import AlbumSerializer, SongSerializer, PlaylistSerializer, PlaylistElementSerializer
+from songs.models import Album, Song, Playlist
+from songs.serializers import AlbumSerializer, SongSerializer, PlaylistSerializer
 
 
 # @permission_classes([IsAuthenticated])  # used to only grant access to authenticated users (JWT access token in request header)
@@ -86,20 +86,4 @@ class PlaylistViewset(ModelViewSet):
 		if user_id is not None:
 			queryset = queryset.filter(user_id=user_id)
 
-		return queryset
-
-
-
-class PlaylistElementViewset(ModelViewSet):
-
-	serializer_class = PlaylistElementSerializer
-
-	def get_queryset(self):
-
-		queryset = PlaylistElement.objects.all()
-
-		playlist_id = self.request.GET.get('playlist_id')
-		if playlist_id is not None:
-			queryset = queryset.filter(playlist_id=playlist_id)
-			
 		return queryset

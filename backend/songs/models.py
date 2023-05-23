@@ -66,6 +66,7 @@ class Playlist(models.Model):
 	name = models.CharField(max_length=255)
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	description = models.TextField(blank=True)
+	songs = models.ManyToManyField(Song)
 
 	class Meta:
 		constraints = [
@@ -77,12 +78,3 @@ class Playlist(models.Model):
 
 	def __str__(self):
 		return f"{self.name} by {self.user}"
-
-
-class PlaylistElement(models.Model):
-
-	playlist = models.ForeignKey(Playlist, on_delete=models.CASCADE)
-	song = models.ForeignKey(Song, on_delete=models.CASCADE)
-
-	def __str__(self):
-		return f"Song {self.song} in playlist {self.playlist}"

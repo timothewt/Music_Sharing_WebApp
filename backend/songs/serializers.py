@@ -1,7 +1,10 @@
 from rest_framework.serializers import ModelSerializer, SlugRelatedField
 from taggit.serializers import TagListSerializerField, TaggitSerializer
-from songs.models import Song, Album, Playlist, PlaylistElement
+from songs.models import Song, Album, Playlist
 from users.serializers import UserSerializer
+
+
+# REMOVE READ_ONLY PROPERTIES TO POST FROM THE FRONTEND
 
 
 class AlbumSerializer(TaggitSerializer, ModelSerializer):
@@ -23,14 +26,8 @@ class SongSerializer(TaggitSerializer, ModelSerializer):
 
 
 class PlaylistSerializer(ModelSerializer):
+	songs = SongSerializer(many=True, read_only=True)
 
 	class Meta:
 		model = Playlist
-		fields = '__all__'
-
-
-class PlaylistElementSerializer(ModelSerializer):
-
-	class Meta:
-		model = PlaylistElement
-		fields = '__all__'
+		fields = ('id','name','songs')
