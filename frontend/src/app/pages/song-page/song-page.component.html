@@ -1,16 +1,19 @@
 <div class="song-page"> 
+    <div class="banner-img">
+        <img src="{{this.song.album.cover}}" alt="">
+    </div>
     <div class="song-header">
         <div class="cover">
-            <img src="https://i.scdn.co/image/ab67616d00001e02c7d6fe09dfe4af1580e59705" alt="">
+            <img src="{{this.song.album.cover}}" alt="">
         </div>
         <div class="text">
-            <h1 class="title">Blinding Lights</h1>
+            <h1 class="title">{{this.song.name}}</h1>
             <div class="infos">
-                <a class="artist"> The semaine</a>
+                <a class="artist"> {{this.song.album.artist.username}}</a>
                 <p class="dot">-</p>
-                <p class="date"> 2020 </p>
+                <p class="date"> {{this.song.releaseYear}} </p>
                 <p class="dot">-</p>
-                <p class="duration"> 3:20 </p>
+                <p class="duration"> 0:30 </p>
             </div>
         </div> 
     </div>
