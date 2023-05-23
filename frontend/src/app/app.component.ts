@@ -18,16 +18,6 @@ export class AppComponent {
 	constructor(private apiService: APIService, private sharedQueueService: SharedQueueService) {
 		this.queue = new Queue();
 		this.sharedQueueService.setQueue(this.queue);
-		this.apiService.getSongs({albumId: 1228}).subscribe(
-			(response: any) => {
-				for(let i = 0; i < response.length; i++) {
-					let song = new Song().deserialize(response[i]);
-					let queue: Queue = this.sharedQueueService.getQueueObject();
-					queue.addSong(song);
-					this.sharedQueueService.setQueue(queue);
-				}
-			}
-		);
 	}
 
 	ngOnInit() {}
