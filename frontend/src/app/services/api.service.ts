@@ -21,22 +21,52 @@ export class APIService {
 		return this.http.get(this.apiURL + 'song/' + id + "/");
 	}
 
-	public getMostPopularArtists(numberOfArtists: number) {
-		return this.http.get(this.apiURL + 'user/?most_popular=' + numberOfArtists);
+	public getMostPopularArtists(limit: number) {
+		return this.http.get(this.apiURL + 'user/?most_popular&limit=' + limit);
 	}
 
-	public getMostPopularAlbums(numberOfAlbum: number, artistId?: number) {
-		let reqURL: string = this.apiURL + 'album/?most_popular=' + numberOfAlbum;
+	public getMostPopularAlbums(limit: number, offset?: number, artistId?: number) {
+		let reqURL: string = this.apiURL + 'album/?most_popular&limit=' + limit;
+		if (offset) {
+			reqURL += "&offset=" + offset;
+		}
 		if (artistId) {
 			reqURL += "&artist_id=" + artistId;
 		}
 		return this.http.get(reqURL);
 	}
 
-	public getMostPopularSongs(numberOfSongs: number, artistId?: number) {
-		let reqURL: string = this.apiURL + 'song/?most_popular=' + numberOfSongs;
+	public getMostPopularSongs(limit: number, offset?: number, artistId?: number) {
+		let reqURL: string = this.apiURL + 'song/?most_popular&limit=' + limit;
+		if (offset) {
+			reqURL += "&offset=" + offset;
+		}
 		if (artistId) {
 			reqURL += "&artist_id=" + artistId;
+		}
+		return this.http.get(reqURL);
+	}
+
+	public getArtistsBySearch(searched_value: string, limit: number, offset?: number) {
+		let reqURL: string = this.apiURL + 'user/?most_popular&search=' + searched_value + '&limit=' + limit;
+		if (offset) {
+			reqURL += "&offset=" + offset;
+		}
+		return this.http.get(reqURL);
+	}
+
+	public getAlbumsBySearch(searched_value: string, limit: number, offset?: number) {
+		let reqURL: string = this.apiURL + 'album/?most_popular&search=' + searched_value + '&limit=' + limit;
+		if (offset) {
+			reqURL += "&offset=" + offset;
+		}
+		return this.http.get(reqURL);
+	}
+
+	public getSongsBySearch(searched_value: string, limit: number, offset?: number) {
+		let reqURL: string = this.apiURL + 'song/?most_popular&search=' + searched_value + '&limit=' + limit;
+		if (offset) {
+			reqURL += "&offset=" + offset;
 		}
 		return this.http.get(reqURL);
 	}

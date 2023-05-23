@@ -24,7 +24,7 @@ export class AppComponent {
 	}
 
 	ngOnInit() {
-		this.apiService.getMostPopularSongs(5, 600).subscribe(
+		this.apiService.getSongsBySearch("super", 5).subscribe(
 			(response: any) => {
 				console.log(response);
 			},
