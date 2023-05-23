@@ -48,3 +48,13 @@ def insert_songs():  # execute third
 			print(f"Could not save tags for song {song.name}")
 
 		song.save()
+
+
+def insert_times():
+	songs = pd.read_csv("db_data/songs.csv")
+	for i in range(len(songs)):
+		song = Song.objects.filter(recording_link=songs.loc[i,"spotify_preview_url"]).first()
+
+		if song is not None:
+			song.duration_ms = songs.loc[i, "duration_ms"]
+			song.save()
