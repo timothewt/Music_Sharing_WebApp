@@ -9,7 +9,7 @@
         <div class="text">
             <h1 class="title">{{this.song.name}}</h1>
             <div class="infos">
-                <a class="artist"> {{this.song.album.artist.username}}</a>
+                <a routerLink="/artist/{{this.song.album.artist.id}}" class="artist"> {{this.song.album.artist.username}}</a>
                 <p class="dot">-</p>
                 <p class="date"> {{this.song.releaseYear}} </p>
                 <p class="dot">-</p>
