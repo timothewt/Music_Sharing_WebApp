@@ -24,7 +24,7 @@ export class AppComponent {
 	}
 
 	ngOnInit() {
-		this.apiService.getSongsBySearch("super", 5).subscribe(
+		this.apiService.getSongs({limit:5, searchedValue: "super"}).subscribe(
 			(response: any) => {
 				console.log(response);
 			},
