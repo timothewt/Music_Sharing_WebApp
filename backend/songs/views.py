@@ -2,8 +2,8 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes
 
-from songs.models import Album, Song, AlbumTag, SongTag, Playlist, PlaylistElement
-from songs.serializers import AlbumSerializer, SongSerializer, AlbumTagSerializer, SongTagSerializer, PlaylistSerializer, PlaylistElementSerializer
+from songs.models import Album, Song, Playlist, PlaylistElement
+from songs.serializers import AlbumSerializer, SongSerializer, PlaylistSerializer, PlaylistElementSerializer
 
 
 # @permission_classes([IsAuthenticated])  # used to only grant access to authenticated users (JWT access token in request header)
@@ -71,36 +71,6 @@ class SongViewset(ModelViewSet):
 			else:
 				queryset = queryset[:int(limit)]
 		
-		return queryset
-
-
-class AlbumTagViewset(ModelViewSet):
-
-	serializer_class = AlbumTagSerializer
-
-	def get_queryset(self):
-
-		queryset = AlbumTag.objects.all()
-		
-		album_id = self.request.GET.get('album_id')
-		if album_id is not None:
-			queryset = queryset.filter(album_id=album_id)
-
-		return queryset
-
-
-class SongTagViewset(ModelViewSet):
-
-	serializer_class = SongTagSerializer
-
-	def get_queryset(self):
-
-		queryset = SongTag.objects.all()
-		
-		song_id = self.request.GET.get('song_id')
-		if song_id is not None:
-			queryset = queryset.filter(song_id=song_id)
-			
 		return queryset
 
 

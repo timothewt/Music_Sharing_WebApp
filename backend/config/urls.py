@@ -5,7 +5,7 @@ from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from config.settings import MEDIA_URL, MEDIA_ROOT
 
-from songs.views import AlbumViewset, SongViewset, AlbumTagViewset, SongTagViewset
+from songs.views import AlbumViewset, SongViewset
 from users.views import UserViewset
 
 
@@ -13,8 +13,6 @@ router = routers.SimpleRouter()  # used to access all the views of the API
 
 router.register('album', AlbumViewset, basename="album")
 router.register('song', SongViewset, basename="song")
-router.register('album_tag', AlbumTagViewset, basename="album_tag")
-router.register('song_tag', SongTagViewset, basename="song_tag")
 router.register('user', UserViewset, basename="user")
 
 urlpatterns = [

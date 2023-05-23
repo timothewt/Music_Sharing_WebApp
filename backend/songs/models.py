@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import User
+from taggit.managers import TaggableManager
 
 
 class Album(models.Model):
@@ -12,6 +13,7 @@ class Album(models.Model):
 	cover_link = models.CharField(max_length=255, blank=True)
 	cover_file = models.ImageField(blank=True)
 	listenings = models.IntegerField(default=0)
+	tags = TaggableManager()
 
 	def save(self, *args, **kwargs):
 			
@@ -43,6 +45,7 @@ class Song(models.Model):
 	duration_ms = models.IntegerField(blank=True, default=0)
 	listenings = models.IntegerField(default=0)
 	lyrics = models.TextField(blank=True)
+	tags = TaggableManager()
 
 	def save(self, *args, **kwargs):
 			
@@ -54,24 +57,6 @@ class Song(models.Model):
 
 	def __str__(self):
 		return f"{self.name} by {self.album.artist} from {self.album.name}, {self.release_year}"
-
-
-class AlbumTag(models.Model):
-
-	tag = models.CharField(max_length=255)
-	album = models.ForeignKey(Album, on_delete=models.CASCADE)
-
-	def __str__(self):
-		return f"{self.tag} : {self.album}"
-
-
-class SongTag(models.Model):
-
-	tag = models.CharField(max_length=255)
-	song = models.ForeignKey(Song, on_delete=models.CASCADE)
-
-	def __str__(self):
-		return f"{self.tag} : {self.song}"
 
 
 class Playlist(models.Model):

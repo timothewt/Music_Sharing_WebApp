@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'users',
     'songs',
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -146,3 +147,5 @@ SIMPLE_JWT = {
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
+
+TAGGIT_CASE_INSENSITIVE = True
