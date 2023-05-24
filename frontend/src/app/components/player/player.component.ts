@@ -13,6 +13,7 @@ import { SharedQueueService } from 'src/app/services/shared-queue.service';
 
 export class PlayerComponent {
 	audio: any;
+	canPlayAudio: boolean;
 	songLength: number;
 	songLengthAsStr: string;
 	currentTime: number;
@@ -26,6 +27,7 @@ export class PlayerComponent {
 
 	constructor(private sharedQueueService: SharedQueueService) {
 		this.audio = new Audio();
+		this.canPlayAudio = false;
 		this.currentTime = 0;
 		this.currentTimeAsStr = "0:00";
 		this.songLength = 0;
@@ -64,27 +66,36 @@ export class PlayerComponent {
 	}
 	
 	public loadCurrentSong(playAudio: boolean = false): void {
-		if (this.getQueue().getQueueLength() == 0) return;
+		this.canPlayAudio = false;
+		if (this.getQueue().getQueueLength() == 0) {
+			this.audio.src = "";
+			this.currentTime = 0;
+			this.currentTimeAsStr = "0:00";
+			this.songLength = 0;
+			this.songLengthAsStr = "0:00";
+			this.currentlyPlaying = false;
+			return;
+		}
 		this.audio.src = this.getCurrentSong().recordingLink;
 		this.currentTime = 0;
 		this.currentTimeAsStr = "0:00";
 
 		this.audio.addEventListener('loadedmetadata', () => {  // fetches the length of the song when it has been loaded
 			this.songLength = this.audio.duration;
-			this.songLengthAsStr = this.timeToTimeAsStr(this.songLength);				
+			this.songLengthAsStr = this.timeToTimeAsStr(this.songLength);
+			this.canPlayAudio = true;			
 		});
-
-		this.audio.addEventListener('canplaythrough', () => {
 
 		if (playAudio) {
 			this.resumeAudio();
 		} else {
 			this.pauseAudio();
 		}
-		});
 	}
 
 	private onAudioTimeUpdate(): void {
+		if (!this.canPlayAudio) return;
+
 		this.currentTime = this.audio.currentTime;
 		this.currentTimeAsStr = this.timeToTimeAsStr(this.currentTime);
 
