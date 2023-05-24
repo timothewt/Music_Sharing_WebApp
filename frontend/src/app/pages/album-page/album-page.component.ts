@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 
 import { Song } from 'src/app/models/song';
 import { Album } from 'src/app/models/album';
-import { User } from 'src/app/models/user';
-import { Queue } from 'src/app/models/queue';
 
 import { ActivatedRoute } from '@angular/router';
 import { APIService } from 'src/app/services/api.service';
