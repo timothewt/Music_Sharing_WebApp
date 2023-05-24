@@ -1,8 +1,8 @@
 import { Song } from "./song";
 
 export class Queue {
-	songs: Song[];
-	currentSongIndex: number;
+	private songs: Song[];
+	private currentSongIndex: number;
 
 	constructor() {
 		this.songs = [];
@@ -39,7 +39,30 @@ export class Queue {
 		this.songs.splice(songIndex, 1);
 	}
 
+	public getSongs(): Song[] {
+		return this.songs
+	}
+
+	public getCurrentSongIndex(): number {
+		return this.currentSongIndex;
+	}
+
+	public getCurrentSong(): Song {
+		if (this.currentSongIndex < this.songs.length) {
+			return this.songs[this.currentSongIndex];
+		} 
+		return new Song();
+	}
+
+	public getQueueLength(): number {
+		return this.songs.length;
+	}
+
 	public setCurrentSongIndex(newIndex: number): void {
 		this.currentSongIndex = newIndex;
+	}
+
+	public setSongs(songs: Song[]): void {
+		this.songs = songs;
 	}
 }

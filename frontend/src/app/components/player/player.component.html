@@ -1,16 +1,16 @@
 <div id="player-container">
-	<div id="song-infos" *ngIf="getQueue().songs.length > 0">
-		<img [src]="getCurrentSong().album.cover">
+	<div id="song-infos" *ngIf="getQueue().getQueueLength() > 0">
+		<img [src]="getQueue().getCurrentSong().album.cover">
 		<div id="song-titles">
 			<h2 id="songName">
-				{{getCurrentSong().name}}
+				{{getQueue().getCurrentSong().name}}
 			</h2>
 			<h3 id="artist">
-				{{getCurrentSong().album.artist.username}}
+				{{getQueue().getCurrentSong().album.artist.username}}
 			</h3>
 		</div>
 	</div>
-	<div id="song-infos" *ngIf="getQueue().songs.length == 0"></div>
+	<div id="song-infos" *ngIf="getQueue().getQueueLength() == 0"></div>
 	<div id="player">
 		<div id="player-controls">
 			<button (click)="previousSong()">

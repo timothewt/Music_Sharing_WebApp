@@ -6,16 +6,23 @@ import { Queue } from 'src/app/models/queue';
 	providedIn: 'root'
 })
 export class SharedQueueService {
-	private queueSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+	private queue: Queue;
+	private doReloadPlayerSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+	public doReloadPlayer$ = this.doReloadPlayerSubject.asObservable();
 
-	public queue$ = this.queueSubject.asObservable();
-
-	public setQueue(queue: Queue): void {
-		// called when the player has to change the currently playing song. Otherwise, changing the queue object through the getter is enough. 
-		this.queueSubject.next(queue);
+	constructor() {
+		this.queue = new Queue();
 	}
 
-	public getQueueObject(): Queue {
-		return this.queueSubject.getValue();
+	public setDoReloadPlayer(doReload: boolean): void { 
+		this.doReloadPlayerSubject.next(doReload);
+	}
+
+	public getQueue(): Queue {
+		return this.queue;
+	}
+
+	public setQueue(queue: Queue) {
+		this.queue = queue;
 	}
 }

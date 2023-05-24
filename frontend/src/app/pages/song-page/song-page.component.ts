@@ -33,11 +33,11 @@ export class SongPageComponent {
 	}
 
 	public addSongToQueue(): void {
-		let queue = this.sharedQueueService.getQueueObject();
+		let queue = this.sharedQueueService.getQueue();
 		queue.addSong(this.song);
-		queue.setCurrentSongIndex(queue.songs.length - 1);
+		queue.setCurrentSongIndex(queue.getQueueLength() - 1);
 
-		this.sharedQueueService.setQueue(queue);
+		this.sharedQueueService.setDoReloadPlayer(true);
 	}
 
 }

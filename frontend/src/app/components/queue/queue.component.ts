@@ -16,13 +16,13 @@ export class QueueComponent {
 	constructor(private sharedQueueService: SharedQueueService) {}
 
 	public getQueue() {
-		return this.sharedQueueService.getQueueObject();
+		return this.sharedQueueService.getQueue();
 	}
 
 	public changeQueueSongIndex(newIndex: number): void {
 		let queue: Queue = this.getQueue();
 		queue.setCurrentSongIndex(newIndex);
-		this.sharedQueueService.setQueue(queue);
+		this.sharedQueueService.setDoReloadPlayer(true);
 	}
 
 	public moveSongInQueue(event: MouseEvent, songIndex: number, delta: number): void {
@@ -32,12 +32,12 @@ export class QueueComponent {
 
 	public deleteSongFromQueue(event: MouseEvent, songIndex: number): void {
 		event.stopImmediatePropagation();
-		let currentSongIndex: number = this.getQueue().currentSongIndex
 		let queue: Queue = this.getQueue();
+		let currentSongIndex: number = queue.getCurrentSongIndex()
 		queue.deleteSongFromQueue(songIndex);
 
 		if (songIndex == currentSongIndex) {
-			this.sharedQueueService.setQueue(queue);
+			this.sharedQueueService.setDoReloadPlayer(true);
 		}
 	}
 }

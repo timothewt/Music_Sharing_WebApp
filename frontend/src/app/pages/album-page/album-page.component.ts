@@ -43,16 +43,14 @@ export class AlbumPageComponent {
 	}
 
 	public addAlbumToQueue(songIndex?: number): void {
-		let queue = this.sharedQueueService.getQueueObject();
+		let queue = this.sharedQueueService.getQueue();
 
-		this.songs.forEach((song: Song) => {
-			queue.addSong(song);
-		});
+		queue.setSongs(this.songs);
 
 		if (songIndex) {
 			queue.setCurrentSongIndex(songIndex);
 		}
 
-		this.sharedQueueService.setQueue(queue);
+		this.sharedQueueService.setDoReloadPlayer(true);
 	}
 }
