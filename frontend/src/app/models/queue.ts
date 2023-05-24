@@ -40,7 +40,7 @@ export class Queue {
 	}
 
 	public getSongs(): Song[] {
-		return this.songs
+		return this.songs;
 	}
 
 	public getCurrentSongIndex(): number {
@@ -62,7 +62,13 @@ export class Queue {
 		this.currentSongIndex = newIndex;
 	}
 
-	public setSongs(songs: Song[]): void {
-		this.songs = songs;
+	public setSongs(songs: Song[], newCurrentSongIndex?: number): void {
+		this.songs = [];
+		songs.map((song) => this.songs.push(song)); // making a copy of the input array 
+		if (newCurrentSongIndex) {
+			this.currentSongIndex = newCurrentSongIndex;
+		} else {
+			this.currentSongIndex = 0;
+		}
 	}
 }

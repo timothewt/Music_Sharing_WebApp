@@ -21,7 +21,7 @@ export class SongPageComponent {
 		
 		this._Activatedroute.paramMap.subscribe(params => {
 			//Get the song id from the url
-			let songId : number  = Number(params.get('id'));
+			let songId: number = Number(params.get('id'));
 
 			//Load the song infos from the backend
 			this.apiService.getSongById(songId).subscribe(
@@ -32,10 +32,9 @@ export class SongPageComponent {
 		});
 	}
 
-	public addSongToQueue(): void {
+	public playSong(): void {
 		let queue = this.sharedQueueService.getQueue();
-		queue.addSong(this.song);
-		queue.setCurrentSongIndex(queue.getQueueLength() - 1);
+		queue.setSongs([this.song]);
 
 		this.sharedQueueService.setDoReloadPlayer(true);
 	}

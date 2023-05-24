@@ -44,9 +44,7 @@ export class AlbumPageComponent {
 
 	public addAlbumToQueue(songIndex?: number): void {
 		let queue = this.sharedQueueService.getQueue();
-
 		queue.setSongs(this.songs);
-
 		if (songIndex) {
 			queue.setCurrentSongIndex(songIndex);
 		}

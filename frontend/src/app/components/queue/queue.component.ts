@@ -26,12 +26,14 @@ export class QueueComponent {
 	}
 
 	public moveSongInQueue(event: MouseEvent, songIndex: number, delta: number): void {
-		event.stopImmediatePropagation();
+		event.stopImmediatePropagation(); // when clicking on a move button, does not trigger the changeQueueSongIndex method
+
 		this.getQueue().moveSongInQueue(songIndex, delta);
 	}
 
 	public deleteSongFromQueue(event: MouseEvent, songIndex: number): void {
-		event.stopImmediatePropagation();
+		event.stopImmediatePropagation(); // when clicking on the delete button, does not trigger the changeQueueSongIndex method
+		
 		let queue: Queue = this.getQueue();
 		let currentSongIndex: number = queue.getCurrentSongIndex()
 		queue.deleteSongFromQueue(songIndex);

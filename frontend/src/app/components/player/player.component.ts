@@ -40,11 +40,10 @@ export class PlayerComponent {
 
 	ngOnInit(): void {
 		this.sharedQueueService.doReloadPlayer$.subscribe((doReload: boolean) => {
-			setTimeout(() => {
-				if (doReload) {
-					this.loadCurrentSong(this.currentlyPlaying); 
-				}
-			}, 200);
+			if (doReload) {
+				this.loadCurrentSong(this.currentlyPlaying);
+				this.sharedQueueService.setDoReloadPlayer(false);
+			}
 		});
 
 		this.audio.addEventListener('timeupdate', () => { // when the time of the audio changes
@@ -75,11 +74,14 @@ export class PlayerComponent {
 			this.songLengthAsStr = this.timeToTimeAsStr(this.songLength);				
 		});
 
+		this.audio.addEventListener('canplaythrough', () => {
+
 		if (playAudio) {
 			this.resumeAudio();
 		} else {
 			this.pauseAudio();
 		}
+		});
 	}
 
 	private onAudioTimeUpdate(): void {
