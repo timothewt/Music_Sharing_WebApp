@@ -17,8 +17,9 @@ export class SongPageComponent {
 
 	public song: Song = new Song();
 
-	constructor(private _Activatedroute:ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService) { 
-		
+	constructor(private _Activatedroute:ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService) {}
+
+	nOnInit() {
 		this._Activatedroute.paramMap.subscribe(params => {
 			//Get the song id from the url
 			let songId: number = Number(params.get('id'));

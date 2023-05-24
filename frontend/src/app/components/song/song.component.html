@@ -1,19 +1,19 @@
 <div class="track-details">
-    <div class="play-or-index">
-        <div class="index">
-            <p>{{index}}</p>
-        </div>
-        <button class="play" (click)="playSong()">
-            <img src="../../assets/play-icon-2.svg" alt="Play">
-        </button>
-    </div>
-    <div class="cover">
-        <img src="{{song.album.cover}}" alt="">
-    </div>
-    <div class="title">
-        <a routerLink="/song/{{this.song.id}}">{{song.name}}</a>
-    </div>
-    <div class="listened">
-        <p>{{song.duration | nicetime}}</p>
-    </div>
+	<div class="play-or-index">
+		<div class="index">
+			<p>{{index}}</p>
+		</div>
+		<button class="play" (click)="playSong()">
+			<img src="../../assets/play-icon-2.svg" alt="Play">
+		</button>
+	</div>
+	<div class="cover">
+		<img src="{{song.album.cover}}" alt="">
+	</div>
+	<div class="title">
+		<a routerLink="/song/{{this.song.id}}">{{song.name}}</a>
+	</div>
+	<div class="listened">
+		<p>{{song.duration | nicetime}}</p>
+	</div>
 </div>

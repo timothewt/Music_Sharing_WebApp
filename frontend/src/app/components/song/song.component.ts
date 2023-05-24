@@ -12,8 +12,7 @@ export class SongComponent {
 	@Input() song!: Song;
 	@Input() index!: number;
 	
-	constructor(private sharedQueueService: SharedQueueService) { 
-	}
+	constructor(private sharedQueueService: SharedQueueService) {}
 
 	public playSong(): void {
 		let queue = this.sharedQueueService.getQueue();

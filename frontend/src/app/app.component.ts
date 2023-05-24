@@ -13,12 +13,12 @@ import { SharedQueueService } from 'src/app/services/shared-queue.service';
 })
 export class AppComponent {
 	title = 'frontend';
-	queue: Queue;
+	queue!: Queue;
 
-	constructor(private apiService: APIService, private sharedQueueService: SharedQueueService) {
+	constructor(private apiService: APIService, private sharedQueueService: SharedQueueService) {}
+
+	ngOnInit() {
 		this.queue = new Queue();
 		this.sharedQueueService.setQueue(this.queue);
 	}
-
-	ngOnInit() {}
 }

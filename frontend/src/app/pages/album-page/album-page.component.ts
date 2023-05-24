@@ -19,7 +19,9 @@ export class AlbumPageComponent {
 	album: Album = new Album();
 	songs: Song[] = [];
 
-	constructor(private _Activatedroute:ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService) {
+	constructor(private _Activatedroute:ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService) {}
+
+	ngOnInit() {
 		this._Activatedroute.paramMap.subscribe(params => {
 			//Get the song id from the url
 			let albumId : number  = Number(params.get('id'));

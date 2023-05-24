@@ -12,20 +12,22 @@ import { SharedQueueService } from 'src/app/services/shared-queue.service';
 })
 
 export class PlayerComponent {
-	audio: any;
-	canPlayAudio: boolean;
-	songLength: number;
-	songLengthAsStr: string;
-	currentTime: number;
-	currentTimeAsStr: string;
-	currentTimeElement: any;
-	currentlyPlaying: boolean;
-	volumeBeforeDisabled: number;
-	volumeDisabled: boolean;
-	loopType: number; // 0: no loop, 1: loop the playlist, 2: loop the current song
-	visibleQueue: boolean;
+	audio!: any;
+	canPlayAudio!: boolean;
+	songLength!: number;
+	songLengthAsStr!: string;
+	currentTime!: number;
+	currentTimeAsStr!: string;
+	currentTimeElement!: any;
+	currentlyPlaying!: boolean;
+	volumeBeforeDisabled!: number;
+	volumeDisabled!: boolean;
+	loopType!: number; // 0: no loop, 1: loop the playlist, 2: loop the current song
+	visibleQueue!: boolean;
 
-	constructor(private sharedQueueService: SharedQueueService) {
+	constructor(private sharedQueueService: SharedQueueService) {}
+
+	ngOnInit(): void {
 		this.audio = new Audio();
 		this.canPlayAudio = false;
 		this.currentTime = 0;
@@ -38,9 +40,7 @@ export class PlayerComponent {
 		this.volumeDisabled = false;
 		this.loopType = 0;
 		this.visibleQueue = false;
-	}
 
-	ngOnInit(): void {
 		this.sharedQueueService.doReloadPlayer$.subscribe((doReload: boolean) => {
 			if (doReload) {
 				this.loadCurrentSong(this.currentlyPlaying);
