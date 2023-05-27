@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../../models/user';
 import { Album } from '../../models/album';
 import { Song } from '../../models/song';
@@ -11,7 +11,7 @@ import { SharedQueueService } from 'src/app/services/shared-queue.service';
 	styleUrls: ['./player.component.scss']
 })
 
-export class PlayerComponent {
+export class PlayerComponent implements OnInit {
 	audio!: any;
 	canPlayAudio!: boolean;
 	songLength!: number;

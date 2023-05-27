@@ -15,7 +15,7 @@ import { APIService } from "./services/api.service";
 import { SongComponent } from './components/song/song.component';
 import { TimePipe } from './models/timePipe';
 import { AlbumPageComponent } from './pages/album-page/album-page.component';
-import { ArrowsNavComponent } from './arrows-nav/arrows-nav.component';
+import { ArrowsNavComponent } from './components/arrows-nav/arrows-nav.component';
 
 @NgModule({
   declarations: [

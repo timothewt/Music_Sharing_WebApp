@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Song } from 'src/app/models/song';
 import { Album } from 'src/app/models/album';
@@ -12,7 +12,7 @@ import { SharedQueueService } from 'src/app/services/shared-queue.service';
 	templateUrl: './album-page.component.html',
 	styleUrls: ['./album-page.component.scss']
 })
-export class AlbumPageComponent {
+export class AlbumPageComponent implements OnInit{
 
 	album: Album = new Album();
 	songs: Song[] = [];

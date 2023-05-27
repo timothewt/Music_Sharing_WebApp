@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Song } from 'src/app/models/song';
 
 import { ActivatedRoute } from '@angular/router';
@@ -10,13 +10,13 @@ import { SharedQueueService } from 'src/app/services/shared-queue.service';
 	templateUrl: './song-page.component.html',
 	styleUrls: ['./song-page.component.scss']
 })
-export class SongPageComponent {
+export class SongPageComponent implements OnInit {
 
 	public song: Song = new Song();
 
 	constructor(private _Activatedroute:ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService) {}
 
-	nOnInit() {
+	ngOnInit() {
 		this._Activatedroute.paramMap.subscribe(params => {
 			//Get the song id from the url
 			let songId: number = Number(params.get('id'));

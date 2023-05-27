@@ -1,6 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { PlayerComponent } from './components/player/player.component';
-import { ArrowsNavComponent } from './arrows-nav/arrows-nav.component';
+import { ArrowsNavComponent } from './components/arrows-nav/arrows-nav.component';
 import { Queue } from './models/queue';
 import { Song } from './models/song';
 import { APIService } from './services/api.service';
@@ -11,11 +11,11 @@ import { SharedQueueService } from 'src/app/services/shared-queue.service';
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
 	title = 'frontend';
 	queue!: Queue;
 
-	constructor(private apiService: APIService, private sharedQueueService: SharedQueueService) {}
+	constructor(private sharedQueueService: SharedQueueService) {}
 
 	ngOnInit() {
 		this.queue = new Queue();
