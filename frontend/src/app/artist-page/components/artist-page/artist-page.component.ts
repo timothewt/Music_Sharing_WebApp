@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Album } from '../../models/album';
-import { User } from '../../models/user';
-import { Song } from '../../models/song';
+import { Album } from '../../../models/album';
+import { User } from '../../../models/user';
+import { Song } from '../../../models/song';
 
 @Component({
   selector: 'app-artist-page',
