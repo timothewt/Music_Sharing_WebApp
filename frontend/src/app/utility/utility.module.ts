@@ -18,6 +18,7 @@ import { RouterModule } from '@angular/router';
   exports: [
     SongComponent,
     AlbumComponent,
+    TimePipe,
   ]
 })
 export class UtilityModule { }
