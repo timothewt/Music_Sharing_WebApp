@@ -26,7 +26,7 @@ export class User implements Deserializable {
 		this.email = input.email;
 		this.dateJoined = new Date(input.date_joined);
 		this.description = input.description;
-		this.profilePic = input.profile_pic;
+		this.profilePic = input.profile_pic_link;
 		this.banner = input.banner;
 
 		return this;

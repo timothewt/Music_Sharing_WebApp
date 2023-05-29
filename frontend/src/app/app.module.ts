@@ -10,7 +10,7 @@ import { APIService } from "./services/api.service";
 import { ArrowsNavComponent } from './components/arrows-nav/arrows-nav.component';
 
 import { UtilityModule } from './utility/utility.module';
-import { ArtistPageModule } from './artist-page/artist-page.module';
+import { ArtistPageRoutingModule } from './artist-page/artist-page-routing.module';
 import { AlbumPageRoutingModule } from './album-page/album-page-routing.module';
 import { SongPageRoutingModule } from './song-page/song-page-routing.module';
 import { PlayerModule } from './player/player.module';
@@ -24,10 +24,10 @@ import { PlayerModule } from './player/player.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ArtistPageModule,
     UtilityModule,
     AlbumPageRoutingModule,
     SongPageRoutingModule,
+    ArtistPageRoutingModule,
     PlayerModule,
   ],
   providers: [APIService,],
