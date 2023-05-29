@@ -6,7 +6,7 @@
         <p class="title"> {{album.name}} </p>
         <p class="date"> {{album.releaseYear}} </p>
     </div>
-    <button class="play-button">
+    <button class="play-button" (click)="addAlbumToQueue()">
         <img src="../../assets/play-icon-2.svg" alt="Play">
     </button>
 </div>
