@@ -3,7 +3,7 @@
         <img class="cover" [src]="album.cover" alt="{{album.name}} cover">
     </div>
     <div class="album-infos">
-        <p class="title"> {{album.name}} </p>
+        <a routerLink="/album/{{this.album.id}}" class="title"> {{album.name}} </a>
         <p class="date"> {{album.releaseYear}} </p>
     </div>
     <button class="play-button" (click)="addAlbumToQueue()">

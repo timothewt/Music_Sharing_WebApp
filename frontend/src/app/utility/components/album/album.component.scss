@@ -4,6 +4,16 @@
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+    
+    &:hover {
+        text-decoration: underline;
+        color: inherit;
+    } 
+}
+
 .album {
     position: relative;
     display: flex;
