@@ -4,9 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PlayerComponent } from './components/player/player.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { QueueComponent } from './components/queue/queue.component';
+import { QueueComponent } from './player/queue/queue.component';
 import { APIService } from "./services/api.service";
 import { ArrowsNavComponent } from './components/arrows-nav/arrows-nav.component';
 
@@ -14,12 +13,11 @@ import { UtilityModule } from './utility/utility.module';
 import { ArtistPageModule } from './artist-page/artist-page.module';
 import { AlbumPageRoutingModule } from './album-page/album-page-routing.module';
 import { SongPageRoutingModule } from './song-page/song-page-routing.module';
+import { PlayerModule } from './player/player.module';
 @NgModule({
   declarations: [
     AppComponent,
-    PlayerComponent,
     NavbarComponent,
-    QueueComponent,
     ArrowsNavComponent,
   ],
   imports: [
@@ -30,6 +28,7 @@ import { SongPageRoutingModule } from './song-page/song-page-routing.module';
     UtilityModule,
     AlbumPageRoutingModule,
     SongPageRoutingModule,
+    PlayerModule,
   ],
   providers: [APIService,],
   bootstrap: [AppComponent]

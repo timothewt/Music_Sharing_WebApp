@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { PlayerComponent } from './components/player/player.component';
+import { PlayerComponent } from './player/player/player.component';
 import { ArrowsNavComponent } from './components/arrows-nav/arrows-nav.component';
 import { Queue } from './models/queue';
 import { Song } from './models/song';
