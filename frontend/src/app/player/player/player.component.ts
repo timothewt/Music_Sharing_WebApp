@@ -43,7 +43,7 @@ export class PlayerComponent implements OnInit {
 
 		this.sharedQueueService.doReloadPlayer$.subscribe((doReload: boolean) => {
 			if (doReload) {
-				this.loadCurrentSong(this.currentlyPlaying);
+				this.loadCurrentSong(true);
 				this.sharedQueueService.setDoReloadPlayer(false);
 			}
 		});

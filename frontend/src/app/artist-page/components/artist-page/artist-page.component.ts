@@ -63,4 +63,10 @@ export class ArtistPageComponent implements OnInit {
 		});
   }
 
+  addArtistSongsToQueue(): void {
+    this.sharedQueueService.getQueue().setSongs(this.artistSongs);
+    this.sharedQueueService.getQueue().setCurrentSongIndex(0);
+    this.sharedQueueService.setDoReloadPlayer(true);
+  }
+
 }

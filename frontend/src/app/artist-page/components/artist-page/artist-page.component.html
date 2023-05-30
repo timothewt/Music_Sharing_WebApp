@@ -7,7 +7,12 @@
     <div class="more">
 
         <div class="section">
-            <h2>Populaire</h2>
+            <div>
+                <h2>Popular</h2>
+                <button class="play-button" (click)="addArtistSongsToQueue()">
+                    <img src="../../../assets/play-icon-2.svg" alt="Play">
+                </button>
+            </div>
             <div class="list-style2">
                 <div *ngFor="let song of artistSongs | slice:0:5; let index = index">
                     <app-song [song]="song" [index]="index+1"></app-song>

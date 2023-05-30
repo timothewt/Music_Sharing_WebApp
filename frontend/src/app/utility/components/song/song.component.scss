@@ -1,7 +1,6 @@
 .track-details {
     /*Temp solution to width issue*/
     height: 7vh;
-    
 
     display: grid;
     grid-template-columns: 1fr 1fr 4fr 1fr;
@@ -11,11 +10,8 @@
     gap: 10px;
     padding: 10px;
     color: white;
-    font-family: 'Roboto', sans-serif;  
-
 
     border-radius: 10px;
-
 
     transition: background-color 0.2s ease-in-out;
 

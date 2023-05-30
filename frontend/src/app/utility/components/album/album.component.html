@@ -1,6 +1,6 @@
 <div class="album">
     <div class="img-zone">
-        <img class="cover" [src]="album.cover" alt="{{album.name}} cover">
+        <img class="cover" [src]="album.cover" alt="{{album.name}} cover" routerLink="/album/{{this.album.id}}">
     </div>
     <div class="album-infos">
         <a routerLink="/album/{{this.album.id}}" class="title"> {{album.name}} </a>

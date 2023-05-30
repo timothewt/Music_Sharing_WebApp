@@ -23,12 +23,10 @@
         }
         p {
             color: white;
-            font-family: 'Roboto', sans-serif;
         }
             
         h1 {
             color: white;
-            font-family: 'Roboto', sans-serif;
             font-size: 4em;
             font-style: bold;
         }
@@ -58,7 +56,6 @@
         div {
             h2 {
                 color: white;
-                font-family: 'Roboto', sans-serif;
                 font-size: 2em;
                 font-style: bold;   
             }
@@ -69,6 +66,21 @@
             flex-direction: column;
             gap: 20px;
             width: 100%;
+
+            > div:first-child {
+                display: flex;
+                align-items: center;
+
+                .play-button {
+                    height: 50px;
+                    background: none;
+                    border: none;
+
+                    img {
+                        height: 100%;
+                    }
+                }
+            }
         }
     }
 }
