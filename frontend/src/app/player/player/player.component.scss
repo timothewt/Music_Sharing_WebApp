@@ -2,6 +2,7 @@ $bg_color: #111;
 $player_height: 12vh;
 
 #player-container {
+
 	display: grid;
 	
 	grid-template-columns: .2fr .6fr .2fr;
@@ -126,6 +127,7 @@ $player_height: 12vh;
 			}
 
 			#player-timeline {
+				box-sizing: content-box;
 				outline: none;
 				-webkit-appearance: none;
 				width: 60%;
@@ -168,6 +170,7 @@ $player_height: 12vh;
 		grid-areas: songs-control;
 
 		#volume-slider {
+			box-sizing: content-box;
 			height: 5px;
 			width: 40%;
 			cursor: pointer;
