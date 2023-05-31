@@ -14,6 +14,7 @@
     grid-template-rows: 1fr 1.7fr;
 
 
+
     height: 100%;
 
     //Reset style of a tag
@@ -97,10 +98,8 @@
         padding: 10px;
 
 
-        background: rgba(28, 28, 28, 0.8);
+        background-image: rgba(28, 28, 28, 1);
 
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
 
         .actions {
             height: 10vh;

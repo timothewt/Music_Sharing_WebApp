@@ -13,7 +13,7 @@ import { SharedQueueService } from 'src/app/services/shared-queue.service';
 export class SongPageComponent implements OnInit {
 
 	public song: Song = new Song();
-
+	public color: string = "#000000";
 	constructor(private _Activatedroute:ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService) {}
 
 	ngOnInit() {

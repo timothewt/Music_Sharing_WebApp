@@ -16,6 +16,7 @@ export class AlbumPageComponent implements OnInit{
 
 	album: Album = new Album();
 	songs: Song[] = [];
+	color: string = "#000000";
 
 	constructor(private _Activatedroute:ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService) {}
 
