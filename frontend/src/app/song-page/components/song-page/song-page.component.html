@@ -1,7 +1,5 @@
-<div class="song-page"> 
-    <div class="banner-img">
-        <img src="{{this.song.album.cover}}" alt="">
-    </div>
+<div class="song-page" [ngStyle]="{'background-color': this.color}"> 
+
     <div class="song-header">
         <div class="cover">
             <img src="{{this.song.album.cover}}" alt="">

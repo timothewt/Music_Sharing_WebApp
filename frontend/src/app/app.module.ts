@@ -14,6 +14,7 @@ import { ArtistPageRoutingModule } from './artist-page/artist-page-routing.modul
 import { AlbumPageRoutingModule } from './album-page/album-page-routing.module';
 import { SongPageRoutingModule } from './song-page/song-page-routing.module';
 import { PlayerModule } from './player/player.module';
+import { HomePageModule } from './home-page/home-page.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +30,7 @@ import { PlayerModule } from './player/player.module';
     SongPageRoutingModule,
     ArtistPageRoutingModule,
     PlayerModule,
+    HomePageModule,
   ],
   providers: [APIService,],
   bootstrap: [AppComponent]
