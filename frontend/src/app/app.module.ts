@@ -14,7 +14,8 @@ import { ArtistPageRoutingModule } from './artist-page/artist-page-routing.modul
 import { AlbumPageRoutingModule } from './album-page/album-page-routing.module';
 import { SongPageRoutingModule } from './song-page/song-page-routing.module';
 import { PlayerModule } from './player/player.module';
-import { HomePageModule } from './home-page/home-page.module';
+import { HomePageRoutingModule } from './home-page/home-page-routing.module';
+import { SearchPageRoutingModule } from './search-page/search-page-routing.module';
 
 @NgModule({
   declarations: [
@@ -30,8 +31,9 @@ import { HomePageModule } from './home-page/home-page.module';
     AlbumPageRoutingModule,
     SongPageRoutingModule,
     ArtistPageRoutingModule,
+    SearchPageRoutingModule,
+    HomePageRoutingModule,
     PlayerModule,
-    HomePageModule,
   ],
   providers: [APIService,],
   bootstrap: [AppComponent]

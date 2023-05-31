@@ -71,7 +71,10 @@
             cursor: pointer;
 
             img {
-                transform: translate(-10px, 5px);
+                aspect-ratio: 1/1;
+                height: 5vh;
+                width: auto;
+                transform: translate(-25%, 25%);
             }
         }
     }
