@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomePageComponent } from './home-page/home-page.component';
 import { RouterModule } from '@angular/router';
 import { UtilityModule } from 'src/app/utility/utility.module';
+import { HomePageRoutingModule } from './home-page-routing.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { UtilityModule } from 'src/app/utility/utility.module';
   imports: [
     CommonModule,
     RouterModule,
-    UtilityModule
+    UtilityModule,
+    HomePageRoutingModule
   ],
   exports: [
     HomePageComponent
