@@ -16,6 +16,7 @@ import { SongPageRoutingModule } from './song-page/song-page-routing.module';
 import { PlayerModule } from './player/player.module';
 import { HomePageRoutingModule } from './home-page/home-page-routing.module';
 import { SearchPageRoutingModule } from './search-page/search-page-routing.module';
+import { SearchBarComponent } from './search-page/components/search-bar/search-bar.component';
 
 @NgModule({
   declarations: [

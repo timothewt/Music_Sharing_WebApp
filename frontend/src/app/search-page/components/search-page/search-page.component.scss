@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.search-page {
+    background-color: #282828;
+    height: 100%;
+    width: 100%;
+
+    padding-top: 10vh;
+
+    .search-zone {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;    
+        width: 100%;
+
+        .search-bar {
+            width: 80%;
+        }
+    }
+}
+
+
+@media only screen and (max-width: 800px) {
+    .search-page {
+        .search-zone {
+            .search-bar {
+                width: 100%;
+            }
+        }
+    }
+}
