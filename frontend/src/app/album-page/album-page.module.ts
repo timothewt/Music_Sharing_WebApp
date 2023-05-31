@@ -4,6 +4,7 @@ import { AlbumPageComponent } from './components/album-page/album-page.component
 import { RouterModule } from '@angular/router';
 import { UtilityModule } from '../utility/utility.module';
 
+
 @NgModule({
   declarations: [
     AlbumPageComponent

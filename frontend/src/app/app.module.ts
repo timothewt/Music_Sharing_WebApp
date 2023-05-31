@@ -15,6 +15,7 @@ import { AlbumPageRoutingModule } from './album-page/album-page-routing.module';
 import { SongPageRoutingModule } from './song-page/song-page-routing.module';
 import { PlayerModule } from './player/player.module';
 import { HomePageModule } from './home-page/home-page.module';
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -19,8 +19,20 @@ class UserViewset(ModelViewSet):
 		if search is not None:
 			queryset = queryset.filter(username__contains=search)
 
+		search = self.request.GET.get('search')
+		if search is not None:
+			queryset = queryset.filter(name__icontains=search)
+
 		most_popular = self.request.GET.get('most_popular')
 		if most_popular is not None:
-			queryset = queryset.order_by("-listenings")[:int(most_popular)]
+			queryset = queryset.order_by("-listenings")
+
+		limit = self.request.GET.get('limit')
+		offset = self.request.GET.get('offset')
+		if limit is not None:
+			if offset is not None:
+				queryset = queryset[int(offset):int(offset) + int(limit)]
+			else:
+				queryset = queryset[:int(limit)]
 
 		return queryset

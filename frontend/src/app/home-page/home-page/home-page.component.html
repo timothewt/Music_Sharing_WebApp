@@ -1,2 +1,26 @@
-<p>home-page works!</p>
-
+<div id="home-page">
+	<div id="popular-songs">
+		<div class="title">
+			<h2>Popular Songs</h2>
+		</div>
+		<div *ngFor="let song of popularSongs; let index = index">
+			<app-song [song]="song" [index]="index+1"></app-song>
+		</div>
+	</div>
+	<div id="popular-albums">
+		<div class="title">
+			<h2>Popular Albums</h2>
+		</div>
+        <div *ngFor="let album of popularAlbums">
+            <app-album [album]="album"></app-album>
+        </div>
+	</div>
+	<div id="popular-artists">
+		<div class="title">
+			<h2>Popular Artists</h2>
+		</div>
+		<div *ngFor="let artist of popularArtists" style="height: 50px; color: gray">
+			{{artist.username}}
+		</div>		
+	</div>
+</div>
