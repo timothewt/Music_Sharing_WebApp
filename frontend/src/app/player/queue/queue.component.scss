@@ -1,6 +1,6 @@
 #queue-container {
-	overflow-y: scroll;
 	background-color: #222;
+	overflow-y: auto;
 
 	#queue-title {
 		display: flex;

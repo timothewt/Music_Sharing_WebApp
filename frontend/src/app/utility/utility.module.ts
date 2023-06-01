@@ -4,12 +4,14 @@ import { SongComponent } from './components/song/song.component';
 import { AlbumComponent } from './components/album/album.component';
 import { TimePipe } from './timePipe';
 import { RouterModule } from '@angular/router';
+import { ArtistComponent } from './components/artist/artist.component';
 
 @NgModule({
   declarations: [
     SongComponent,
     AlbumComponent,
     TimePipe,
+    ArtistComponent,
   ],
   imports: [
     CommonModule,
@@ -18,6 +20,7 @@ import { RouterModule } from '@angular/router';
   exports: [
     SongComponent,
     AlbumComponent,
+    ArtistComponent,
     TimePipe,
   ]
 })
