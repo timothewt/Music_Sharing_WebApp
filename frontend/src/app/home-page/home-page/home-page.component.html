@@ -11,9 +11,11 @@
 		<div class="title">
 			<h2>Popular Albums</h2>
 		</div>
-        <div *ngFor="let album of popularAlbums">
-            <app-album [album]="album"></app-album>
-        </div>
+		<div class="popular-album-list">
+			<div *ngFor="let album of popularAlbums">
+				<app-album [album]="album"></app-album>
+			</div>
+		</div>
 	</div>
 	<div id="popular-artists">
 		<div class="title">

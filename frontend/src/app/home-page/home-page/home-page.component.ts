@@ -17,7 +17,7 @@ export class HomePageComponent implements OnInit {
 	popularAlbums: Album[] = [];
 	popularArtists: User[] = [];
 
-	constructor(private _Activatedroute:ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService) {}
+	constructor(private apiService: APIService, private sharedQueueService: SharedQueueService) {}
 
 	ngOnInit() {
 		// Fetching popular songs

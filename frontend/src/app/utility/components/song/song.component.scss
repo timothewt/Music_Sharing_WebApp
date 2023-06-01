@@ -15,6 +15,10 @@
 
     transition: background-color 0.2s ease-in-out;
 
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
 
     a {
         text-decoration: none;
@@ -96,6 +100,7 @@
         align-items: center;
 
         font-size: 1.2rem;
+        max-width: 30vh;
     }
     
     
