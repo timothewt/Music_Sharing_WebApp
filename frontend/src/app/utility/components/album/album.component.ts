@@ -1,4 +1,4 @@
-import { Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Album } from 'src/app/models/album';
 import { Song } from 'src/app/models/song';
 import { APIService } from 'src/app/services/api.service';

@@ -1,6 +1,7 @@
 body {
 	margin: 0;
 	overflow: hidden;
+    background-color: #181818;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Source+Sans+Pro&display=swap'); // importing google font families
@@ -16,7 +17,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-	background: #AAA; 
+	background: #BBB; 
 }
  
 ::-webkit-scrollbar-thumb {
