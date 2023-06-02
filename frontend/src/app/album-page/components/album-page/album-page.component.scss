@@ -13,8 +13,6 @@
         "more";
     grid-template-rows: 1fr 1.7fr;
 
-
-
     height: 100%;
 
     //Reset style of a tag
@@ -53,15 +51,17 @@
         justify-content: left;
 
         padding: 10px;
+        padding-top: 7vh;
 
         .cover {
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 10px 30px;
 
             img {
-                width: 70%;
-                height: 70%;
+                width: 200px;
+                aspect-ratio: 1/1;
                 object-fit: cover;
 
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -131,6 +131,14 @@
                     object-fit: cover;
                 }
             }
+        }
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .song-page {
+        .song-header {
+            align-items: flex-start;
         }
     }
 }
