@@ -132,3 +132,11 @@
         }
     }
 }
+
+@media only screen and (max-width: 800px) {
+    .song-page {
+        .song-header {
+            padding-top: 7vh;
+        }
+    }
+}

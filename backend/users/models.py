@@ -6,7 +6,7 @@ class User(AbstractUser):
 
 	description = models.TextField(blank=True)
 	profile_pic = models.ImageField(blank=True)
-	profile_pic_link = models.CharField(max_length=255, blank=True)
+	profile_pic_link = models.CharField(max_length=255, blank=True, default=SERVER_URL + "/media/default_pfp.jpg")
 	banner = models.ImageField(blank=True)
 	banner_link = models.CharField(max_length=255, blank=True)
 	listenings = models.IntegerField(default=0)
