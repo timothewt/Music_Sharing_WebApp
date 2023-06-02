@@ -17,11 +17,7 @@ class UserViewset(ModelViewSet):
 
 		search = self.request.GET.get('search')
 		if search is not None:
-			queryset = queryset.filter(username__contains=search)
-
-		search = self.request.GET.get('search')
-		if search is not None:
-			queryset = queryset.filter(name__icontains=search)
+			queryset = queryset.filter(username__icontains=search)
 
 		most_popular = self.request.GET.get('most_popular')
 		if most_popular is not None:
