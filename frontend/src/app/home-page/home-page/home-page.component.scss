@@ -6,7 +6,6 @@
 	box-sizing: border-box;
 
 	.home-page-section {
-		
 	}
 
 	.title {
@@ -28,4 +27,12 @@
 
 	}
 
+}
+
+@media only screen and (max-width: 800px) {
+	#home-page {
+		.title {
+			margin-top: -25px;
+		}
+	}
 }
