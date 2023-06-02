@@ -15,6 +15,7 @@ export class SearchPageComponent implements OnInit {
 	albumsSearchResults: Album[] = [];
 	songsSearchResults: Song[] = [];
 	searchType: string = "all";
+	searchValue: string = "";
 
 	constructor(private apiService: APIService) { }
 
@@ -22,9 +23,13 @@ export class SearchPageComponent implements OnInit {
 
 	changeSearchType(type: string): void {
 		this.searchType = type;
+		if (this.searchValue != "") {
+			this.displaySearch(this.searchValue);
+		}
 	}
 
 	displaySearch(searchValue: string): void {
+		this.searchValue = searchValue;
 		if (this.searchType === "songs" || this.searchType === "all") {
 			this.findSongs(searchValue);
 		}
@@ -42,7 +47,7 @@ export class SearchPageComponent implements OnInit {
 		* params: searchValue - the value to search for
 		* return: void
 		*/
-		this.apiService.getUsers({limit: 5, mostPopular: true, searchedValue: searchValue}).subscribe(
+		this.apiService.getUsers({limit: 8, mostPopular: true, searchedValue: searchValue}).subscribe(
 			(response: any) => {
 				this.artistsSearchResults = [];
 				for(let i = 0; i < response.length; i++) {
@@ -59,7 +64,7 @@ export class SearchPageComponent implements OnInit {
 		* params: searchValue - the value to search for
 		* return: void
 		*/
-		this.apiService.getAlbums({limit: 5, mostPopular: true, searchedValue: searchValue}).subscribe(
+		this.apiService.getAlbums({limit: 8, mostPopular: true, searchedValue: searchValue}).subscribe(
 			(response: any) => {
 				this.albumsSearchResults = [];
 				for(let i = 0; i < response.length; i++) {
@@ -76,7 +81,7 @@ export class SearchPageComponent implements OnInit {
 		* params: searchValue - the value to search for
 		* return: void
 		*/
-		this.apiService.getSongs({limit: 5, mostPopular: true, searchedValue: searchValue}).subscribe(
+		this.apiService.getSongs({limit: 8, mostPopular: true, searchedValue: searchValue}).subscribe(
 			(response: any) => {
 				this.songsSearchResults = [];
 				for(let i = 0; i < response.length; i++) {

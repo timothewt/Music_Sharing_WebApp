@@ -1,7 +1,7 @@
 #home-page {
 	margin: 0;
 	padding: 10px;
-	padding-top: 10vh;
+	padding-top: 3vh;
 	background-color: #1C1C1C;
 	color: white;
 	box-sizing: border-box;
@@ -28,10 +28,4 @@
 
 }
 
-@media only screen and (max-width: 800px) {
-	#home-page {
-		.title {
-			margin-top: -25px;
-		}
-	}
-}
+@media only screen and (max-width: 800px) {}
