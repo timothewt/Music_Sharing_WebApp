@@ -2,14 +2,17 @@
     <div class="search-zone">
         <app-search-bar (searchEvent)="displaySearch($event)" class="search-bar"></app-search-bar>
         <div class="list-flair">
-            <div class="flair">
-                <p>Song</p>
+            <div class="flair" (click)="changeSearchType('all')">
+                <p>All</p>
             </div>
-            <div class="flair">
-                <p>Artist</p>
+            <div class="flair" (click)="changeSearchType('songs')">
+                <p>Songs</p>
             </div>
-            <div class="flair">
-                <p>Album</p>
+            <div class="flair" (click)="changeSearchType('artists')">
+                <p>Artists</p>
+            </div>
+            <div class="flair" (click)="changeSearchType('albums')">
+                <p>Albums</p>
             </div>
         </div>
     </div>

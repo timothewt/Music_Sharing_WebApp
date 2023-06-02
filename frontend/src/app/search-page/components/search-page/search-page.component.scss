@@ -59,6 +59,12 @@
         flex-direction: column;
         padding: 10px;
     }
+
+    .artists-list, .albums-list {
+        display: flex;
+        flex-direction: row;
+        padding: 10px;        
+    }
 }
 
 
