@@ -5,6 +5,7 @@ import { Queue } from './models/queue';
 import { Song } from './models/song';
 import { APIService } from './services/api.service';
 import { SharedQueueService } from 'src/app/services/shared-queue.service';
+import { SharedAuthService } from 'src/app/services/shared-auth.service';
 
 @Component({
 	selector: 'app-root',
@@ -15,10 +16,12 @@ export class AppComponent implements OnInit{
 	title = 'frontend';
 	queue!: Queue;
 
-	constructor(private sharedQueueService: SharedQueueService) {}
+	constructor(private sharedQueueService: SharedQueueService, private authService: SharedAuthService) {}
 
 	ngOnInit() {
 		this.queue = new Queue();
 		this.sharedQueueService.setQueue(this.queue);
+		
+		this.authService.fetchTokensPair('admin','admin'); // gets the tokens in the shared service
 	}
 }
