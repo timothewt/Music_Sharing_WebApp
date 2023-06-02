@@ -1,6 +1,8 @@
 #queue-container {
 	background-color: #222;
 	position: relative;
+	overflow-y: auto;
+
 	#queue-title {
 		position: sticky;
 		top: 0;
