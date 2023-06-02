@@ -17,6 +17,7 @@ import { PlayerModule } from './player/player.module';
 import { HomePageRoutingModule } from './home-page/home-page-routing.module';
 import { SearchPageRoutingModule } from './search-page/search-page-routing.module';
 import { SearchBarComponent } from './search-page/components/search-bar/search-bar.component';
+import { LoginPageRoutingModule } from './login-page/login-page-routing.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { SearchBarComponent } from './search-page/components/search-bar/search-b
     SearchPageRoutingModule,
     HomePageRoutingModule,
     PlayerModule,
+    LoginPageRoutingModule,
   ],
   providers: [APIService,],
   bootstrap: [AppComponent]
