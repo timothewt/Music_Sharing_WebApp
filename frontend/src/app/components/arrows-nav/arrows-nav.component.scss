@@ -42,3 +42,16 @@
     }
 
 }
+
+@media only screen and (max-width: 800px) {
+    .arrows-nav {
+        width: 25vw;
+        height: 6vh;
+
+        button {
+            img {
+                height: 60%;
+            }
+        }
+    }
+}
