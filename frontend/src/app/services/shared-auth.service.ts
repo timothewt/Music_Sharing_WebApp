@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
@@ -24,28 +25,25 @@ export class SharedAuthService {
 		return this.accessToken;
 	}
 
-	public fetchTokensPair(username: string, password: string):void {
-	    let headers = { 'content-type': 'application/json'}  
-	    let body = {'username':username,'password':password};
-	    let httpResponse = this.http.post(this.tokenURL, body,{'headers':headers});
-	    httpResponse.subscribe(
-			(response: any) => {
-				this.refreshToken = response.refresh;
-				this.accessToken = response.access;
+	public fetchTokensPair(username: string, password: string): Observable<Object> {
+		let headers = { 'content-type': 'application/json'}  
+		let body = {'username':username,'password':password};
+		let httpResponse: Observable<Object> = this.http.post(this.tokenURL, body,{'headers':headers});
 
-				this.refreshIntervalId = setInterval(() => {
-					this.refreshAccessToken();
-				}, 1000 * 60 * 14); // refreshes the access token every 14 minutes
-			}
-		);
+		return httpResponse;
+	}
+
+	public setTokens(refreshToken: string, accessToken: string) {
+		this.refreshToken = refreshToken;
+		this.accessToken = accessToken;
 	}
 
 	private refreshAccessToken() {
 		if (this.refreshToken === "") return;
-	    let headers = { 'content-type': 'application/json'}  
-	    let body = {'refresh':this.refreshToken};
-	    let httpResponse = this.http.post(this.tokenURL + 'refresh/', body,{'headers':headers});
-	    httpResponse.subscribe(
+		let headers = { 'content-type': 'application/json'}  
+		let body = {'refresh':this.refreshToken};
+		let httpResponse = this.http.post(this.tokenURL + 'refresh/', body,{'headers':headers});
+		httpResponse.subscribe(
 			(response: any) => {
 				this.accessToken = response.access;
 			}

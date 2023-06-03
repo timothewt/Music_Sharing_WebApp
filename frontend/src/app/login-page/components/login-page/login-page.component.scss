@@ -5,5 +5,88 @@
 }
 
 .login-page{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
 
+    .title {
+        font-size: 30px;
+        font-weight: bold;
+
+        h1 {
+            color: white;
+        }
+    }
+
+    .options {
+        display: flex; 
+        flex-direction: row;
+        width: 30%;
+        justify-content: center;
+        gap: 20px;
+
+        button {
+            padding: 10px;
+            border: none;
+            background: transparent;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+
+            &::after {
+                /* Blue underline */
+                content: '';
+                display: block;
+                width: 0;
+                height: 2px;
+                background: #1E90FF;
+                transition: width .3s;
+                
+            }
+        }
+
+
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+
+        width: 30%;
+        gap: 20px;
+
+
+        padding: 10px;
+
+        input {
+            background-color: white;
+            border: none;
+            border-radius: 18px;
+            height: 40px;
+            padding: 10px;
+        }
+
+        button {
+            background-color: #1E90FF;
+            border: none;
+            border-radius: 18px;
+            height: 40px;
+            width: 20%;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .login-page{
+        form {
+            width: 80%;
+        }
+    }
 }

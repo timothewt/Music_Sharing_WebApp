@@ -1,6 +1,16 @@
 <div class="login-page">
-    <form>
-        <input type="text" id="name">
-        <input type="password" id="password">
+    <div class="title">
+        <h1>Design will change</h1>
+    </div>
+    <div class="options">
+        <button class="btn btn-primary" (click)="changeAction('login')">Login</button>
+        <button class="btn btn-primary" (click)="changeAction('register')">Register</button>
+    </div>
+    
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <input type="text" id="name" placeholder="username" formControlName="username">
+        <input type="password" id="password" placeholder="password" formControlName="password">
+
+        <button class="btn btn-primary">Go on</button>
     </form>
 </div>

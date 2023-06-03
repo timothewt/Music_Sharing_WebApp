@@ -4,6 +4,7 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 import { RouterModule } from '@angular/router';
 import { UtilityModule } from 'src/app/utility/utility.module';
 import { LoginPageRoutingModule } from './login-page-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { LoginPageRoutingModule } from './login-page-routing.module';
     CommonModule,
     RouterModule,
     UtilityModule,
-    LoginPageRoutingModule
+    LoginPageRoutingModule,
+    ReactiveFormsModule,
   ],
   exports: [
     LoginPageComponent
