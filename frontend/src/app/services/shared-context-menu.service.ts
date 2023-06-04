@@ -1,18 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Song } from '../models/song';
+import { Album } from '../models/album';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedContextMenuService {
 
-  public functionCallEvent$: Subject<Song> = new Subject<Song>();
+  public functionCallEvent$: Subject<{song?:Song, albumSongs?:Song[], artist?:User}> = new Subject<{song?:Song, albumSongs?:Song[], artist?:User}>();
 
   constructor() { }
 
-  public showContextMenu(song: Song): void {
-    this.functionCallEvent$.next(song);
+  public showContextMenu(obj:{song?:Song, albumSongs?:Song[], artist?:User}): void {
+    this.functionCallEvent$.next(obj);
+  }
+
+  public showContextMenuForAlbum(albumId: number): void {
+
   }
 
 

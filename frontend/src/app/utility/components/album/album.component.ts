@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Album } from 'src/app/models/album';
 import { Song } from 'src/app/models/song';
 import { APIService } from 'src/app/services/api.service';
+import { SharedContextMenuService } from 'src/app/services/shared-context-menu.service';
 import { SharedQueueService } from 'src/app/services/shared-queue.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class AlbumComponent {
 
     songs: Song[] = [];
   
-    constructor(private sharedQueueService: SharedQueueService, private apiService: APIService,) {}
+    constructor(private sharedQueueService: SharedQueueService, private apiService: APIService,private sharedContextMenuService: SharedContextMenuService) {}
 
     public addAlbumToQueue(){
       //Load the songs of the album from the backend if not already loaded
@@ -58,6 +59,13 @@ export class AlbumComponent {
   
       this.sharedQueueService.setDoReloadPlayer(true);
 
+    }
+
+    public openContextMenu(event:Event): void {
+      event.preventDefault();
+      this.loadSongs().then(() => {
+        this.sharedContextMenuService.showContextMenu({albumSongs: this.songs});
+      });
     }
 
 }

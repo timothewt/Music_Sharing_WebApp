@@ -1,4 +1,4 @@
-<div class="album">
+<div class="album" (contextmenu)="openContextMenu($event)">
     <div class="img-zone">
         <img class="cover" [src]="album.cover" alt="{{album.name}} cover" routerLink="/album/{{this.album.id}}">
     </div>

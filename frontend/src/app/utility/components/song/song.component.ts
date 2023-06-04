@@ -23,6 +23,11 @@ export class SongComponent {
 	}
 
 	public showContextMenu(): void {
-		this.sharedContextMenuService.showContextMenu(this.song);
+		this.sharedContextMenuService.showContextMenu({song:this.song});
+	}
+
+	public showContextMenuOnRightClick(event: MouseEvent): void {
+		event.preventDefault();
+		this.sharedContextMenuService.showContextMenu({song:this.song});
 	}
 }

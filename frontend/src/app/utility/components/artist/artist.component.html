@@ -1,4 +1,4 @@
-<div class="artist">
+<div class="artist" (contextmenu)="showContextMenu($event)">
     <div class="img-zone">
         <img class="profile-picture" [src]="artist.profilePic" alt="{{artist.username}} picture" routerLink="/artist/{{this.artist.id}}">
     </div>

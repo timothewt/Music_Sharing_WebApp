@@ -14,7 +14,7 @@ import { SharedContextMenuService } from 'src/app/services/shared-context-menu.s
 
 export class ContextMenuComponent implements OnInit {
 
-  public song: Song = new Song();
+  public obj: {song?:Song, albumSongs?:Song[], artist?:User} = {};
 
   public mouseX: number = 0;
   public mouseY: number = 0;
@@ -35,19 +35,27 @@ export class ContextMenuComponent implements OnInit {
     this.onResize();
 
     this.sharedContextMenuService.functionCallEvent$.subscribe(
-      (song: Song) => {
-        this.showContextMenu(song);
+      (obj:{song?:Song, albumSongs?:Song[], artist?:User}) => {
+
+        this.obj = obj;
+
+        if (obj.song || obj.albumSongs || obj.artist){
+          this.showContextMenu(obj);
+          console.log(obj);
+        }
       }
     );
   }
 
   @HostListener('document:click', ['$event'])
+  @HostListener('document:contextmenu', ['$event'])
   onMouseClick(event: MouseEvent): void {
     this.mouseY = event.pageY;
     this.mouseX = event.pageX;
 
     this.calculatePos();
-    if (this.activated) {
+
+    if (this.activated && ( this.obj.song || this.obj.artist) ) {
       this.activated = false;
     }
     else {
@@ -62,13 +70,6 @@ export class ContextMenuComponent implements OnInit {
     this.viewportWidth = window.innerWidth;
   }
 
-  public showContextMenu(song: Song): void {
-    this.song = song;
-    this.show = true;
-    this.activated = true;
-  }
-
-  
   public calculatePos(){
     if (this.mouseY + 50 > this.viewportHeight) {
       this.top = this.mouseY - 50;
@@ -85,14 +86,46 @@ export class ContextMenuComponent implements OnInit {
     }
   }
 
+  public showContextMenu(obj:{song?:Song, albumSongs?:Song[], artist?:User}): void {
+    this.show = true;
+    this.activated = true;
+  }
+
   public addSongToQueue(): void {
+    if (!this.obj.song) return;
     let queue: Queue = this.sharedQueueService.getQueue();
-    queue.addSong(this.song);
+    queue.addSong(this.obj.song);
+  }
+
+  public addAlbumToQueue(): void {
+    if (!this.obj.albumSongs) return;
+    let queue: Queue = this.sharedQueueService.getQueue();
+    for (let song of this.obj.albumSongs) {
+      queue.addSong(song);
+    }
   }
 
   public shareSong(): void {
-    // Copy the link to the clipboard
-    let link: string = window.location.href + 'song/' + this.song.id;
+    if (!this.obj.song) return;
+    let link: string = window.location.href + 'song/' + this.obj.song.id;
+    navigator.clipboard.writeText(link).then(() => {
+      console.log('Link copied to clipboard');
+    }
+    );
+  }
+
+  public shareAlbum(): void {
+    if (!this.obj.albumSongs) return;
+    let link: string = window.location.href + 'album/' + this.obj.albumSongs[0].album.id;
+    navigator.clipboard.writeText(link).then(() => {
+      console.log('Link copied to clipboard');
+    }
+    );
+  }
+
+  public shareArtist(): void {
+    if (!this.obj.artist) return;
+    let link: string = window.location.href + 'artist/' + this.obj.artist.id;
     navigator.clipboard.writeText(link).then(() => {
       console.log('Link copied to clipboard');
     }
