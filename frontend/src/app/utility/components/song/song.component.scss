@@ -3,7 +3,7 @@
     min-height: 7vh;
 
     display: grid;
-    grid-template-columns: 1fr 1fr 4fr 1fr;
+    grid-template-columns: 1fr 1fr 4fr 1fr 0.5fr;
     grid-template-rows: 1fr;
 
     flex-direction: row;
@@ -40,6 +40,10 @@
             .index {
                 visibility: hidden;
             }
+        }
+
+        .more {
+            visibility: visible;
         }
     }
     
@@ -110,6 +114,29 @@
         display: flex;
         justify-content: right;
         align-items: center;
+    }
+
+    .more {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        visibility: hidden;
+
+        transition: visibility 0.1s ease-in-out;
+
+        button {
+            border: none;
+            background: none;
+            cursor: pointer;
+
+            img {
+                width: 20px;
+                height: 20px;
+                object-fit: cover;
+            }
+
+        }
     }
     
 }
