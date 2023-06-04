@@ -27,6 +27,7 @@ export class LoginPageComponent implements OnInit {
 
   changeAction(action: "login" | "register") {
     this.action = action;
+    console.log(this.action);
   }
 
   login(){
@@ -36,8 +37,17 @@ export class LoginPageComponent implements OnInit {
     // Get the username and password from the form
     const username: string = this.loginForm.get('username')?.value;
     const password: string = this.loginForm.get('password')?.value;
+    const confirmPassword: string = this.loginForm.get('confirmPassword')?.value;
 
+    if (this.action == "login") {
+      this.loginUser(username, password);
+    }
+    else if (this.action == "register") {
+      this.registerUser(username, password, confirmPassword);
+    }
+  }
 
+  loginUser(username:string, password:string): void {
     this.authService.fetchTokensPair(username, password).subscribe(
       (response: any) => {
         this.authService.setTokens(response.refresh, response.access);  
@@ -57,4 +67,15 @@ export class LoginPageComponent implements OnInit {
       }
     );
   }
+
+  registerUser(username:string, password:string, confirmPassword:string): void {
+    if (password != confirmPassword) {
+      console.error('Passwords do not match');
+      return;
+    }
+
+    // Register the user
+  }
 }
+
+

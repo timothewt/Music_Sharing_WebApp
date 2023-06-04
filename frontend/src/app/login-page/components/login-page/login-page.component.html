@@ -1,16 +1,16 @@
 <div class="login-page">
     <div class="title">
-        <h1>Design will change</h1>
+        <h1>Connexion</h1>
     </div>
     <div class="options">
-        <button class="btn btn-primary" (click)="changeAction('login')">Login</button>
-        <button class="btn btn-primary" (click)="changeAction('register')">Register</button>
+        <button class="btn btn-primary" (click)="changeAction('login')" [ngClass]="action === 'login' ? 'active' : '' ">Login</button>
+        <button class="btn btn-primary" (click)="changeAction('register')" [ngClass]="action === 'register' ? 'active' : '' ">Register</button>
     </div>
     
     <form [formGroup]="loginForm" (ngSubmit)="login()">
         <input type="text" id="name" placeholder="username" formControlName="username">
         <input type="password" id="password" placeholder="password" formControlName="password">
-
+        <input *ngIf="action == 'register'" type="password" id="confirm-password" placeholder="confirm the password" formControlName="confirm-password">
         <button class="btn btn-primary">Go on</button>
     </form>
 </div>

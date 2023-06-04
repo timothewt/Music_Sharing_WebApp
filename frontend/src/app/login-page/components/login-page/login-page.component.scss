@@ -35,17 +35,10 @@
             color: white;
             font-weight: bold;
             font-size: 16px;
+        }
 
-            &::after {
-                /* Blue underline */
-                content: '';
-                display: block;
-                width: 0;
-                height: 2px;
-                background: #1E90FF;
-                transition: width .3s;
-                
-            }
+        button.active {
+            border-bottom: 2px solid white;
         }
 
 
@@ -62,17 +55,23 @@
         padding: 10px;
 
         input {
-            background-color: white;
+            background-color: #333;
+            color: white;
             border: none;
-            border-radius: 18px;
+            border-radius: 5px;
             height: 40px;
             padding: 10px;
+
+            &:focus {
+                background-color: #444;
+            }
         }
 
+
         button {
-            background-color: #1E90FF;
+            background-color: #333;
             border: none;
-            border-radius: 18px;
+            border-radius: 5px;
             height: 40px;
             width: 20%;
             color: white;
