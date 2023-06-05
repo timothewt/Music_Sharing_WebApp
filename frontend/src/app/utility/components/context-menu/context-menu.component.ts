@@ -25,6 +25,8 @@ export class ContextMenuComponent implements OnInit {
   public top: number = 0;
   public left: number = 0;
 
+  public numberActions: number = 0;
+
 
   public show: boolean = false;
   public activated: boolean = false;
@@ -46,7 +48,7 @@ export class ContextMenuComponent implements OnInit {
       }
     );
   }
-
+  
   @HostListener('document:click', ['$event'])
   @HostListener('document:contextmenu', ['$event'])
   onMouseClick(event: MouseEvent): void {
@@ -87,6 +89,17 @@ export class ContextMenuComponent implements OnInit {
   }
 
   public showContextMenu(obj:{song?:Song, albumSongs?:Song[], artist?:User}): void {
+
+    if (obj.song) {
+      this.numberActions = 2;
+    }
+    else if (obj.albumSongs) {
+      this.numberActions = 2;
+    }
+    else if (obj.artist) {
+      this.numberActions = 1;
+    }
+
     this.show = true;
     this.activated = true;
   }
