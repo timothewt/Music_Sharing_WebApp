@@ -1,6 +1,6 @@
 <div class="login-page">
     <div class="title">
-        <h1>Connexion</h1>
+        <h1>Account</h1>
     </div>
     <div class="options">
         <button class="btn btn-primary" (click)="changeAction('login')" [ngClass]="action === 'login' ? 'active' : '' ">Login</button>
@@ -8,9 +8,9 @@
     </div>
     
     <form [formGroup]="loginForm" (ngSubmit)="login()">
-        <input type="text" id="name" placeholder="username" formControlName="username">
-        <input type="password" id="password" placeholder="password" formControlName="password">
-        <input *ngIf="action == 'register'" type="password" id="confirm-password" placeholder="confirm the password" formControlName="confirm-password">
+        <input type="text" id="name" placeholder="Username" formControlName="username">
+        <input type="password" id="password" placeholder="Password" formControlName="password">
+        <input *ngIf="action == 'register'" type="password" id="confirm-password" placeholder="Confirm password" formControlName="confirm-password">
         <button class="btn btn-primary">Go on</button>
     </form>
 </div>

@@ -11,6 +11,8 @@ export class SharedAuthService {
 
 	private refreshToken: string = "";
 	private accessToken: string = "";
+	public loggedIn: boolean = false;
+	private currentUsername: string = "";
 	private refreshIntervalId: any;
 
 	constructor(private http: HttpClient) {
@@ -29,13 +31,20 @@ export class SharedAuthService {
 		let headers = { 'content-type': 'application/json'}  
 		let body = {'username':username,'password':password};
 		let httpResponse: Observable<Object> = this.http.post(this.tokenURL, body,{'headers':headers});
-
+		httpResponse.subscribe(
+			(response: any) => {
+				this.setTokens(response.refresh, response.access, username);
+				this.refreshIntervalId = setInterval(() => this.refreshAccessToken(), 1000*60*5);
+			}
+		);
 		return httpResponse;
 	}
 
-	public setTokens(refreshToken: string, accessToken: string) {
+	public setTokens(refreshToken: string, accessToken: string, username: string) {
 		this.refreshToken = refreshToken;
 		this.accessToken = accessToken;
+		this.loggedIn = true;
+		this.currentUsername = username;
 	}
 
 	private refreshAccessToken() {
@@ -46,6 +55,9 @@ export class SharedAuthService {
 		httpResponse.subscribe(
 			(response: any) => {
 				this.accessToken = response.access;
+			},
+			(error: any) => {
+				this.logout();
 			}
 		);
 	}
@@ -54,5 +66,7 @@ export class SharedAuthService {
 		clearInterval(this.refreshIntervalId);
 		this.refreshToken = "";
 		this.accessToken = "";
+		this.loggedIn = false;
+		this.currentUsername = "";
 	}
 }
