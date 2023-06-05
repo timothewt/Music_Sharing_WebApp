@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { SharedAuthService } from 'src/app/services/shared-auth.service';
 import { Router } from '@angular/router';
 import { APIService } from 'src/app/services/api.service';
+import { config } from 'src/app/services/config';
 
 @Component({
 	selector: 'app-login-page',
@@ -19,18 +20,17 @@ export class LoginPageComponent implements OnInit {
 		password: ''
 	});
 	
-	constructor(private authService: SharedAuthService, private formBuilder: FormBuilder, private router:Router, private apiService: APIService) { }
+	constructor(private authService: SharedAuthService, private formBuilder: FormBuilder, private router:Router, private apiService: APIService	, private http: HttpClient) { }
 
 	ngOnInit(): void {
 		this.action = "login";
 		if (this.authService.loggedIn) {
-			this.router.navigate(['/artist', 1]);
+			this.router.navigate(['/artist', this.authService.currentUserID]);
 		}
 	}
 
 	changeAction(action: "login" | "register") {
 		this.action = action;
-		console.log(this.action);
 	}
 
 	login(){
@@ -53,12 +53,12 @@ export class LoginPageComponent implements OnInit {
 	loginUser(username:string, password:string): void {
 		this.authService.fetchTokensPair(username, password).subscribe(
 			(response: any) => {
-				// Redirect to the artist's page using its id
-				// Search by username (to change to exact match disallowing partial matches) 
-				// should work for now
-				this.apiService.getUsers({searchedValue:username}).subscribe(
+				let headers = { 'content-type': 'application/json', 'Authorization': "Bearer " + response.access}
+				let currUserHttpResponse = this.http.get(config.apiURL + 'current_user/', {'headers':headers});
+
+				currUserHttpResponse.subscribe(
 					(response: any) => {
-						this.router.navigate(['/artist', response[0].id]);
+						this.router.navigate(['/artist', response.id]);
 					}
 				);
 			},

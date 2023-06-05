@@ -2,13 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { APIGetOptions } from '../models/apiget-options';
+import { config } from "./config";
 
 @Injectable()
 export class APIService {
 
-	apiURL: string = "http://127.0.0.1:8000/api/";
+	apiURL: string = "";
 
-	constructor(private http: HttpClient) {}
+	constructor(private http: HttpClient) {
+		this.apiURL = config.apiURL;
+	}
 
 	private buildRequestParemeters(options: APIGetOptions) {
 		let requestParameters: string = "?";
@@ -43,6 +46,10 @@ export class APIService {
 
 	public getSongById(id: number): Observable<any> {
 		return this.http.get(this.apiURL + 'song/' + id + "/");
+	}
+
+	public getAPIURL(): string {
+		return this.apiURL;
 	}
 
 	public getUsers(options: APIGetOptions) {
