@@ -41,7 +41,7 @@ export class SharedAuthService {
 				this.refreshIntervalId = setInterval(() => this.refreshAccessToken(), 1000*60*5);
 
 				let headers = { 'content-type': 'application/json', 'Authorization': "Bearer " + this.accessToken}
-				let currUserHttpResponse = this.http.get(config.apiURL + 'current_user/', {'headers':headers});
+				let currUserHttpResponse = this.http.get(config.apiURL + 'user/current_user/', {'headers':headers});
 
 				currUserHttpResponse.subscribe(
 					(response: any) => {

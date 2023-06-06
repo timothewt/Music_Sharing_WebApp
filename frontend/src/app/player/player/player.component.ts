@@ -4,6 +4,7 @@ import { Album } from '../../models/album';
 import { Song } from '../../models/song';
 import { Queue } from '../../models/queue';
 import { SharedQueueService } from 'src/app/services/shared-queue.service';
+import { APIService } from 'src/app/services/api.service';
 
 @Component({
 	selector: 'app-player',
@@ -25,7 +26,7 @@ export class PlayerComponent implements OnInit {
 	loopType!: number; // 0: no loop, 1: loop the playlist, 2: loop the current song
 	visibleQueue!: boolean;
 
-	constructor(private sharedQueueService: SharedQueueService) {}
+	constructor(private sharedQueueService: SharedQueueService, private apiService: APIService) {}
 
 	ngOnInit(): void {
 		this.audio = new Audio();
@@ -85,6 +86,8 @@ export class PlayerComponent implements OnInit {
 			this.songLengthAsStr = this.timeToTimeAsStr(this.songLength);
 			this.canPlayAudio = true;			
 		});
+
+		this.apiService.onSongListening(this.getCurrentSong());
 
 		if (playAudio) {
 			this.resumeAudio();

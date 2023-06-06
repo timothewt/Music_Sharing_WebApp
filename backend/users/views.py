@@ -34,8 +34,16 @@ class UserViewset(ModelViewSet):
 		return queryset
 
 
-class CurrentUserAPIView(APIView):
-
-	def get(self, request):
+	@action(methods=['get'], detail=False)
+	def current_user(self, request, pk=None):
 		serializer = UserSerializer(self.request.user)
+		return Response(serializer.data)
+
+
+	@action(methods=['post'], detail=True)
+	def listen(self, request, pk=None):
+		user = User.objects.filter(pk=pk).first()
+		user.listenings += 1
+		user.save()
+		serializer = UserSerializer(user)
 		return Response(serializer.data)
