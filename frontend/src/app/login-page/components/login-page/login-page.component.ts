@@ -54,7 +54,7 @@ export class LoginPageComponent implements OnInit {
 		this.authService.fetchTokensPair(username, password).subscribe(
 			(response: any) => {
 				let headers = { 'content-type': 'application/json', 'Authorization': "Bearer " + response.access}
-				let currUserHttpResponse = this.http.get(config.apiURL + 'current_user/', {'headers':headers});
+				let currUserHttpResponse = this.http.get(config.apiURL + 'user/current_user/', {'headers':headers});
 
 				currUserHttpResponse.subscribe(
 					(response: any) => {

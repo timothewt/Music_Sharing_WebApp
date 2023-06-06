@@ -1,3 +1,4 @@
+from urllib.parse import unquote
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes, action
@@ -22,7 +23,7 @@ class AlbumViewset(ModelViewSet):
 
 		search = self.request.GET.get('search')
 		if search is not None:
-			queryset = queryset.filter(name__icontains=search)
+			queryset = queryset.filter(name__icontains=unquote(search))
 
 
 		most_popular = self.request.GET.get('most_popular')
@@ -67,7 +68,7 @@ class SongViewset(ModelViewSet):
 
 		search = self.request.GET.get('search')
 		if search is not None:
-			queryset = queryset.filter(name__icontains=search)
+			queryset = queryset.filter(name__icontains=unquote(search))
 
 		most_popular = self.request.GET.get('most_popular')
 		if most_popular is not None:

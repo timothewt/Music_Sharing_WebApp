@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from urllib.parse import unquote
 
 from users.models import User
 from users.serializers import UserSerializer
@@ -17,7 +18,7 @@ class UserViewset(ModelViewSet):
 
 		search = self.request.GET.get('search')
 		if search is not None:
-			queryset = queryset.filter(username__icontains=search)
+			queryset = queryset.filter(username__icontains=unquote(search))
 
 		most_popular = self.request.GET.get('most_popular')
 		if most_popular is not None:

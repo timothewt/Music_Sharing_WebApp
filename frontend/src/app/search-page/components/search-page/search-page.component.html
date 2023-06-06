@@ -16,13 +16,13 @@
             </div>
         </div>
     </div>
-    <div class="songs-list" *ngIf="(searchType === 'all' || searchType === 'songs') && artistsSearchResults.length > 0">
+    <div class="songs-list" *ngIf="(searchType === 'all' || searchType === 'songs') && songsSearchResults.length > 0">
         <h2 class="section-title">Songs</h2>
         <div class="search-results">
             <app-song *ngFor="let song of songsSearchResults; let index = index" [song]="song" [index]="index + 1"></app-song>
         </div>
     </div>
-    <div class="albums-list" *ngIf="(searchType === 'all' || searchType === 'albums') && artistsSearchResults.length > 0">
+    <div class="albums-list" *ngIf="(searchType === 'all' || searchType === 'albums') && albumsSearchResults.length > 0">
         <h2 class="section-title">Albums</h2>
         <div class="search-results">
             <app-album *ngFor="let album of albumsSearchResults; let index = index" [album]="album"></app-album>
