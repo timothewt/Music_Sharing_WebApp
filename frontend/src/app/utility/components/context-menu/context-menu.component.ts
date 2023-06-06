@@ -5,6 +5,7 @@ import { Album } from 'src/app/models/album';
 import { User } from 'src/app/models/user';
 import { Queue } from 'src/app/models/queue';
 import { SharedContextMenuService } from 'src/app/services/shared-context-menu.service';
+import { SharedPopUpService } from 'src/app/services/shared-pop-up.service';
 
 @Component({
   selector: 'app-context-menu',
@@ -31,7 +32,7 @@ export class ContextMenuComponent implements OnInit {
   public show: boolean = false;
   public activated: boolean = false;
 
-  constructor(private sharedQueueService: SharedQueueService, private sharedContextMenuService: SharedContextMenuService) {}
+  constructor(private sharedQueueService: SharedQueueService, private sharedContextMenuService: SharedContextMenuService, private sharedPopUpService: SharedPopUpService) {}
 
   ngOnInit(): void {
     this.onResize();
@@ -122,7 +123,7 @@ export class ContextMenuComponent implements OnInit {
     if (!this.obj.song) return;
     let link: string = window.location.href + 'song/' + this.obj.song.id;
     navigator.clipboard.writeText(link).then(() => {
-      console.log('Link copied to clipboard');
+      this.sharedPopUpService.showPopUp({message: 'Link copied to clipboard', timedisplay: 2000});
     }
     );
   }
@@ -131,7 +132,7 @@ export class ContextMenuComponent implements OnInit {
     if (!this.obj.albumSongs) return;
     let link: string = window.location.href + 'album/' + this.obj.albumSongs[0].album.id;
     navigator.clipboard.writeText(link).then(() => {
-      console.log('Link copied to clipboard');
+      this.sharedPopUpService.showPopUp({message: 'Link copied to clipboard',  timedisplay: 2000});
     }
     );
   }
@@ -140,7 +141,7 @@ export class ContextMenuComponent implements OnInit {
     if (!this.obj.artist) return;
     let link: string = window.location.href + 'artist/' + this.obj.artist.id;
     navigator.clipboard.writeText(link).then(() => {
-      console.log('Link copied to clipboard');
+      this.sharedPopUpService.showPopUp({message: 'Link copied to clipboard',  timedisplay: 2000});
     }
     );
   }

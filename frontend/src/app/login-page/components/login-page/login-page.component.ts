@@ -5,6 +5,7 @@ import { SharedAuthService } from 'src/app/services/shared-auth.service';
 import { Router } from '@angular/router';
 import { APIService } from 'src/app/services/api.service';
 import { config } from 'src/app/services/config';
+import { SharedPopUpService } from 'src/app/services/shared-pop-up.service';
 
 @Component({
 	selector: 'app-login-page',
@@ -20,7 +21,7 @@ export class LoginPageComponent implements OnInit {
 		password: ''
 	});
 	
-	constructor(private authService: SharedAuthService, private formBuilder: FormBuilder, private router:Router, private apiService: APIService	, private http: HttpClient) { }
+	constructor(private authService: SharedAuthService, private formBuilder: FormBuilder, private router:Router, private apiService: APIService	, private http: HttpClient, private sharedPopUpService: SharedPopUpService) { }
 
 	ngOnInit(): void {
 		this.action = "login";
@@ -64,6 +65,7 @@ export class LoginPageComponent implements OnInit {
 			},
 			(error: any) => {
 				console.error('Login failed:', error);
+				this.sharedPopUpService.showPopUp({message:"Login failed"});
 			}
 		);
 	}

@@ -6,6 +6,7 @@ import { TimePipe } from './timePipe';
 import { RouterModule } from '@angular/router';
 import { ArtistComponent } from './components/artist/artist.component';
 import { ContextMenuComponent } from './components/context-menu/context-menu.component';
+import { PopUpComponent } from './components/pop-up/pop-up.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { ContextMenuComponent } from './components/context-menu/context-menu.com
     TimePipe,
     ArtistComponent,
     ContextMenuComponent,
+    PopUpComponent,
   ],
   imports: [
     CommonModule,
@@ -25,6 +27,7 @@ import { ContextMenuComponent } from './components/context-menu/context-menu.com
     ArtistComponent,
     TimePipe,
     ContextMenuComponent,
+    PopUpComponent,
   ]
 })
 export class UtilityModule { }

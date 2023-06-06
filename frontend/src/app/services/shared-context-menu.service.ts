@@ -16,10 +16,4 @@ export class SharedContextMenuService {
   public showContextMenu(obj:{song?:Song, albumSongs?:Song[], artist?:User}): void {
     this.functionCallEvent$.next(obj);
   }
-
-  public showContextMenuForAlbum(albumId: number): void {
-
-  }
-
-
 }
