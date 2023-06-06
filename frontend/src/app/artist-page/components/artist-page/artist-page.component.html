@@ -1,11 +1,10 @@
 <div class="artist-page">
     <div class="artist-infos">
         <h1 id="artist-name">{{artist.username}}</h1>
-        <p id="monthly-audience">108 837 113 auditeurs mensuels</p>
         <img class="back" [src]="artist.profilePic"> 
     </div>
     <div class="more">
-        <button (click)="logout()">Logout</button>
+        <button (click)="logout()" *ngIf="authService.currentUserID == artist.id">Logout</button>
         <div class="section">
             <div>
                 <h2>Popular</h2>
@@ -23,18 +22,14 @@
         <div class="section">
             <h2>Discographie</h2>
             <div class="list-style1">
-                <div *ngFor="let album of artistAlbums">
-                    <app-album [album]="album"></app-album>
-                </div>
+                <app-album *ngFor="let album of artistAlbums" [album]="album"></app-album>
             </div>
         </div>
 
         <div class="section">
             <h2>Similar</h2>
             <div class="list-style1">
-                <div *ngFor="let album of artistAlbums">
-                    <app-album [album]="album"></app-album>
-                </div>
+                <app-album *ngFor="let album of artistAlbums" [album]="album"></app-album>
             </div>
         </div>
         

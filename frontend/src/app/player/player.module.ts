@@ -9,7 +9,7 @@ import { QueueComponent } from './queue/queue.component';
     QueueComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports: [
     PlayerComponent,

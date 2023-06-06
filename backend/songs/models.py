@@ -66,6 +66,7 @@ class Playlist(models.Model):
 	name = models.CharField(max_length=255)
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	description = models.TextField(blank=True)
+	listenings = models.IntegerField(default=0)
 	songs = models.ManyToManyField(Song)
 
 	class Meta:

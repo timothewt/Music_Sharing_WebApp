@@ -1,6 +1,8 @@
+from urllib.parse import unquote
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import permission_classes
+from rest_framework.decorators import permission_classes, action
+from rest_framework.response import Response
 
 from songs.models import Album, Song, Playlist
 from songs.serializers import AlbumSerializer, SongSerializer, PlaylistSerializer
@@ -21,7 +23,7 @@ class AlbumViewset(ModelViewSet):
 
 		search = self.request.GET.get('search')
 		if search is not None:
-			queryset = queryset.filter(name__icontains=search)
+			queryset = queryset.filter(name__icontains=unquote(search))
 
 
 		most_popular = self.request.GET.get('most_popular')
@@ -37,6 +39,15 @@ class AlbumViewset(ModelViewSet):
 				queryset = queryset[:int(limit)]
 
 		return queryset
+
+
+	@action(methods=['post'], detail=True)
+	def listen(self, request, pk=None):
+		album = Album.objects.filter(pk=pk).first()
+		album.listenings += 1
+		album.save()
+		serializer = AlbumSerializer(album)
+		return Response(serializer.data)
 
 
 class SongViewset(ModelViewSet):
@@ -57,7 +68,7 @@ class SongViewset(ModelViewSet):
 
 		search = self.request.GET.get('search')
 		if search is not None:
-			queryset = queryset.filter(name__icontains=search)
+			queryset = queryset.filter(name__icontains=unquote(search))
 
 		most_popular = self.request.GET.get('most_popular')
 		if most_popular is not None:
@@ -74,6 +85,15 @@ class SongViewset(ModelViewSet):
 		return queryset
 
 
+	@action(methods=['post'], detail=True)
+	def listen(self, request, pk=None):
+		song = Song.objects.filter(pk=pk).first()
+		song.listenings += 1
+		song.save()
+		serializer = SongSerializer(song)
+		return Response(serializer.data)
+
+
 class PlaylistViewset(ModelViewSet):
 
 	serializer_class = PlaylistSerializer
@@ -87,3 +107,13 @@ class PlaylistViewset(ModelViewSet):
 			queryset = queryset.filter(user_id=user_id)
 
 		return queryset
+
+
+	@action(methods=['post'], detail=True)
+	def listen(self, request, pk=None):
+		playlist = Playlist.objects.filter(pk=pk).first()
+		playlist.listenings += 1
+		playlist.save()
+		serializer = PlaylistSerializer(playlist)
+		return Response(serializer.data)
+

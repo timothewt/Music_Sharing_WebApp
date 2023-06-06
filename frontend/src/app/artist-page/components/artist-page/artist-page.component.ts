@@ -23,7 +23,7 @@ export class ArtistPageComponent implements OnInit {
 	//Songs of the artist
 	artistSongs: Song[] = [];
 
-	constructor(private _Activatedroute: ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService, private authService: SharedAuthService) {}
+	constructor(private _Activatedroute: ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService, public authService: SharedAuthService) {}
 
 	ngOnInit(): void {
 		this._Activatedroute.paramMap.subscribe(params => {

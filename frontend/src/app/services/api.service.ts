@@ -3,6 +3,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { APIGetOptions } from '../models/apiget-options';
 import { config } from "./config";
+import { Song } from '../models/song';
 
 @Injectable()
 export class APIService {
@@ -65,5 +66,27 @@ export class APIService {
 	public getSongs(options: APIGetOptions) {
 		let reqURL: string = this.apiURL + 'song/' + this.buildRequestParemeters(options);
 		return this.http.get(reqURL);
+	}
+
+	public onSongListening(song: Song): void {
+		this.addListeningToSong(song.id);
+		this.addListeningToAlbum(song.album.id);
+		this.addListeningToArtist(song.album.artist.id);
+	} 
+
+	private addListeningToSong(songId: number) {
+		let reqURL: string = this.apiURL + 'song/' + songId + '/listen/';
+		console.log(reqURL);
+		this.http.post(reqURL, {}).subscribe();
+	}
+
+	private addListeningToAlbum(albumId: number) {
+		let reqURL: string = this.apiURL + 'album/' + albumId + '/listen/';
+		this.http.post(reqURL, {}).subscribe();
+	}
+
+	private addListeningToArtist(artistId: number) {
+		let reqURL: string = this.apiURL + 'user/' + artistId + '/listen/';
+		this.http.post(reqURL, {}).subscribe();
 	}
 }
