@@ -3,7 +3,8 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from urllib.parse import unquote
-
+from rest_framework.status import HTTP_400_BAD_REQUEST
+from songs.models import Playlist
 from users.models import User
 from users.serializers import UserSerializer
 
@@ -36,7 +37,7 @@ class UserViewset(ModelViewSet):
 
 
 	@action(methods=['get'], detail=False)
-	def current_user(self, request, pk=None):
+	def current_user(self, request):
 		serializer = UserSerializer(self.request.user)
 		return Response(serializer.data)
 
@@ -46,5 +47,33 @@ class UserViewset(ModelViewSet):
 		user = User.objects.filter(pk=pk).first()
 		user.listenings += 1
 		user.save()
+		serializer = UserSerializer(user)
+		return Response(serializer.data)
+
+
+	@action(methods=['post'], detail=False)
+	def register(self, request):
+		username = request.data.get('username')
+		password = request.data.get('password')
+		confirm_password = request.data.get('confirm_password')
+		email = request.data.get('email')
+
+		if username is None or password is None or confirm_password is None or email is None:
+			return Response({'error': 'Please provide username, password and email'},
+							status=HTTP_400_BAD_REQUEST)
+		if password != confirm_password:
+			return Response({'error': 'Passwords do not match'},
+							status=HTTP_400_BAD_REQUEST)
+		if User.objects.filter(username=username).exists():
+			return Response({'error': 'Username already exists'},
+							status=HTTP_400_BAD_REQUEST)
+		if User.objects.filter(email=email).exists():
+			return Response({'error': 'Email already exists'},
+							status=HTTP_400_BAD_REQUEST)
+		
+		user = User.objects.create_user(username=username, email=email, password=password)
+
+		user_favorites = Playlist.objects.create(name="Favorites", user=user, deletable=False)
+
 		serializer = UserSerializer(user)
 		return Response(serializer.data)

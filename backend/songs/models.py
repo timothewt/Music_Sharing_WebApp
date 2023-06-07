@@ -64,18 +64,13 @@ class Playlist(models.Model):
 	date_created = models.DateTimeField(auto_now_add=True)
 	date_updated = models.DateTimeField(auto_now=True)
 	name = models.CharField(max_length=255)
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	user = models.ForeignKey(to=User, on_delete=models.CASCADE)
 	description = models.TextField(blank=True)
 	listenings = models.IntegerField(default=0)
 	songs = models.ManyToManyField(Song)
+	deletable = models.BooleanField(default=True)
 
-	class Meta:
-		constraints = [
-			models.UniqueConstraint(
-				fields=['name', 'user'],
-				name='Unique playlist names for each user'
-			)
-		]
 
 	def __str__(self):
 		return f"{self.name} by {self.user}"
+		

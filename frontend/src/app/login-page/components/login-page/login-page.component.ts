@@ -18,7 +18,9 @@ export class LoginPageComponent implements OnInit {
 
 	loginForm: FormGroup = this.formBuilder.group({
 		username: '',
-		password: ''
+		email: '',
+		password: '',
+		confirmPassword: '',
 	});
 	
 	constructor(private authService: SharedAuthService, private formBuilder: FormBuilder, private router:Router, private apiService: APIService	, private http: HttpClient, private sharedPopUpService: SharedPopUpService) { }
@@ -40,6 +42,7 @@ export class LoginPageComponent implements OnInit {
 
 		// Get the username and password from the form
 		const username: string = this.loginForm.get('username')?.value;
+		const email: string = this.loginForm.get('email')?.value;
 		const password: string = this.loginForm.get('password')?.value;
 		const confirmPassword: string = this.loginForm.get('confirmPassword')?.value;
 
@@ -47,11 +50,11 @@ export class LoginPageComponent implements OnInit {
 			this.loginUser(username, password);
 		}
 		else if (this.action == "register") {
-			this.registerUser(username, password, confirmPassword);
+			this.registerUser(username, email, password, confirmPassword);
 		}
 	}
 
-	loginUser(username:string, password:string): void {
+	loginUser(username: string, password: string): void {
 		this.authService.fetchTokensPair(username, password).subscribe(
 			(response: any) => {
 				let headers = { 'content-type': 'application/json', 'Authorization': "Bearer " + response.access}
@@ -70,13 +73,21 @@ export class LoginPageComponent implements OnInit {
 		);
 	}
 
-	registerUser(username:string, password:string, confirmPassword:string): void {
-		if (password != confirmPassword) {
+	registerUser(username: string, email: string, password: string, confirmPassword: string): void {
+		if (password !== confirmPassword) {
 			console.error('Passwords do not match');
 			return;
 		}
 
-		// Register the user
+		this.authService.register(username, email, password, confirmPassword).subscribe(
+			(response: any) => {
+				this.loginUser(username, password);
+			},
+			(error: any) => {
+				this.sharedPopUpService.showPopUp({message:"Registration failed :" + error.error.error, timedisplay: 3000});
+			}
+		);
+
 	}
 }
 
