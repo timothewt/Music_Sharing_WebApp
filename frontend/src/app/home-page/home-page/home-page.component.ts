@@ -21,7 +21,7 @@ export class HomePageComponent implements OnInit {
 
 	ngOnInit() {
 		// Fetching popular songs
-		this.apiService.getSongs({limit: 5, mostPopular: true}).subscribe(
+		this.apiService.getSongs({limit: 8, mostPopular: true}).subscribe(
 			(response: any) => {
 				for(let i = 0; i < response.length; i++) {
 					let song = new Song().deserialize(response[i]);

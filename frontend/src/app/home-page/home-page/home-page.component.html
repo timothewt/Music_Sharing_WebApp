@@ -3,8 +3,8 @@
 		<div class="title">
 			<h2>Popular Songs</h2>
 		</div>
-		<div>
-			<app-song *ngFor="let song of popularSongs; let index = index" [song]="song" [index]="index+1"></app-song>
+		<div id="songs">
+			<app-song *ngFor="let song of popularSongs; let index = index" [song]="song"></app-song>
 		</div>
 	</div>
 	<div id="popular-albums" class="home-page-section">
