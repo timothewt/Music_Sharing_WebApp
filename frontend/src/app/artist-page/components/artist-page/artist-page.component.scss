@@ -5,9 +5,10 @@
 }
 .artist-page{
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 100%;
     grid-template-rows: 0.2fr auto;
     height: 100%;
+    width: 100%;
 
     .artist-infos {
         margin-top: 200px;
