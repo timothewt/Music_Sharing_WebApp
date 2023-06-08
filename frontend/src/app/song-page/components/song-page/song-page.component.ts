@@ -21,6 +21,8 @@ export class SongPageComponent implements OnInit {
 
 	ngOnInit() {
 		this._Activatedroute.paramMap.subscribe(params => {
+			this.similarSongs.splice(0);
+
 			//Get the song id from the url
 			let songId: number = Number(params.get('id'));
 

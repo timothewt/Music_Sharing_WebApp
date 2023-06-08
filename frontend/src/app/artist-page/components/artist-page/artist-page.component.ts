@@ -30,6 +30,10 @@ export class ArtistPageComponent implements OnInit {
 
 	ngOnInit(): void {
 		this._Activatedroute.paramMap.subscribe(params => {
+			this.artistAlbums.splice(0);
+			this.artistSongs.splice(0);
+			this.similarArtists.splice(0);
+
 			//Get the user id from the url
 			let userId : number  = Number(params.get('id'));
 

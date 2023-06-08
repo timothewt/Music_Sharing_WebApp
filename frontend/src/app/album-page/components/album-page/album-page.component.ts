@@ -24,6 +24,9 @@ export class AlbumPageComponent implements OnInit{
 
 	ngOnInit() {
 		this._Activatedroute.paramMap.subscribe(params => {
+			this.songs.splice(0);
+			this.similarAlbums.splice(0);
+
 			//Get the song id from the url
 			let albumId : number  = Number(params.get('id'));
 
