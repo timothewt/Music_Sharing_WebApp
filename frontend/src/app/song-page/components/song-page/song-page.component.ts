@@ -14,6 +14,9 @@ export class SongPageComponent implements OnInit {
 
 	public song: Song = new Song();
 	public color: string = "#000000";
+
+	similarSongs: Song[] = [];
+
 	constructor(private _Activatedroute:ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService) {}
 
 	ngOnInit() {
@@ -25,6 +28,15 @@ export class SongPageComponent implements OnInit {
 			this.apiService.getSongById(songId).subscribe(
 				(response: any) => {
 					this.song = new Song().deserialize(response);
+				}
+			);
+
+			this.apiService.getSimilarSongs(songId, 7).subscribe(
+				(response: any) => {
+					for(let i = 0; i < response.length; i++) {
+						let song = new Song().deserialize(response[i]);
+						this.similarSongs.push(song);
+					}
 				}
 			);
 		});

@@ -89,4 +89,19 @@ export class APIService {
 		let reqURL: string = this.apiURL + 'user/' + artistId + '/listen/';
 		this.http.post(reqURL, {}).subscribe();
 	}
+
+	public getSimilarArtists(artistId: number, limit: number) {
+		let reqURL: string = this.apiURL + 'user/' + artistId + '/similar/?limit=' + limit;
+		return this.http.get(reqURL);
+	}
+
+	public getSimilarAlbums(albumId: number, limit: number) {
+		let reqURL: string = this.apiURL + 'album/' + albumId + '/similar/?limit=' + limit;
+		return this.http.get(reqURL);
+	}
+
+	public getSimilarSongs(songId: number, limit: number) {
+		let reqURL: string = this.apiURL + 'song/' + songId + '/similar/?limit=' + limit;
+		return this.http.get(reqURL);
+	}
 }

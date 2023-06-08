@@ -18,6 +18,8 @@ export class AlbumPageComponent implements OnInit{
 	songs: Song[] = [];
 	color: string = "#000000";
 
+	similarAlbums: Album[] = [];
+
 	constructor(private _Activatedroute:ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService) {}
 
 	ngOnInit() {
@@ -38,6 +40,15 @@ export class AlbumPageComponent implements OnInit{
 							}
 						}
 					);
+				}
+			);
+
+			this.apiService.getSimilarAlbums(albumId, 7).subscribe(
+				(response: any) => {
+					for(let i = 0; i < response.length; i++) {
+						let album = new Album().deserialize(response[i]);
+						this.similarAlbums.push(album);
+					}
 				}
 			);
 		});

@@ -25,6 +25,13 @@
             color: inherit;
         }
     }
+    
+    .list-style1 {
+        overflow-x: auto;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
 
     .banner-img {
         position: absolute;

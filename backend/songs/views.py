@@ -117,7 +117,7 @@ class SongViewset(ModelViewSet):
 		if (limit := self.request.GET.get('limit')) is not None:
 			similar_songs = similar_songs[:int(limit)]
 
-		serializer = AlbumSerializer(similar_songs, many=True)
+		serializer = SongSerializer(similar_songs, many=True)
 		return Response(serializer.data)
 
 

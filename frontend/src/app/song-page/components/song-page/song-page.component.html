@@ -25,5 +25,12 @@
                 <img src="../../assets/heart-icon.svg" alt="Like">
             </button>
         </div>
+
+        <div class="section">
+            <h2>Similar</h2>
+            <div class="list-style1">
+                <app-song *ngFor="let song of similarSongs" [song]="song"></app-song>
+            </div>
+        </div>
     </div>
 </div>

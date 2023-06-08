@@ -24,6 +24,8 @@ export class ArtistPageComponent implements OnInit {
 	//Songs of the artist
 	artistSongs: Song[] = [];
 
+	similarArtists: User[] = [];
+
 	constructor(private _Activatedroute: ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService, public authService: SharedAuthService, private router:Router) {}
 
 	ngOnInit(): void {
@@ -39,7 +41,7 @@ export class ArtistPageComponent implements OnInit {
 			);
 
 			//Load the albums of the user from the backend
-			this.apiService.getAlbums({artistId: userId}).subscribe(
+			this.apiService.getAlbums({artistId: userId, mostPopular: true}).subscribe(
 				(response: any) => {
 					this.artistAlbums = [];
 					for(let i = 0; i < response.length; i++) {
@@ -50,16 +52,24 @@ export class ArtistPageComponent implements OnInit {
 			);
 
 			//Load the songs of the user from the backend
-			this.apiService.getSongs({artistId: userId}).subscribe(
+			this.apiService.getSongs({artistId: userId, mostPopular: true}).subscribe(
 				(response: any) => {
 					this.artistSongs = [];
 					for(let i = 0; i < response.length; i++) {
 						let song = new Song().deserialize(response[i]);
 						this.artistSongs.push(song);
 					}
+				}
+			);
 
-					//Sort the songs by title (for the moment)
-					this.artistSongs.sort((a, b) => (a.name > b.name) ? 1 : -1);
+			//Load the similar artists from the backend
+			this.apiService.getSimilarArtists(userId, 8).subscribe(
+				(response: any) => {
+					this.similarArtists = [];
+					for(let i = 0; i < response.length; i++) {
+						let user = new User().deserialize(response[i]);
+						this.similarArtists.push(user);
+					}
 				}
 			);
 		});
