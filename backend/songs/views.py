@@ -50,6 +50,20 @@ class AlbumViewset(ModelViewSet):
 		return Response(serializer.data)
 
 
+	@action(methods=['get'], detail=True)
+	def similar(self, request, pk=None):
+
+		album = Album.objects.filter(pk=pk).first()
+
+		similar_albums = album.tags.similar_objects()
+
+		if (limit := self.request.GET.get('limit')) is not None:
+			similar_albums = similar_albums[:int(limit)]
+
+		serializer = AlbumSerializer(similar_albums, many=True)
+		return Response(serializer.data)
+
+
 class SongViewset(ModelViewSet):
 
 	serializer_class = SongSerializer
@@ -91,6 +105,19 @@ class SongViewset(ModelViewSet):
 		song.listenings += 1
 		song.save()
 		serializer = SongSerializer(song)
+		return Response(serializer.data)
+
+
+	@action(methods=['get'], detail=True)
+	def similar(self, request, pk=None):
+
+		song = Song.objects.filter(pk=pk).first()
+		similar_songs = song.tags.similar_objects()
+
+		if (limit := self.request.GET.get('limit')) is not None:
+			similar_songs = similar_songs[:int(limit)]
+
+		serializer = AlbumSerializer(similar_songs, many=True)
 		return Response(serializer.data)
 
 

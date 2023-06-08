@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from urllib.parse import unquote
 from rest_framework.status import HTTP_400_BAD_REQUEST
-from songs.models import Playlist
+from songs.models import Playlist, Album
 from users.models import User
 from users.serializers import UserSerializer
 
@@ -76,4 +76,17 @@ class UserViewset(ModelViewSet):
 		user_favorites = Playlist.objects.create(name="Favorites", user=user, deletable=False)
 
 		serializer = UserSerializer(user)
+		return Response(serializer.data)
+
+
+	@action(methods=['get'], detail=True)
+	def similar(self, request, pk=None):
+
+		user = User.objects.filter(pk=pk).first()
+		similar_users = user.tags.similar_objects()
+
+		if (limit := self.request.GET.get('limit')) is not None:
+			similar_users = similar_users[:int(limit)]
+
+		serializer = UserSerializer(similar_users, many=True)
 		return Response(serializer.data)

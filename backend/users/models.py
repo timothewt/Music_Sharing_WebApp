@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from config.settings import SERVER_URL
+from taggit.managers import TaggableManager
 
 class User(AbstractUser):
 
@@ -10,6 +11,7 @@ class User(AbstractUser):
 	banner = models.ImageField(blank=True)
 	banner_link = models.CharField(max_length=255, blank=True)
 	listenings = models.IntegerField(default=0)
+	tags = TaggableManager()
 
 
 	def save(self, *args, **kwargs):
