@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.upload-song-generator {
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    border: solid 1px #333;
+
+    form {
+
+        display: grid;
+        grid-template-columns: 0.4fr 0.05fr 0.5fr 0.05fr;
+        grid-template-rows: 1fr;
+
+        gap: 10px;
+
+        #song-name {
+            width: 100%;
+            height: auto;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+            font-size: 1.2rem;
+            outline: none;
+            transition: all 0.2s ease-in-out;
+    
+            &:focus {
+                background-color: #444;
+            }
+        }
+
+        button {
+            background: transparent;
+            border: none;
+            height: 100%;
+            img {
+                height: 5vh;
+                aspect-ratio: 1/1;
+            }
+        }
+
+        .song-input-container {
+            input {
+                display: none;
+            }
+
+            label {
+                img {
+                    height: 5vh;
+                    aspect-ratio: 1/1;
+                    filter: invert(100%);
+                }
+            }
+        }
+    }
+}

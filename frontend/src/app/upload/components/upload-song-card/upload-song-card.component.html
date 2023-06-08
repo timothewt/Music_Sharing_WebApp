@@ -1,0 +1,13 @@
+<div class="song-upload-card">
+    <h2 class="song-title">{{song.name}}</h2>
+
+    <!--Song genre-->
+    <div class="song-genre">
+        <span *ngFor="let genre of song.genres">{{genre}}</span>
+    </div>
+    
+    <!--Delete icon-->
+    <div class="delete-icon-container">
+        <img src="../../../assets/delete-icon.svg" alt="Delete" (click)="deleteSong()">
+    </div>
+</div>

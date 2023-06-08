@@ -4,7 +4,9 @@
         <img class="back" [src]="artist.profilePic"> 
     </div>
     <div class="more">
-        <button (click)="logout()" *ngIf="authService.currentUserID == artist.id">Logout</button>
+        <div class="profile-edition" *ngIf="authService.currentUserID == artist.id">
+            <button (click)="logout()">Logout</button>
+        </div>
         <div class="section">
             <div>
                 <h2>Popular</h2>

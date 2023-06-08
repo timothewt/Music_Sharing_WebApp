@@ -12,6 +12,7 @@ export class PopUpComponent {
   public message: String = "";
   public displayTime: number = 1;
   public visible: boolean = false;
+  public color: String = "#333";
 
   constructor(private sharedPopUpService: SharedPopUpService) { }
 
@@ -23,7 +24,7 @@ export class PopUpComponent {
       );
   }
 
-  public showPopUp(obj:{message:String, timedisplay?:number}): void {
+  public showPopUp(obj:{message:String, timedisplay?:number, color?:String}): void {
     this.message = obj.message;
 
     if (obj.timedisplay){
@@ -31,6 +32,13 @@ export class PopUpComponent {
     }
     else {
       this.displayTime = 1000;
+    }
+
+    if (obj.color) {
+      this.color = obj.color;
+    }
+    else {
+      this.color = "#333";
     }
 
     this.visible = true;

@@ -1,6 +1,7 @@
 <div class="context-menu" [style.--positionX.px]="left" [style.--positionY.px]="top" [style.--number-actions]="numberActions" [ngClass]="show ? '' : 'hidden'">
     <!--If the context menu is called from a song card component-->
     <button *ngIf="obj.song != undefined" class="action-menu" (click)="addSongToQueue()">Add song to queue</button>
+    <button *ngIf="obj.song != undefined" class="action-menu" (click)="addSongRightAfter()">Listen to it right after</button>
     <button *ngIf="obj.song != undefined" class="action-menu" (click)="shareSong()">Share</button>
     <!--If the context menu is called from an album card component-->
     <button *ngIf="obj.albumSongs != undefined" class="action-menu" (click)="addAlbumToQueue()">Add album to queue</button>

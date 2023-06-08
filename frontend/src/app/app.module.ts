@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { QueueComponent } from './player/queue/queue.component';
 import { APIService } from "./services/api.service";
 import { ArrowsNavComponent } from './components/arrows-nav/arrows-nav.component';
 
@@ -16,8 +15,8 @@ import { SongPageRoutingModule } from './song-page/song-page-routing.module';
 import { PlayerModule } from './player/player.module';
 import { HomePageRoutingModule } from './home-page/home-page-routing.module';
 import { SearchPageRoutingModule } from './search-page/search-page-routing.module';
-import { SearchBarComponent } from './search-page/components/search-bar/search-bar.component';
 import { LoginPageRoutingModule } from './login-page/login-page-routing.module';
+import { UploadPageRoutingModule } from './upload/upload-page-routing.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +36,7 @@ import { LoginPageRoutingModule } from './login-page/login-page-routing.module';
     HomePageRoutingModule,
     PlayerModule,
     LoginPageRoutingModule,
+    UploadPageRoutingModule,
   ],
   providers: [APIService,],
   bootstrap: [AppComponent]

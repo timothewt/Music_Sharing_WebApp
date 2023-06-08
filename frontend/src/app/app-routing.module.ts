@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'song', loadChildren: () => import('./song-page/song-page.module').then(m => m.SongPageModule)},
   { path: 'album', loadChildren: () => import('./album-page/album-page.module').then(m => m.AlbumPageModule)},
   { path: 'login', loadChildren: () => import('./login-page/login-page.module').then(m => m.LoginPageModule)},
+  { path: 'upload', loadChildren: () => import('./upload/upload-page.module').then(m => m.UploadPageModule)},
 ];
 
 @NgModule({

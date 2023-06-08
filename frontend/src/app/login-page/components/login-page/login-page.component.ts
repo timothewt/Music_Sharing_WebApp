@@ -41,12 +41,12 @@ export class LoginPageComponent implements OnInit {
 		// Get the username and password from the form
 		const username: string = this.loginForm.get('username')?.value;
 		const password: string = this.loginForm.get('password')?.value;
-		const confirmPassword: string = this.loginForm.get('confirmPassword')?.value;
-
+		
 		if (this.action == "login") {
 			this.loginUser(username, password);
 		}
 		else if (this.action == "register") {
+			const confirmPassword: string = this.loginForm.get('confirm-password')?.value;
 			this.registerUser(username, password, confirmPassword);
 		}
 	}
@@ -65,7 +65,7 @@ export class LoginPageComponent implements OnInit {
 			},
 			(error: any) => {
 				console.error('Login failed:', error);
-				this.sharedPopUpService.showPopUp({message:"Login failed"});
+				this.sharedPopUpService.showPopUp({message:"Login failed", color:"red"});
 			}
 		);
 	}

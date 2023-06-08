@@ -45,6 +45,19 @@
     }
     
     .more {
+
+        .profile-edition {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            width: 100%;
+
+            .add-upload {
+            
+            }
+        }
+
         display: flex;
         flex-direction: column;
         gap: 20px;

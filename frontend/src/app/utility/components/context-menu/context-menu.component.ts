@@ -111,6 +111,12 @@ export class ContextMenuComponent implements OnInit {
     queue.addSong(this.obj.song);
   }
 
+  public addSongRightAfter() : void {
+    if (!this.obj.song) return;
+    let queue: Queue = this.sharedQueueService.getQueue();
+    queue.addSongAfterCurrentlyPlaying(this.obj.song);
+  }
+
   public addAlbumToQueue(): void {
     if (!this.obj.albumSongs) return;
     let queue: Queue = this.sharedQueueService.getQueue();

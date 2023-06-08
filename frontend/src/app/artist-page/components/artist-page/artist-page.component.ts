@@ -7,6 +7,7 @@ import { APIService } from '../../../services/api.service';
 import { SharedQueueService } from '../../../services/shared-queue.service';
 import { SharedAuthService } from '../../../services/shared-auth.service';
 
+
 @Component({
 	selector: 'app-artist-page',
 	templateUrl: './artist-page.component.html',

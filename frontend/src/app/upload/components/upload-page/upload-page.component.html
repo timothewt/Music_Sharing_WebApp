@@ -1,0 +1,22 @@
+<div class="upload-page">
+    <h1>Upload a new album</h1>
+    <div class="upload-header">
+        <div class="upload-header-cover">
+            <input type="file" id="album-cover" accept="image/*">
+            <label for="album-cover">
+                <img src="../../../assets/image-placeholder.png" alt="Album Cover">
+            </label>
+        </div>
+        <div class="upload-header-title">
+            <input type="text" id="album-name" placeholder="Album Name">
+        </div>
+    </div>
+    <div class="upload-board">
+        <app-upload-song-card-generator [genres]="genres" (songAddEvent)="addSongToUploadList($event)" ></app-upload-song-card-generator>
+        <app-upload-song-card *ngFor="let song of uploadList; let index=index" [song]="song" [index]="index" (deleteSongEvent)="deleteSongAtPos($event)"></app-upload-song-card>
+    </div>
+
+    <div class="upload-button-container">
+        <button (click)="upload()">Upload</button>
+    </div>
+</div>
