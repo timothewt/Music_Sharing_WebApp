@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Album } from '../../../models/album';
 import { User } from '../../../models/user';
 import { Song } from '../../../models/song';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { APIService } from '../../../services/api.service';
 import { SharedQueueService } from '../../../services/shared-queue.service';
 import { SharedAuthService } from '../../../services/shared-auth.service';
@@ -24,7 +24,7 @@ export class ArtistPageComponent implements OnInit {
 	//Songs of the artist
 	artistSongs: Song[] = [];
 
-	constructor(private _Activatedroute: ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService, public authService: SharedAuthService) {}
+	constructor(private _Activatedroute: ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService, public authService: SharedAuthService, private router:Router) {}
 
 	ngOnInit(): void {
 		this._Activatedroute.paramMap.subscribe(params => {
@@ -73,6 +73,11 @@ export class ArtistPageComponent implements OnInit {
 
 	logout(): void {
 		this.authService.logout();
+	}
+
+	upload(): void {
+		// Redirect to upload page using router
+		this.router.navigate(['/upload']);
 	}
 
 }

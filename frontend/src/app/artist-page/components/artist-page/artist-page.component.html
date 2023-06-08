@@ -5,7 +5,8 @@
     </div>
     <div class="more">
         <div class="profile-edition" *ngIf="authService.currentUserID == artist.id">
-            <button (click)="logout()">Logout</button>
+            <button (click)="logout()" class="button-edition">Logout</button>
+            <button (click)="upload()" class="button-edition">Upload new album</button>
         </div>
         <div class="section">
             <div>

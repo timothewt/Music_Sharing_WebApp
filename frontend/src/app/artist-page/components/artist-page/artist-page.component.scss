@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 .artist-page{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr auto;
+    height: 100%;
+
     .artist-infos {
         margin-top: 200px;
         display: flex;
@@ -48,13 +53,25 @@
 
         .profile-edition {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             gap: 10px;
 
             width: 100%;
 
-            .add-upload {
-            
+            .button-edition {
+                padding: 10px;
+                height: 5vh;
+                border: none;
+                border-radius: 5px;
+                background-color: #333;
+                color: #fff;
+                font-size: 1.2rem;
+                outline: none;
+                transition: all 0.2s ease-in-out;
+        
+                &:hover {
+                    background-color: #444;
+                }
             }
         }
 
