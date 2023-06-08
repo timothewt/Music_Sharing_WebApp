@@ -80,4 +80,11 @@ export class SharedAuthService {
 		this.loggedIn = false;
 		this.currentUserID = 0;
 	}
+
+	public register(username: string, email: string, password: string, confirmPassword: string) {
+		let headers = { 'content-type': 'application/json'}  
+		let body = {'username':username,'email':email,'password':password,'confirm_password':confirmPassword};
+		let httpResponse = this.http.post(this.apiURL + 'user/register/', body,{'headers':headers});
+		return httpResponse;
+	}
 }

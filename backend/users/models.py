@@ -11,6 +11,7 @@ class User(AbstractUser):
 	banner_link = models.CharField(max_length=255, blank=True)
 	listenings = models.IntegerField(default=0)
 
+
 	def save(self, *args, **kwargs):
 			
 		super(User, self).save(*args, **kwargs)
@@ -22,6 +23,7 @@ class User(AbstractUser):
 		if bool(self.profile_pic.name):
 			self.profile_pic_link = SERVER_URL + self.profile_pic.url
 			super(User, self).save(*args, **kwargs)
+
 
 	def __str__(self):
 		return self.username

@@ -15,6 +15,7 @@ class Album(models.Model):
 	listenings = models.IntegerField(default=0)
 	tags = TaggableManager()
 
+
 	def save(self, *args, **kwargs):
 			
 		super(Album, self).save(*args, **kwargs)
@@ -23,6 +24,7 @@ class Album(models.Model):
 			self.cover_link = SERVER_URL + self.cover_file.url
 			super(Album, self).save(*args, **kwargs)
 
+
 	class Meta:
 		constraints = [
 			models.UniqueConstraint(
@@ -30,6 +32,7 @@ class Album(models.Model):
 				name='Unique album names for each artist'
 			)
 		]
+
 
 	def __str__(self):
 		return f"{self.name} by {self.artist}, {self.release_year}"
@@ -64,10 +67,23 @@ class Playlist(models.Model):
 	date_created = models.DateTimeField(auto_now_add=True)
 	date_updated = models.DateTimeField(auto_now=True)
 	name = models.CharField(max_length=255)
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	user = models.ForeignKey(to=User, on_delete=models.CASCADE)
 	description = models.TextField(blank=True)
 	listenings = models.IntegerField(default=0)
 	songs = models.ManyToManyField(Song)
+	deletable = models.BooleanField(default=True)
+	cover_link = models.CharField(max_length=255, blank=True)
+	cover_file = models.ImageField(blank=True)
+
+
+	def save(self, *args, **kwargs):
+			
+		super(Playlist, self).save(*args, **kwargs)
+
+		if bool(self.cover_file.name):  # checks if the file exists
+			self.cover_link = SERVER_URL + self.cover_file.url
+			super(Playlist, self).save(*args, **kwargs)
+
 
 	class Meta:
 		constraints = [
@@ -77,5 +93,8 @@ class Playlist(models.Model):
 			)
 		]
 
+
+
 	def __str__(self):
 		return f"{self.name} by {self.user}"
+		

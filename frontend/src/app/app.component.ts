@@ -21,7 +21,5 @@ export class AppComponent implements OnInit{
 	ngOnInit() {
 		this.queue = new Queue();
 		this.sharedQueueService.setQueue(this.queue);
-		
-		this.authService.fetchTokensPair('admin','admin'); // gets the tokens in the shared service
 	}
 }
