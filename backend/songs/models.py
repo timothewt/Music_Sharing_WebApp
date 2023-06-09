@@ -13,7 +13,7 @@ class Album(models.Model):
 	cover_link = models.CharField(max_length=255, blank=True)
 	cover_file = models.ImageField(blank=True)
 	listenings = models.IntegerField(default=0)
-	tags = TaggableManager()
+	tags = TaggableManager(blank=True)
 
 
 	def save(self, *args, **kwargs):
@@ -48,7 +48,7 @@ class Song(models.Model):
 	duration_ms = models.IntegerField(blank=True, default=0)
 	listenings = models.IntegerField(default=0)
 	lyrics = models.TextField(blank=True)
-	tags = TaggableManager()
+	tags = TaggableManager(blank=True)
 
 	def save(self, *args, **kwargs):
 			
