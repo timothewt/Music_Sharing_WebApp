@@ -1,14 +1,14 @@
-<div class="upload-page">
+<form [formGroup]="uploadForm" class="upload-page">
     <h1>Upload a new album</h1>
     <div class="upload-header">
         <div class="upload-header-cover">
-            <input type="file" id="album-cover" accept="image/*">
+            <input type="file" id="album-cover" accept="image/*" formControlName="albumCover">
             <label for="album-cover">
                 <img src="../../../assets/image-placeholder.png" alt="Album Cover">
             </label>
         </div>
         <div class="upload-header-title">
-            <input type="text" id="album-name" placeholder="Album Name">
+            <input type="text" id="album-name" placeholder="Album Name" formControlName="albumTitle">
         </div>
     </div>
     <div class="upload-board">
@@ -19,4 +19,4 @@
     <div class="upload-button-container">
         <button (click)="upload()">Upload</button>
     </div>
-</div>
+</form>

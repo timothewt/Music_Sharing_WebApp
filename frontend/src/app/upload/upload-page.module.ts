@@ -5,6 +5,7 @@ import { UploadSongCardComponent } from './components/upload-song-card/upload-so
 import { UploadPageRoutingModule } from './upload-page-routing.module';
 import { UploadSongCardGeneratorComponent } from './components/upload-song-card-generator/upload-song-card-generator.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MultiselectComponent } from './components/multiselect/multiselect.component';
 
 
 
@@ -12,7 +13,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     UploadPageComponent,
     UploadSongCardComponent,
-    UploadSongCardGeneratorComponent
+    UploadSongCardGeneratorComponent,
+    MultiselectComponent
   ],
   imports: [
     CommonModule,

@@ -11,12 +11,9 @@
             <input type="file" id="song-file" accept="audio/*" formControlName="file">
         </div>
         
-        
-
+    
         <!--Song genre selection -->
-        <select multiple>
-            <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
-        </select>
+        <app-multiselect></app-multiselect>
         <!--Song add button to album-->
         <button (click)="addSong()">
             <img src="../../../assets/plus-icon.svg" alt="Add Song">

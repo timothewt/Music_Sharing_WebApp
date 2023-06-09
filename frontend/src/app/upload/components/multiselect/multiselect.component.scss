@@ -1,0 +1,52 @@
+.multi-select {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #ccc;
+    padding: 5px;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+
+    .selected-items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px; 
+        span {
+            background-color: #e0e0e0;
+            color: #333;
+            border-radius: 3px;
+            padding: 2px;
+        }
+    }
+}
+
+  
+  .selected-items span {
+
+  }
+  
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%;
+  }
+  
+  .option {
+    padding: 5px;
+  }
+  
+  .option span {
+    display: block;
+    cursor: pointer;
+  }
+  
+  .option span.selected {
+    background-color: #2196f3;
+    color: #fff;
+  }
