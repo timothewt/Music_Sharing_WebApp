@@ -50,13 +50,14 @@ class Song(models.Model):
 	lyrics = models.TextField(blank=True)
 	tags = TaggableManager(blank=True)
 
+
 	def save(self, *args, **kwargs):
 			
-		super(Song, self).save(*args, **kwargs)
-
 		if bool(self.recording_file.name):  # checks if the file exists
 			self.recording_link = SERVER_URL + self.recording_file.url
-			super(Song, self).save(*args, **kwargs)
+
+		super(Song, self).save(*args, **kwargs)
+
 
 	def __str__(self):
 		return f"{self.name} by {self.album.artist} from {self.album.name}, {self.release_year}"
