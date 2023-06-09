@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes, action
 from rest_framework.response import Response
 
+from users.models import User
 from songs.models import Album, Song, Playlist
 from songs.serializers import AlbumSerializer, SongSerializer, PlaylistSerializer
 
@@ -61,6 +62,25 @@ class AlbumViewset(ModelViewSet):
 			similar_albums = similar_albums[:int(limit)]
 
 		serializer = AlbumSerializer(similar_albums, many=True)
+		return Response(serializer.data)
+
+
+	@action(methods=['post'], detail=False)
+	def new(self, request, pk=None):
+
+		if not request.user.is_authenticated:
+			return Response({"detail": "Authentication credentials were not provided."}, status=401)
+
+		album = Album.objects.create(
+			name=request.data['name'],
+			artist=request.user,
+			cover_file = request.FILES.get('cover_file'),
+			description=request.data['description'],
+			release_year=request.data['release_year'],
+		)
+		album.save()
+
+		serializer = AlbumSerializer(album)
 		return Response(serializer.data)
 
 

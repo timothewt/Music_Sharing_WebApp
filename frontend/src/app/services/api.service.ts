@@ -104,4 +104,18 @@ export class APIService {
 		let reqURL: string = this.apiURL + 'song/' + songId + '/similar/?limit=' + limit;
 		return this.http.get(reqURL);
 	}
+
+	public postNewAlbum(name: string, authAccessToken: string, description: string, release_year: string, album_cover: File) {
+		let reqURL: string = this.apiURL + 'album/';
+		let formData: FormData = new FormData();
+		formData.append('name', name);
+		formData.append('description', description);
+		formData.append('release_year', release_year);
+		formData.append('album_cover', album_cover);
+		return this.http.post(reqURL, formData, {
+			headers: new HttpHeaders({
+				'Authorization': 'Bearer ' + authAccessToken
+			})
+		});
+	}
 }
