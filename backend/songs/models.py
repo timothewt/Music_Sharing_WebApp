@@ -1,6 +1,7 @@
 from django.db import models
 from users.models import User
 from taggit.managers import TaggableManager
+from config.settings import SERVER_URL
 
 
 class Album(models.Model):
@@ -17,12 +18,11 @@ class Album(models.Model):
 
 
 	def save(self, *args, **kwargs):
-			
-		super(Album, self).save(*args, **kwargs)
 
 		if bool(self.cover_file.name):  # checks if the file exists
 			self.cover_link = SERVER_URL + self.cover_file.url
-			super(Album, self).save(*args, **kwargs)
+		
+		super(Album, self).save(*args, **kwargs)
 
 
 	class Meta:

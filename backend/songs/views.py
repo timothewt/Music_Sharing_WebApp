@@ -71,13 +71,16 @@ class AlbumViewset(ModelViewSet):
 		if not request.user.is_authenticated:
 			return Response({"detail": "Authentication credentials were not provided."}, status=401)
 
+		print(request.data)
+
 		album = Album.objects.create(
 			name=request.data['name'],
 			artist=request.user,
-			cover_file = request.FILES.get('cover_file'),
+			cover_file=request.FILES.get('cover_file'),
 			description=request.data['description'],
-			release_year=request.data['release_year'],
+			release_year=int(request.data['release_year']),
 		)
+
 		album.save()
 
 		serializer = AlbumSerializer(album)

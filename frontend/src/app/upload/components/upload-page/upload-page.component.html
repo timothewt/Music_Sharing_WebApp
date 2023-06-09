@@ -2,7 +2,7 @@
     <h1>Upload a new album</h1>
     <div class="upload-header">
         <div class="upload-header-cover">
-            <input type="file" id="album-cover" accept="image/*" formControlName="albumCover">
+            <input type="file" id="album-cover" accept="image/*" (change)="onFileSelected($event)">
             <label for="album-cover">
                 <img src="../../../assets/image-placeholder.png" alt="Album Cover">
             </label>

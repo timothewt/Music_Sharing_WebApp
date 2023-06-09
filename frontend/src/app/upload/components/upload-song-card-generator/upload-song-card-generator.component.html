@@ -8,7 +8,7 @@
             <label for="song-file">
                 <img src="../../../assets/upload-icon.svg" alt="Upload">
             </label>
-            <input type="file" id="song-file" accept="audio/*" formControlName="file">
+            <input type="file" id="song-file" accept="audio/*" (change)="onFileSelected($event)">
         </div>
         
     
