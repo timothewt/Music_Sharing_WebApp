@@ -1,4 +1,8 @@
-
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 .context-menu {
     --number-actions: 0;
@@ -32,6 +36,7 @@
         width: 100%;
         padding: 10px;
         color: white;
+        ;
         border: #333 solid 1px;
         background: transparent;
 
@@ -42,15 +47,16 @@
 }
 
 .context-menu.hidden {
-    visibility: hidden;
+    // visibility: hidden;
+    display: none;
 }
 
 @media screen and (max-width: 800px) {
     .context-menu {
-        width: 100%;
+        width: 100vw;
+
         bottom: calc(13vh + var(--number-actions) * 6vh);
         top:auto;
-
         left: 0;
     }
 }
