@@ -105,16 +105,16 @@ export class APIService {
 		return this.http.get(reqURL);
 	}
 
-	public postNewAlbum(name: string, authAccessToken: string, description: string, release_year: string, album_cover: File) {
-		let reqURL: string = this.apiURL + 'album/';
+	public postNewAlbum(name: string, authAccessToken: string, description: string, releaseYear: string, coverFile: File) {
+		let reqURL: string = this.apiURL + 'album/new/';
 		let formData: FormData = new FormData();
 		formData.append('name', name);
 		formData.append('description', description);
-		formData.append('release_year', release_year);
-		formData.append('album_cover', album_cover);
+		formData.append('release_year', releaseYear);
+		formData.append('cover_file', coverFile);
 		return this.http.post(reqURL, formData, {
 			headers: new HttpHeaders({
-				'Authorization': 'Bearer ' + authAccessToken
+				'Authorization' : 'Bearer ' + authAccessToken
 			})
 		});
 	}

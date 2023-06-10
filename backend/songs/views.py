@@ -74,10 +74,11 @@ class AlbumViewset(ModelViewSet):
 		album = Album.objects.create(
 			name=request.data['name'],
 			artist=request.user,
-			cover_file = request.FILES.get('cover_file'),
+			cover_file=request.FILES.get('cover_file'),
 			description=request.data['description'],
-			release_year=request.data['release_year'],
+			release_year=int(request.data['release_year']),
 		)
+
 		album.save()
 
 		serializer = AlbumSerializer(album)
@@ -138,6 +139,34 @@ class SongViewset(ModelViewSet):
 			similar_songs = similar_songs[:int(limit)]
 
 		serializer = SongSerializer(similar_songs, many=True)
+		return Response(serializer.data)
+
+
+	@action(methods=['post'], detail=False)
+	def new(self, request, pk=None):
+
+		if not request.user.is_authenticated:
+			return Response({"detail": "Authentication credentials were not provided."}, status=401)
+
+		album = Album.objects.filter(pk=int(request.data['album_id'])).first()
+
+		song = Song.objects.create(
+			name=request.data['name'],
+			album=album,
+			recording_file=request.FILES.get('recording_file'),
+			duration_ms=int(request.data['duration_ms']),
+			release_year=int(request.data['release_year']),
+		)
+
+		for tag in request.data['tags']:
+			album.tags.add(tag)
+			song.tags.add(f"song-{tag}")
+			self.request.user.tags.add(f"artist-{tag}")
+
+		album.save()
+		song.save()
+
+		serializer = SongSerializer(song)
 		return Response(serializer.data)
 
 

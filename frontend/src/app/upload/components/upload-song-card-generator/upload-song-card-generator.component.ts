@@ -17,11 +17,20 @@ export class UploadSongCardGeneratorComponent implements OnInit {
     title: ''
   });
 
+  recordingFile: File = new File([], "");
+
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
 
   } 
+
+  onFileSelected(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.recordingFile = file;
+    }
+  }
 
   public addSong() : void {
     const title: string = this.generateForm.get('title')?.value;
