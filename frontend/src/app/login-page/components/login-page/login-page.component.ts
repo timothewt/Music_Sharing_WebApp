@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { SharedAuthService } from 'src/app/services/shared-auth.service';
 import { Router } from '@angular/router';
@@ -20,7 +20,9 @@ export class LoginPageComponent implements OnInit {
 
 	loginForm: FormGroup = this.formBuilder.group({
 		username: '',
-		email: '',
+		email: new FormControl('',[
+			Validators.required,
+			Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
 		password: '',
 		confirmPassword: '',
 	});

@@ -13,45 +13,109 @@ export class PopUpComponent {
   public displayTime: number = 1;
   public visible: boolean = false;
   public color: String = "#333";
+  public priority: number = 0;
+  public id: number = 0;
+
+  public queuePopUp: {message:String, timedisplay:number, color:String, priority:number, id:number}[] = [];
+  public maxQueueSize: number = 5;
+  
 
   constructor(private sharedPopUpService: SharedPopUpService) { }
 
   ngOnInit(): void {
     this.sharedPopUpService.popUpCallEvent$.subscribe(
-        (obj:{message:String, timedisplay?:number}) => {
-          this.showPopUp(obj);
+        (obj:{message:String, timedisplay?:number, color?:String, priority?:number}) => {
+          this.addToQueue(obj);
         }
       );
   }
 
-  public showPopUp(obj:{message:String, timedisplay?:number, color?:String}): void {
-    this.message = obj.message;
+  public addToQueue(obj:{message:String, timedisplay?:number, color?:String, priority?:number}): void {
+    /*
+    Add a pop up to the queue to be displayed
+    @param obj:{message:String, timedisplay?:number, color?:String, priority?:number} - The pop up to be added to the queue
+    @return void
+    */
 
-    if (obj.timedisplay){
-      this.displayTime = obj.timedisplay;
+    // Correctly setup the pop up object
+    let popUp : {message:String, timedisplay:number, color:String, priority:number, id: number} = {
+      message: obj.message,
+      timedisplay: obj.timedisplay ? obj.timedisplay : 1000,
+      color: obj.color ? obj.color : "#333",
+      priority: obj.priority ? obj.priority : 0,
+      id: Math.floor(Math.random() * 1000000000)
+    }
+
+
+    if (this.priority < popUp.priority) {
+      //Stop current and show new if higher priority
+      this.queuePopUp.unshift(popUp);
+      this.switchToNextPopUp();
     }
     else {
-      this.displayTime = 1000;
+      if (this.queuePopUp.length >= 0) {
+        this.queuePopUp.push(popUp);
+        if (this.visible == false) {
+          this.switchToNextPopUp();
+        }
+      }
     }
-
-    if (obj.color) {
-      this.color = obj.color;
-    }
-    else {
-      this.color = "#333";
-    }
-
-    this.visible = true;
-
-    setTimeout(() => {
-      this.hidePopUp();
-    }
-    , this.displayTime);
 
   }
 
+  public switchToNextPopUp(): void {
+    /*
+    Switch to the next pop up in the queue
+    @return void
+    */
+    if (this.queuePopUp.length > 0) {
+      this.usePopUp(this.queuePopUp[0]);
+      this.closeInXSeconds(this.queuePopUp[0].id, this.queuePopUp[0].timedisplay);
+      this.queuePopUp.shift();
+      this.showPopUp();
+    }
+  }
+
+  public showPopUp(): void {
+    /*
+    Show the pop up with the correct popup object
+    @return void
+    */
+    // Show the pop up
+    this.visible = true;
+  }
+
   public hidePopUp(): void {
+    /*
+    Hide the pop up
+    @return void
+    */
     this.visible = false;
+  }
+
+  public usePopUp(obj:{message:String, timedisplay:number, color:String, priority:number, id:number}): void {
+    this.message = obj.message;
+    this.displayTime = obj.timedisplay;
+    this.color = obj.color;
+    this.priority = obj.priority;
+    this.id = obj.id;
+  }
+
+  public closeInXSeconds(idToClose:number, time:number): void {
+    /*
+    Close the pop up in x seconds
+    @param idToClose:number - The id of the pop up to close
+    @param time:number - The time in milliseconds to close the pop up
+    @return void
+    */
+    setTimeout(() => {
+      if (this.id == idToClose) {
+        this.hidePopUp();
+        setTimeout(() => {
+          this.switchToNextPopUp();
+        }, 500);
+      }
+    }, time);
   }
 
 }

@@ -6,11 +6,11 @@ import { Subject } from 'rxjs';
 })
 export class SharedPopUpService {
 
-  public popUpCallEvent$: Subject<{message:String, timedisplay?:number, color?:String}> = new Subject<{message:String, timedisplay?:number, color?:String}>();
+  public popUpCallEvent$: Subject<{message:String, timedisplay?:number, color?:String, priority?:number}> = new Subject<{message:String, timedisplay?:number, color?:String, priority?:number}>();
 
   constructor() { }
 
-  public showPopUp(obj:{message:String, timedisplay?:number, color?:String}): void {
+  public showPopUp(obj:{message:String, timedisplay?:number, color?:String, priority?:number}): void {
     this.popUpCallEvent$.next(obj);
   }
 }
