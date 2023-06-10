@@ -16,6 +16,8 @@ export class LoginPageComponent implements OnInit {
 
 	action: "login" | "register" = "login";
 
+	isButtonLoginActive: boolean = true;
+
 	loginForm: FormGroup = this.formBuilder.group({
 		username: '',
 		email: '',
@@ -37,6 +39,10 @@ export class LoginPageComponent implements OnInit {
 	}
 
 	login(){
+
+		// Check if the button is active
+		if (this.isButtonLoginActive == false) return;
+
 		// Check if the form is valid
 		if (this.loginForm.invalid) return;
 
@@ -45,7 +51,8 @@ export class LoginPageComponent implements OnInit {
 		const email: string = this.loginForm.get('email')?.value;
 		const password: string = this.loginForm.get('password')?.value;
 		const confirmPassword: string = this.loginForm.get('confirmPassword')?.value;
-		
+
+
 		if (this.action == "login") {
 			this.loginUser(username, password);
 		}
@@ -55,6 +62,8 @@ export class LoginPageComponent implements OnInit {
 	}
 
 	loginUser(username: string, password: string): void {
+		this.isButtonLoginActive = false;
+		console.log(this.isButtonLoginActive);
 		this.authService.fetchTokensPair(username, password).subscribe(
 			(response: any) => {
 				let headers = { 'content-type': 'application/json', 'Authorization': "Bearer " + response.access}
@@ -65,15 +74,18 @@ export class LoginPageComponent implements OnInit {
 						this.router.navigate(['/artist', response.id]);
 					}
 				);
+				this.isButtonLoginActive = true;
 			},
 			(error: any) => {
 				console.error('Login failed:', error);
 				this.sharedPopUpService.showPopUp({message:"Login failed", color:"red"});
+				this.isButtonLoginActive = true;
 			}
 		);
 	}
 
 	registerUser(username: string, email: string, password: string, confirmPassword: string): void {
+		this.isButtonLoginActive = false;
 		if (password !== confirmPassword) {
 			console.error('Passwords do not match');
 			return;
@@ -82,9 +94,11 @@ export class LoginPageComponent implements OnInit {
 		this.authService.register(username, email, password, confirmPassword).subscribe(
 			(response: any) => {
 				this.loginUser(username, password);
+				this.isButtonLoginActive = true;
 			},
 			(error: any) => {
 				this.sharedPopUpService.showPopUp({message:"Registration failed :" + error.error.error, timedisplay: 3000});
+				this.isButtonLoginActive = true;
 			}
 		);
 

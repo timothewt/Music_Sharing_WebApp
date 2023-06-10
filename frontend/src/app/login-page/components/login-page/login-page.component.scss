@@ -70,15 +70,42 @@
 
 
         button {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
             background-color: #333;
             border: none;
             border-radius: 5px;
-            height: 40px;
+            padding: 10px;
+            height: auto;
             width: 20%;
-            color: white;
-            font-weight: bold;
-            font-size: 16px;
             cursor: pointer;
+
+            img {
+                height: 20px;
+                width: 20px;
+                display: none;
+                filter: invert(100%);
+            }
+
+            span {
+                display: block;
+                color: white;
+                font-weight: bold;
+                font-size: 16px;
+            }
+
+            &:has(img.show){
+                img {
+                    display: block;
+                    animation: rotateSpinner 2s linear infinite;
+                }
+                span {
+                    display: none;
+                }
+            }
         }
     }
 }
@@ -88,5 +115,14 @@
         form {
             width: 80%;
         }
+    }
+}
+
+@keyframes rotateSpinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
     }
 }
