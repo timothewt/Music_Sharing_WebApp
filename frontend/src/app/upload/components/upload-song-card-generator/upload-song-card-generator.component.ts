@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
-import { Song } from 'src/app/models/song';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { UploadSong } from 'src/app/models/uploadSong';
 
 @Component({
   selector: 'app-upload-song-card-generator',
@@ -11,11 +11,14 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class UploadSongCardGeneratorComponent implements OnInit {
 
   @Input() genres !: string[];
-  @Output() songAddEvent = new EventEmitter<Song>();
+  @Output() songAddEvent = new EventEmitter<UploadSong>();
 
   generateForm: FormGroup = this.formBuilder.group({
     title: ''
   });
+
+  currentSong: UploadSong = new UploadSong();
+  currentSongGenres: string[] = [];
 
   recordingFile: File = new File([], "");
 
@@ -32,12 +35,21 @@ export class UploadSongCardGeneratorComponent implements OnInit {
     }
   }
 
+  updateGenres(genres: string[]): void {
+    this.currentSongGenres = genres;
+  }
+
+
   public addSong() : void {
     const title: string = this.generateForm.get('title')?.value;
-    
-    let song: Song = new Song(); 
-    song.name = title;
-    this.songAddEvent.emit(song);
+    this.currentSong.name = title;
+    let currentSongGenresCopy: string[] = this.currentSongGenres.slice();
+    this.currentSong.genres = currentSongGenresCopy;
+
+    this.songAddEvent.emit(this.currentSong);
+
+    //Reset the song
+    this.currentSong = new UploadSong();
   }
 
 }

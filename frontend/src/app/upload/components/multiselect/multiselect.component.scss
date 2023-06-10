@@ -27,11 +27,16 @@
         }
 
         .selected-item {
-            span {
-                background-color: #e0e0e0;
-                color: #333;
-                border-radius: 3px;
-                padding: 2px;
+            display: flex;
+            background-color: #333;
+            color: white;
+            border-radius: 3px;
+            padding: 5px;
+            gap: 6px;
+            
+            span.remove-selected-item {
+                font-weight: bold;
+                cursor: pointer;
             }
         }
     }
@@ -40,21 +45,23 @@
         top: 100%;
         left: 0;
         z-index: 1;
-        background-color: #fff;
-        border: 1px solid #ccc;
+        background-color: #333;
+        border: 1px solid #444;
+        color: white;
         max-height: 200px;
         overflow-y: auto;
         width: 100%;
 
         .option {
-            padding: 5px;
+            padding: 10px;
+
             span {
                 display: block;
                 cursor: pointer;
             }
 
-            span.selected {
-                background-color: #2196f3;
+            &:has(span.selected) {
+                background-color: #444;
                 color: #fff;
             }
         }

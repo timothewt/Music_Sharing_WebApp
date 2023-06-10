@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { APIService } from 'src/app/services/api.service';
 import { SharedAuthService } from 'src/app/services/shared-auth.service';
+import { UploadSong } from 'src/app/models/uploadSong';
 
 @Component({
   selector: 'app-upload-page',
@@ -17,7 +18,7 @@ export class UploadPageComponent {
   genres: string[] = ['Rock', 'Pop', 'Jazz', 'Hip Hop', 'Electronic'];
   selectedGenres: string[] = [];
 
-  uploadList: Song[] = [];
+  uploadList: UploadSong[] = [];
 
   uploadForm: FormGroup = this.formBuilder.group({
     albumTitle: '',
@@ -31,7 +32,7 @@ export class UploadPageComponent {
 
   }
 
-  addSongToUploadList(song: Song): void {
+  addSongToUploadList(song: UploadSong): void {
     this.uploadList.push(song);
     console.log(this.uploadList);
   }
