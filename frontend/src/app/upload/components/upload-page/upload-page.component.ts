@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Song } from 'src/app/models/song';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators  } from '@angular/forms';
+
 @Component({
   selector: 'app-upload-page',
   templateUrl: './upload-page.component.html',
@@ -17,7 +17,7 @@ export class UploadPageComponent {
   uploadList: Song[] = [];
 
   uploadForm: FormGroup = this.formBuilder.group({
-    albumCover : '',
+    albumCover : new FormControl('', [Validators.required]),
     albumTitle: '',
   });
 
@@ -38,10 +38,13 @@ export class UploadPageComponent {
 
   upload(): void{
     //Get the album cover from the form group input file
-    const albumCover: File = this.uploadForm.get('albumCover')?.value;
+    const albumCover: any = this.uploadForm.get('albumCover');
+  
 
     //Get the album title from the form group input text
     const albumTitle: string = this.uploadForm.get('albumTitle')?.value;
+
+    console.log(albumCover);
 
   }
 
