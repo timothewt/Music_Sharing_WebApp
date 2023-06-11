@@ -1,4 +1,4 @@
 <div class="info-login">
-    <a *ngIf="isLogged" routerLink="/artist/{{this.idUser}}"> {{username}} </a>
-    <a *ngIf="!isLogged" routerLink="/login"> Login </a>
+    <a *ngIf="authService.loggedIn" routerLink="/artist/{{this.authService.currentUserID}}"> {{this.authService.currentUserUsername}} </a>
+    <a *ngIf="!authService.loggedIn" routerLink="/login"> Login </a>
 </div>

@@ -72,6 +72,7 @@ export class LoginPageComponent implements OnInit {
 				currUserHttpResponse.subscribe(
 					(response: any) => {
 						this.authService.currentUserID = response.id;
+						this.authService.currentUserUsername = response.username;
 						this.router.navigate(['/artist', response.id]);
 					}
 				);

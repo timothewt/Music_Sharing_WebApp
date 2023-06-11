@@ -16,6 +16,7 @@ export class SharedAuthService {
 	private accessToken: string = "";
 	public loggedIn: boolean = false;
 	public currentUserID: number = 0;
+	public currentUserUsername: string = "";
 	public refreshIntervalId: any;
 
 	constructor(private http: HttpClient) {
@@ -41,7 +42,6 @@ export class SharedAuthService {
 	public setTokens(refreshToken: string, accessToken: string) {
 		this.refreshToken = refreshToken;
 		this.accessToken = accessToken;
-		console.log("oui");
 		this.loggedIn = true;
 	}
 
