@@ -1,12 +1,14 @@
 <div id="player-container">
 	<div id="song-infos" *ngIf="getQueue().getQueueLength() > 0">
-		<img [src]="getQueue().getCurrentSong().album.cover">
+		<a routerLink="/album/{{getQueue().getCurrentSong().album.id}}">
+			<img [src]="getQueue().getCurrentSong().album.cover">
+		</a>
 		<div id="song-titles">
 			<h2 id="songName">
-				{{getQueue().getCurrentSong().name}}
+				<a routerLink="/song/{{getQueue().getCurrentSong().id}}">{{getQueue().getCurrentSong().name}}</a>
 			</h2>
 			<h3 id="artist">
-				{{getQueue().getCurrentSong().album.artist.username}}
+				<a routerLink="/artist/{{getQueue().getCurrentSong().album.artist.id}}">{{getQueue().getCurrentSong().album.artist.username}}</a>
 			</h3>
 		</div>
 	</div>

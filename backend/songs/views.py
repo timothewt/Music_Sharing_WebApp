@@ -3,6 +3,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes, action
 from rest_framework.response import Response
+from rest_framework.status import HTTP_400_BAD_REQUEST
 
 from users.models import User
 from songs.models import Album, Song, Playlist
@@ -70,6 +71,10 @@ class AlbumViewset(ModelViewSet):
 
 		if not request.user.is_authenticated:
 			return Response({"detail": "Authentication credentials were not provided."}, status=401)
+
+		if Album.objects.filter(name=request.data['name'], artist=request.user).exists():
+			return Response({'error': 'Album name already exists'},
+							status=HTTP_400_BAD_REQUEST)
 
 		album = Album.objects.create(
 			name=request.data['name'],

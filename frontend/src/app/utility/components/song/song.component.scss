@@ -79,7 +79,7 @@
                 aspect-ratio: 1/1;
                 height: 70%;
                 width: auto;
-                transform: translate(-25%, 25%);
+                transform: translate(-25%, 20%);
             }
         }
     }
@@ -91,9 +91,11 @@
         justify-content: center;
         align-items: center;
 
-        img {
-            aspect-ratio: 1/1;
-            height: 100%;
+        a {
+            img {
+                aspect-ratio: 1/1;
+                height: 100%;
+            }
         }
     }
     

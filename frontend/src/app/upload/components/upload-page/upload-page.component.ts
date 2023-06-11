@@ -4,7 +4,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { APIService } from 'src/app/services/api.service';
 import { SharedAuthService } from 'src/app/services/shared-auth.service';
+import { Router } from '@angular/router';
 import { UploadSong } from 'src/app/models/uploadSong';
+import { SharedPopUpService } from 'src/app/services/shared-pop-up.service';
 
 @Component({
   selector: 'app-upload-page',
@@ -26,7 +28,7 @@ export class UploadPageComponent {
 
   coverFile: File = new File([], "")
 
-  constructor(private formBuilder: FormBuilder, private apiService: APIService, private authService: SharedAuthService) { }
+  constructor(private formBuilder: FormBuilder, private router:Router, private apiService: APIService, private authService: SharedAuthService, private sharedPopUpService: SharedPopUpService) { }
 
   ngOnInit(): void {
 
@@ -34,7 +36,6 @@ export class UploadPageComponent {
 
   addSongToUploadList(song: UploadSong): void {
     this.uploadList.push(song);
-    console.log(this.uploadList);
   }
 
   deleteSongAtPos(index:number): void {
@@ -53,9 +54,14 @@ export class UploadPageComponent {
     //Get the album title from the form group input text
     const albumTitle: string = this.uploadForm.get('albumTitle')?.value;
 
-    this.apiService.postNewAlbum(albumTitle, this.authService.getAccessToken(), "", "2000", this.coverFile).subscribe((response) => {
-      console.log(response);
-    });
+    this.apiService.postNewAlbum(albumTitle, this.authService.getAccessToken(), "", "2000", this.coverFile).subscribe(
+      (response: any) => {
+        this.router.navigate(['/album', response.id]);
+      },
+      (error: any) => {
+        this.sharedPopUpService.showPopUp({message:error['error'].error, timedisplay:3000, color:"red"});
+      }
+    );
 
   }
 

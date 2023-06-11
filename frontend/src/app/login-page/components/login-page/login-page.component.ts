@@ -75,7 +75,6 @@ export class LoginPageComponent implements OnInit {
 				this.isButtonLoginActive = true;
 			},
 			(error: any) => {
-				console.error('Login failed:', error);
 				this.sharedPopUpService.showPopUp({message:"Login failed", color:"red"});
 				this.isButtonLoginActive = true;
 			}
