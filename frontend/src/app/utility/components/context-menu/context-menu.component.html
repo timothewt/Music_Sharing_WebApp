@@ -3,9 +3,13 @@
     <button *ngIf="obj.song != undefined" class="action-menu" (click)="addSongToQueue()">Add song to queue</button>
     <button *ngIf="obj.song != undefined" class="action-menu" (click)="addSongRightAfter()">Listen to it right after</button>
     <button *ngIf="obj.song != undefined" class="action-menu" (click)="shareSong()">Share</button>
+    <button *ngIf="obj.song != undefined && this.isConnected && !isSongFavorite" class="action-menu" (click)="likeSong()">Like</button>
+    <button *ngIf="obj.song != undefined && this.isConnected && isSongFavorite" class="action-menu" (click)="unlikeSong()">Unlike</button>
     <!--If the context menu is called from an album card component-->
     <button *ngIf="obj.albumSongs != undefined" class="action-menu" (click)="addAlbumToQueue()">Add album to queue</button>
     <button *ngIf="obj.albumSongs != undefined" class="action-menu" (click)="shareAlbum()">Share</button>
+    <button *ngIf="obj.albumSongs != undefined && this.isConnected && !isAlbumFavorite" class="action-menu" (click)="likeAlbum()">Like</button>
+    <button *ngIf="obj.albumSongs != undefined && this.isConnected && isAlbumFavorite" class="action-menu" (click)="unlikeAlbum()">Unlike</button>
     <!--If the context menu is called from an artist card component-->
     <button *ngIf="obj.artist != undefined" class="action-menu" (click)="shareArtist()">Share</button>
 </div>
