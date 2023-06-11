@@ -12,6 +12,9 @@
         <input *ngIf="action == 'register'" type="email" id="email" placeholder="Email adress" formControlName="email">
         <input type="password" id="password" placeholder="Password" formControlName="password">
         <input *ngIf="action == 'register'" type="password" id="confirm-password" placeholder="Confirm password" formControlName="confirmPassword">
-        <button class="btn btn-primary">Go on</button>
+        <button class="btn btn-primary" >
+            <span>Go on</span>
+            <img [ngClass]="isButtonLoginActive == false ? 'show' : ''" src="../../../assets/spin-icon.svg" alt="Spin loader icon">
+        </button>
     </form>
 </div>

@@ -1,9 +1,13 @@
-<div class="multi-select" (click)="toggleDropdown()"> 
-    <div class="selected-items" *ngIf="selectedItems.length > 0">
-        <span *ngFor="let item of selectedItems">{{ item }}</span>
+<div class="multi-select" (click)="openDropDown()"> 
+    <div class="selected-items">
+        <div class="selected-item" *ngFor="let item of selectedItems; let index=index">
+            <span>{{ item }}</span>
+            <span class="remove-selected-item" (click)="toggleSelection(item)"> X </span>
+        </div>
+        <input type="text" placeholder="Select Genres" [(ngModel)]="searchText" (ngModelChange)="filterItems()">
     </div>
     <div class="dropdown" *ngIf="dropdownOpen">
-        <div class="option" *ngFor="let item of items" (click)="toggleSelection(item)">
+        <div class="option" *ngFor="let item of filteredItems" (click)="toggleSelection(item)">
             <span [class.selected]="isSelected(item)">{{ item }}</span>
         </div>
     </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { SharedAuthService } from 'src/app/services/shared-auth.service';
 import { Router } from '@angular/router';
@@ -16,9 +16,13 @@ export class LoginPageComponent implements OnInit {
 
 	action: "login" | "register" = "login";
 
+	isButtonLoginActive: boolean = true;
+
 	loginForm: FormGroup = this.formBuilder.group({
 		username: '',
-		email: '',
+		email: new FormControl('',[
+			Validators.required,
+			Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
 		password: '',
 		confirmPassword: '',
 	});
@@ -37,15 +41,16 @@ export class LoginPageComponent implements OnInit {
 	}
 
 	login(){
-		// Check if the form is valid
-		if (this.loginForm.invalid) return;
-
+		// Check if the button is active
+		if (this.isButtonLoginActive == false) return;
+	
 		// Get the username and password from the form
 		const username: string = this.loginForm.get('username')?.value;
 		const email: string = this.loginForm.get('email')?.value;
 		const password: string = this.loginForm.get('password')?.value;
 		const confirmPassword: string = this.loginForm.get('confirmPassword')?.value;
-		
+
+
 		if (this.action == "login") {
 			this.loginUser(username, password);
 		}
@@ -55,6 +60,8 @@ export class LoginPageComponent implements OnInit {
 	}
 
 	loginUser(username: string, password: string): void {
+		this.isButtonLoginActive = false;
+		console.log(this.isButtonLoginActive);
 		this.authService.fetchTokensPair(username, password).subscribe(
 			(response: any) => {
 				let headers = { 'content-type': 'application/json', 'Authorization': "Bearer " + response.access}
@@ -65,15 +72,18 @@ export class LoginPageComponent implements OnInit {
 						this.router.navigate(['/artist', response.id]);
 					}
 				);
+				this.isButtonLoginActive = true;
 			},
 			(error: any) => {
 				console.error('Login failed:', error);
 				this.sharedPopUpService.showPopUp({message:"Login failed", color:"red"});
+				this.isButtonLoginActive = true;
 			}
 		);
 	}
 
 	registerUser(username: string, email: string, password: string, confirmPassword: string): void {
+		this.isButtonLoginActive = false;
 		if (password !== confirmPassword) {
 			console.error('Passwords do not match');
 			return;
@@ -82,9 +92,11 @@ export class LoginPageComponent implements OnInit {
 		this.authService.register(username, email, password, confirmPassword).subscribe(
 			(response: any) => {
 				this.loginUser(username, password);
+				this.isButtonLoginActive = true;
 			},
 			(error: any) => {
 				this.sharedPopUpService.showPopUp({message:"Registration failed :" + error.error.error, timedisplay: 3000});
+				this.isButtonLoginActive = true;
 			}
 		);
 
