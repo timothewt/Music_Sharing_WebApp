@@ -17,12 +17,16 @@ import { HomePageRoutingModule } from './home-page/home-page-routing.module';
 import { SearchPageRoutingModule } from './search-page/search-page-routing.module';
 import { LoginPageRoutingModule } from './login-page/login-page-routing.module';
 import { UploadPageRoutingModule } from './upload/upload-page-routing.module';
+import { InfoLoginComponent } from './components/info-login/info-login.component';
+import { OverlayHeaderComponent } from './components/overlay-header/overlay-header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     ArrowsNavComponent,
+    InfoLoginComponent,
+    OverlayHeaderComponent,
   ],
   imports: [
     BrowserModule,
