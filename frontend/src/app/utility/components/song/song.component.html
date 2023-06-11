@@ -8,7 +8,10 @@
 		</button>
 	</div>
 	<div class="cover">
-		<img src="{{song.album.cover}}" alt="">
+		<a routerLink="/album/{{this.song.album.id}}">
+			<img src="{{song.album.cover}}" alt="">
+		</a>
+		
 	</div>
 	<div class="title">
 		<a routerLink="/song/{{this.song.id}}">{{song.name}}</a>
