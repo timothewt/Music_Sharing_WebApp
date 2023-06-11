@@ -1,118 +1,137 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-.artist-page{
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 0.2fr auto;
-    height: 100%;
-
-    .artist-infos {
-        margin-top: 200px;
-        display: flex;
-        flex-direction: column;
-        padding: 10px;
-        gap: 10px;
-        align-items: flex-start;
-        img.back {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            filter: blur(2px);
-        }
-        p {
-            color: white;
-        }
-            
-        h1 {
-            color: white;
-            font-size: 4em;
-            font-style: bold;
-        }
-    }
-    .list-style1 {
-        overflow-x: auto;
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-    }
-
-    .list-style2 {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .more {
-
-        .profile-edition {
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-
-            width: 100%;
-
-            .button-edition {
-                padding: 10px;
-                border: none;
-                border-radius: 5px;
-                background-color: #333;
-                color: #fff;
-                font-size: 1.2rem;
-                outline: none;
-                transition: all 0.2s ease-in-out;
-        
-                &:hover {
-                    background-color: #444;
-                }
-            }
-        }
-
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        align-items: flex-start;
-        padding: 10px;
-
-        /*background: linear-gradient(180deg, rgba(16,29,27,1) 0%, rgba(18,18,18,1) 100%);*/
-        background: #1c1c1c;
-    
-        div {
-            h2 {
-                color: white;
-                font-size: 2em;
-                font-style: bold;   
-            }
-        }
-
-        .section {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 100%;
-
-            > div:first-child {
-                display: flex;
-                align-items: center;
-
-                .play-button {
-                    height: 50px;
-                    background: none;
-                    border: none;
-
-                    img {
-                        height: 100%;
-                    }
-                }
-            }
-        }
-    }
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
+.artist-page {
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: 0.2fr auto;
+	height: 100%;
 
+	.artist-infos {
+		margin-top: 200px;
+		display: flex;
+		flex-direction: column;
+		padding: 10px;
+		gap: 10px;
+		align-items: flex-start;
+		img.back {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: -1;
+			filter: blur(2px);
+		}
+		p {
+			color: white;
+		}
+			
+		h1 {
+			color: white;
+			font-size: 4em;
+			font-style: bold;
+		}
+	}
+	.list-style1 {
+		overflow-x: auto;
+		display: flex;
+		flex-direction: row;
+		gap: 10px;
+	}
+
+	.list-style2 {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+	
+	.more {
+
+		.profile-edition {
+			display: flex;
+			flex-direction: row;
+			gap: 10px;
+
+			width: 100%;
+
+			.button-edition {
+				padding: 10px;
+				border: none;
+				border-radius: 5px;
+				background-color: #333;
+				color: #fff;
+				font-size: 1.2rem;
+				outline: none;
+				transition: all 0.2s ease-in-out;
+		
+				&:hover {
+					background-color: #444;
+				}
+			}
+		}
+
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		align-items: flex-start;
+		padding: 10px;
+
+		/*background: linear-gradient(180deg, rgba(16,29,27,1) 0%, rgba(18,18,18,1) 100%);*/
+		background: #1c1c1c;
+	
+		div {
+			h2 {
+				color: white;
+				font-size: 2em;
+				font-style: bold;   
+			}
+		}
+
+		.section {
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+			width: 100%;
+
+			.songs-list {
+				display: grid;
+				grid-template-columns: 1fr 1fr; 
+			}
+
+			> div:first-child {
+				display: flex;
+				align-items: center;
+
+				.play-button {
+					height: 50px;
+					background: none;
+					border: none;
+
+					img {
+						height: 100%;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	.artist-page {
+
+		.more {
+
+			.section {
+				.songs-list {
+					display: grid;
+					grid-template-columns: 1fr; 
+				}
+			}   
+		}
+	}
+}

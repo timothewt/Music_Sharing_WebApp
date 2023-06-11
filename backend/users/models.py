@@ -12,6 +12,8 @@ class User(AbstractUser):
 	banner_link = models.CharField(max_length=255, blank=True)
 	listenings = models.IntegerField(default=0)
 	tags = TaggableManager(blank=True)
+	favorite_songs = models.ManyToManyField('songs.Song', blank=True)
+	favorite_albums = models.ManyToManyField('songs.Album', blank=True)
 
 
 	def save(self, *args, **kwargs):

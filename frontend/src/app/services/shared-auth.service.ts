@@ -16,7 +16,7 @@ export class SharedAuthService {
 	private accessToken: string = "";
 	public loggedIn: boolean = false;
 	public currentUserID: number = 0;
-	private refreshIntervalId: any;
+	public refreshIntervalId: any;
 
 	constructor(private http: HttpClient) {
 		this.apiURL = config.apiURL;
@@ -35,30 +35,17 @@ export class SharedAuthService {
 		let headers = { 'content-type': 'application/json'}  
 		let body = {'username':username,'password':password};
 		let httpResponse: Observable<Object> = this.http.post(this.tokenURL, body,{'headers':headers});
-		httpResponse.subscribe(
-			(response: any) => {
-				this.setTokens(response.refresh, response.access);
-				this.refreshIntervalId = setInterval(() => this.refreshAccessToken(), 1000*60*5);
-
-				let headers = { 'content-type': 'application/json', 'Authorization': "Bearer " + this.accessToken}
-				let currUserHttpResponse = this.http.get(config.apiURL + 'user/current_user/', {'headers':headers});
-
-				currUserHttpResponse.subscribe(
-					(response: any) => {
-						this.currentUserID = response.id;
-					}
-				);
-			});
 		return httpResponse;
 	}
 
 	public setTokens(refreshToken: string, accessToken: string) {
 		this.refreshToken = refreshToken;
 		this.accessToken = accessToken;
+		console.log("oui");
 		this.loggedIn = true;
 	}
 
-	private refreshAccessToken() {
+	public refreshAccessToken() {
 		if (this.refreshToken === "") return;
 		let headers = { 'content-type': 'application/json'}  
 		let body = {'refresh':this.refreshToken};

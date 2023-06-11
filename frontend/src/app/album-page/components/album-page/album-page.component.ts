@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Song } from 'src/app/models/song';
 import { Album } from 'src/app/models/album';
 
 import { ActivatedRoute } from '@angular/router';
 import { APIService } from 'src/app/services/api.service';
 import { SharedQueueService } from 'src/app/services/shared-queue.service';
+import { SharedAuthService } from 'src/app/services/shared-auth.service';
 
 @Component({
 	selector: 'app-album-page',
@@ -14,13 +14,14 @@ import { SharedQueueService } from 'src/app/services/shared-queue.service';
 })
 export class AlbumPageComponent implements OnInit{
 
-	album: Album = new Album();
-	songs: Song[] = [];
-	color: string = "#000000";
+	public album: Album = new Album();
+	public songs: Song[] = [];
+	public color: string = "#000000";
+	public isFavorite: boolean = false;
 
 	similarAlbums: Album[] = [];
 
-	constructor(private _Activatedroute:ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService) {}
+	constructor(private _Activatedroute:ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService, public authService: SharedAuthService) {}
 
 	ngOnInit() {
 		this._Activatedroute.paramMap.subscribe(params => {
@@ -54,6 +55,14 @@ export class AlbumPageComponent implements OnInit{
 					}
 				}
 			);
+
+			if (this.authService.loggedIn) {
+				this.apiService.isFavoriteSong(albumId, this.authService.getAccessToken()).subscribe(
+					(response: any) => {
+						this.isFavorite = response.is_favorite;
+					}
+				);
+			}
 		});
 	}
 
@@ -65,5 +74,21 @@ export class AlbumPageComponent implements OnInit{
 		}
 
 		this.sharedQueueService.setDoReloadPlayer(true);
+	}
+
+	public addToFavorites() {
+		this.apiService.addAlbumToFavorites(this.album.id, this.authService.getAccessToken()).subscribe(
+			(response: any) => {
+				this.isFavorite = true;
+			}
+		);
+	}
+
+	public removeFromFavorites() {
+		this.apiService.removeAlbumFromFavorites(this.album.id, this.authService.getAccessToken()).subscribe(
+			(response: any) => {
+				this.isFavorite = false;
+			}
+		);
 	}
 }

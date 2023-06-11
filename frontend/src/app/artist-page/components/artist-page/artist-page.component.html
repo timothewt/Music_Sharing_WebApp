@@ -4,10 +4,27 @@
         <img class="back" [src]="artist.profilePic"> 
     </div>
     <div class="more">
-        <div class="profile-edition" *ngIf="authService.currentUserID == artist.id">
+        <div class="profile-edition" *ngIf="authService.loggedIn && authService.currentUserID == artist.id">
             <button (click)="logout()" class="button-edition">Logout</button>
             <button (click)="upload()" class="button-edition">Upload new album</button>
         </div>
+
+        <div class="section" *ngIf="authService.loggedIn && authService.currentUserID == artist.id">
+            <h2>
+                Favorite Songs
+            </h2>
+            <div class="songs-list">
+                <app-song *ngFor="let song of favoriteSongs" [song]="song"></app-song>
+            </div>
+
+            <h2>
+                Favorite Albums
+            </h2>
+            <div class="list-style1">
+                <app-album *ngFor="let album of favoriteAlbums" [album]="album"></app-album>
+            </div>
+        </div>
+
         <div class="section">
             <div>
                 <h2>Popular</h2>

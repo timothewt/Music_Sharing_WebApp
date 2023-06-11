@@ -49,7 +49,6 @@ export class SearchPageComponent implements OnInit {
 		*/
 		this.apiService.getUsers({limit: 8, mostPopular: true, searchedValue: searchValue}).subscribe(
 			(response: any) => {
-				console.log(response);
 				this.artistsSearchResults = [];
 				for(let i = 0; i < response.length; i++) {
 					let artist = new User().deserialize(response[i]);
@@ -67,7 +66,6 @@ export class SearchPageComponent implements OnInit {
 		*/
 		this.apiService.getAlbums({limit: 8, mostPopular: true, searchedValue: searchValue}).subscribe(
 			(response: any) => {
-				console.log(response);
 				this.albumsSearchResults = [];
 				for(let i = 0; i < response.length; i++) {
 					let album = new Album().deserialize(response[i]);
@@ -85,7 +83,6 @@ export class SearchPageComponent implements OnInit {
 		*/
 		this.apiService.getSongs({limit: 8, mostPopular: true, searchedValue: searchValue}).subscribe(
 			(response: any) => {
-				console.log(response);
 				this.songsSearchResults = [];
 				for(let i = 0; i < response.length; i++) {
 					let song = new Song().deserialize(response[i]);

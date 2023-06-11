@@ -4,6 +4,7 @@ import { Song } from 'src/app/models/song';
 import { ActivatedRoute } from '@angular/router';
 import { APIService } from 'src/app/services/api.service';
 import { SharedQueueService } from 'src/app/services/shared-queue.service';
+import { SharedAuthService } from 'src/app/services/shared-auth.service';
 
 @Component({
 	selector: 'app-song-page',
@@ -14,10 +15,11 @@ export class SongPageComponent implements OnInit {
 
 	public song: Song = new Song();
 	public color: string = "#000000";
+	public isFavorite: boolean = false;
 
 	similarSongs: Song[] = [];
 
-	constructor(private _Activatedroute:ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService) {}
+	constructor(private _Activatedroute:ActivatedRoute, public apiService: APIService, private sharedQueueService: SharedQueueService, public authService: SharedAuthService) {}
 
 	ngOnInit() {
 		this._Activatedroute.paramMap.subscribe(params => {
@@ -41,6 +43,16 @@ export class SongPageComponent implements OnInit {
 					}
 				}
 			);
+
+			if (this.authService.loggedIn) {
+				this.apiService.isFavoriteSong(songId, this.authService.getAccessToken()).subscribe(
+					(response: any) => {
+						console.log(response);
+						this.isFavorite = response.is_favorite;
+					}
+				);
+			}
+
 		});
 	}
 
@@ -49,6 +61,22 @@ export class SongPageComponent implements OnInit {
 		queue.setSongs([this.song]);
 
 		this.sharedQueueService.setDoReloadPlayer(true);
+	}
+
+	public addToFavorites() {
+		this.apiService.addSongToFavorites(this.song.id, this.authService.getAccessToken()).subscribe(
+			(response: any) => {
+				this.isFavorite = true;
+			}
+		);
+	}
+
+	public removeFromFavorites() {
+		this.apiService.removeSongFromFavorites(this.song.id, this.authService.getAccessToken()).subscribe(
+			(response: any) => {
+				this.isFavorite = false;
+			}
+		);
 	}
 
 }

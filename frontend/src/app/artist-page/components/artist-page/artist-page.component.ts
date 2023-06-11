@@ -26,6 +26,10 @@ export class ArtistPageComponent implements OnInit {
 
 	similarArtists: User[] = [];
 
+	// Used when logged in and current user page
+	favoriteSongs: Song[] = [];
+	favoriteAlbums: Album[] = [];
+
 	constructor(private _Activatedroute: ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService, public authService: SharedAuthService, private router:Router) {}
 
 	ngOnInit(): void {
@@ -76,6 +80,28 @@ export class ArtistPageComponent implements OnInit {
 					}
 				}
 			);
+
+			if (this.authService.loggedIn && this.authService.currentUserID == userId) {
+				this.apiService.getFavoriteSongs(this.authService.getAccessToken()).subscribe(
+					(response: any) => {
+						this.favoriteSongs = [];
+						for(let i = 0; i < response.length; i++) {
+							let song = new Song().deserialize(response[i]);
+							this.favoriteSongs.push(song);
+						}
+					}
+				);
+
+				this.apiService.getFavoriteAlbums(this.authService.getAccessToken()).subscribe(
+					(response: any) => {
+						this.favoriteAlbums = [];
+						for(let i = 0; i < response.length; i++) {
+							let album = new Album().deserialize(response[i]);
+							this.favoriteAlbums.push(album);
+						}
+					}
+				);
+			}
 		});
 	}
 

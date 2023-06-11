@@ -61,14 +61,17 @@ export class LoginPageComponent implements OnInit {
 
 	loginUser(username: string, password: string): void {
 		this.isButtonLoginActive = false;
-		console.log(this.isButtonLoginActive);
 		this.authService.fetchTokensPair(username, password).subscribe(
 			(response: any) => {
+				this.authService.setTokens(response.refresh, response.access);
+				this.authService.refreshIntervalId = setInterval(() => this.authService.refreshAccessToken(), 1000*60*5);
+
 				let headers = { 'content-type': 'application/json', 'Authorization': "Bearer " + response.access}
 				let currUserHttpResponse = this.http.get(config.apiURL + 'user/current_user/', {'headers':headers});
 
 				currUserHttpResponse.subscribe(
 					(response: any) => {
+						this.authService.currentUserID = response.id;
 						this.router.navigate(['/artist', response.id]);
 					}
 				);

@@ -21,8 +21,12 @@
                 <img src="../../assets/play-icon-2.svg" alt="Play">
             </button>
 
-            <button class="like-button">
+            <button class="like-button" (click)="addToFavorites()" *ngIf="authService.loggedIn && !isFavorite">
                 <img src="../../assets/heart-icon.svg" alt="Like">
+            </button>
+
+            <button class="like-button" (click)="removeFromFavorites()" *ngIf="authService.loggedIn && isFavorite">
+                <img src="../../assets/heart-icon-full.svg" alt="Unlike">
             </button>
         </div>
 

@@ -1,10 +1,7 @@
 from rest_framework.serializers import ModelSerializer, SlugRelatedField
 from taggit.serializers import TagListSerializerField, TaggitSerializer
-from songs.models import Song, Album, Playlist
 from users.serializers import UserSerializer
-
-
-# REMOVE READ_ONLY PROPERTIES TO POST FROM THE FRONTEND
+from songs.models import Album, Song, Playlist
 
 
 class AlbumSerializer(TaggitSerializer, ModelSerializer):

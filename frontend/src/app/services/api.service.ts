@@ -118,4 +118,77 @@ export class APIService {
 			})
 		});
 	}
+
+	public addSongToFavorites(songID: number, authAccessToken: string) {
+		let reqURL: string = this.apiURL + 'user/add_song_to_favorites/';
+		return this.http.post(reqURL, {'song_id': songID}, {
+			headers: new HttpHeaders({
+				'Authorization' : 'Bearer ' + authAccessToken
+			})
+		});
+	}
+
+	public removeSongFromFavorites(songID: number, authAccessToken: string) {
+		let reqURL: string = this.apiURL + 'user/remove_song_from_favorites/';
+		return this.http.post(reqURL, {'song_id': songID}, {
+			headers: new HttpHeaders({
+				'Authorization' : 'Bearer ' + authAccessToken
+			})
+		});
+	}
+
+	public addAlbumToFavorites(albumID: number, authAccessToken: string) {
+		let reqURL: string = this.apiURL + 'user/add_album_to_favorites/';
+		return this.http.post(reqURL, {'album_id': albumID}, {
+			headers: new HttpHeaders({
+				'Authorization' : 'Bearer ' + authAccessToken
+			})
+		});
+	}
+
+	public removeAlbumFromFavorites(albumID: number, authAccessToken: string) {
+		let reqURL: string = this.apiURL + 'user/remove_album_from_favorites/';
+		return this.http.post(reqURL, {'album_id': albumID}, {
+			headers: new HttpHeaders({
+				'Authorization' : 'Bearer ' + authAccessToken
+			})
+		});
+	}
+
+	public isFavoriteSong(songID: number, authAccessToken: string) {
+		let reqURL: string = this.apiURL + 'user/is_favorite_song/?song_id=' + songID;
+		return this.http.get(reqURL, {
+			headers: new HttpHeaders({
+				'Authorization' : 'Bearer ' + authAccessToken
+			})
+		});
+	}
+
+	public isFavoriteAlbum(albumID: number, authAccessToken: string) {
+		let reqURL: string = this.apiURL + 'user/is_favorite_album/?album_id=' + albumID;
+		return this.http.get(reqURL, {
+			headers: new HttpHeaders({
+				'Authorization' : 'Bearer ' + authAccessToken
+			})
+		});
+	}
+
+	public getFavoriteSongs(authAccessToken: string) {
+		let reqURL: string = this.apiURL + 'user/get_favorite_songs/';
+		return this.http.get(reqURL, {
+			headers: new HttpHeaders({
+				'Authorization' : 'Bearer ' + authAccessToken
+			})
+		});
+	}
+
+	public getFavoriteAlbums(authAccessToken: string) {
+		let reqURL: string = this.apiURL + 'user/get_favorite_albums/';
+		return this.http.get(reqURL, {
+			headers: new HttpHeaders({
+				'Authorization' : 'Bearer ' + authAccessToken
+			})
+		});
+	}
+
 }
