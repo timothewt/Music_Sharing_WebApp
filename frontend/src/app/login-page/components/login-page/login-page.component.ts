@@ -41,13 +41,9 @@ export class LoginPageComponent implements OnInit {
 	}
 
 	login(){
-
 		// Check if the button is active
 		if (this.isButtonLoginActive == false) return;
-
-		// Check if the form is valid
-		if (this.loginForm.invalid) return;
-
+	
 		// Get the username and password from the form
 		const username: string = this.loginForm.get('username')?.value;
 		const email: string = this.loginForm.get('email')?.value;
