@@ -89,6 +89,21 @@ class AlbumViewset(ModelViewSet):
 		return Response(serializer.data)
 
 
+	@action(methods=['post'], detail=True)
+	def delete(self, request, pk=None):
+
+		if not request.user.is_authenticated:
+			return Response({"detail": "Authentication credentials were not provided."}, status=401)
+
+		album = Album.objects.filter(pk=pk).first()
+
+		if album.artist != request.user:
+			return Response({"detail": "You are not the owner of this album."}, status=401)
+
+		album.delete()
+		return Response({'success': 'Album deleted'})
+
+
 class SongViewset(ModelViewSet):
 
 	serializer_class = SongSerializer
@@ -173,6 +188,20 @@ class SongViewset(ModelViewSet):
 
 		serializer = SongSerializer(song)
 		return Response(serializer.data)
+
+
+	def delete(self, request, pk=None):
+
+		if not request.user.is_authenticated:
+			return Response({"detail": "Authentication credentials were not provided."}, status=401)
+
+		song = Song.objects.filter(pk=pk).first()
+
+		if song.album.artist != request.user:
+			return Response({"detail": "You are not the owner of this song."}, status=401)
+
+		song.delete()
+		return Response({'success': 'Song deleted'})
 
 
 class PlaylistViewset(ModelViewSet):

@@ -252,3 +252,16 @@ class UserViewset(ModelViewSet):
 
 		return Response({'is_favorite': request.user.favorite_albums.filter(pk=int(album_id)).exists()})
 		
+
+	@action(methods=['post'], detail=True)
+	def delete_user(self, request, pk=None):
+		if not request.user.is_authenticated:
+			return Response({"detail": "Authentication credentials were not provided."}, status=401)
+
+		user = self.get_object()
+		if user != request.user:
+			return Response({'error': 'You can only delete your own account'},
+							status=HTTP_400_BAD_REQUEST)
+
+		user.delete()
+		return Response({'detail': 'User deleted successfully'}, status=HTTP_200_OK)
