@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { Song } from 'src/app/models/song';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { UploadSong } from 'src/app/models/uploadSong';
 import { EventEmitter } from '@angular/core';
 
 @Component({
@@ -9,15 +10,18 @@ import { EventEmitter } from '@angular/core';
 })
 export class UploadSongCardComponent implements OnInit{
 
-  @Input() song !:Song;
+  @Input() song !:UploadSong;
   @Input() index !:number;
+
+  songUrl: SafeUrl = "";
 
   @Output() deleteSongEvent = new EventEmitter<number>();
 
-  constructor() { }
+  constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-
+    const audioBlob = new Blob([this.song.recordingFile], { type: 'audio/mpeg' });
+    this.songUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(audioBlob));
   }
 
   deleteSong(): void {
