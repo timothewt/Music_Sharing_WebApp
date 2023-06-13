@@ -16,7 +16,7 @@ import { UploadAlbum } from 'src/app/models/uploadAlbum';
 
 export class UploadPageComponent {
 
-  tags: string[] = ['Rock', 'Pop', 'Jazz', 'Hip Hop', 'Electronic'];
+  tags: string[] = [];
   selectedGenres: string[] = [];
 
   uploadList: UploadSong[] = [];
@@ -32,7 +32,13 @@ export class UploadPageComponent {
   constructor(private formBuilder: FormBuilder, private router:Router, private apiService: APIService, private authService: SharedAuthService, private sharedPopUpService: SharedPopUpService) { }
 
   ngOnInit(): void {
-
+    this.apiService.getTags().subscribe(
+      (response: any) => {
+        response.forEach((tag: any) => {
+          this.tags.push(tag.name);
+        });
+      }
+    );
   }
 
   addSongToUploadList(song: UploadSong): void {

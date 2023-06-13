@@ -217,4 +217,9 @@ export class APIService {
 		});
 	}
 
+	public getTags() {
+		let reqURL: string = this.apiURL + 'tags/';
+		return this.http.get(reqURL);
+	}
+
 }
