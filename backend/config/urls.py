@@ -7,6 +7,7 @@ from config.settings import MEDIA_URL, MEDIA_ROOT
 
 from songs.views import AlbumViewset, SongViewset, PlaylistViewset
 from users.views import UserViewset
+from tags.views import TagViewset
 
 
 router = routers.SimpleRouter()  # used to access all the views of the API
@@ -15,6 +16,8 @@ router.register('album', AlbumViewset, basename="album")
 router.register('song', SongViewset, basename="song")
 router.register('user', UserViewset, basename="user")
 router.register('playlist', PlaylistViewset, basename="playlist")
+router.register('tags', TagViewset, basename="tags")
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
