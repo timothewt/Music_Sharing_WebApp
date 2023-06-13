@@ -83,7 +83,6 @@ class AlbumViewset(ModelViewSet):
 			description=request.data['description'],
 			release_year=int(request.data['release_year']),
 		)
-
 		album.save()
 
 		serializer = AlbumSerializer(album)
@@ -163,10 +162,11 @@ class SongViewset(ModelViewSet):
 			release_year=int(request.data['release_year']),
 		)
 
-		for tag in request.data['tags']:
-			album.tags.add(tag)
-			song.tags.add(f"song-{tag}")
-			self.request.user.tags.add(f"artist-{tag}")
+		if request.data.get('tags'):
+			for tag in request.data['tags']:
+				album.tags.add(tag)
+				song.tags.add(f"song-{tag}")
+				self.request.user.tags.add(f"artist-{tag}")
 
 		album.save()
 		song.save()

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { config } from "./config";
 
 @Injectable({
@@ -18,6 +18,8 @@ export class SharedAuthService {
 	public currentUserID: number = 0;
 	public currentUserUsername: string = "";
 	public refreshIntervalId: any;
+
+	public loggedIn$ : Subject<boolean> = new Subject<boolean>();
 
 	constructor(private http: HttpClient) {
 		this.apiURL = config.apiURL;
@@ -53,6 +55,7 @@ export class SharedAuthService {
 		httpResponse.subscribe(
 			(response: any) => {
 				this.accessToken = response.access;
+				this.loggedIn$.next(this.loggedIn);
 			},
 			(error: any) => {
 				this.logout();
@@ -66,6 +69,7 @@ export class SharedAuthService {
 		this.accessToken = "";
 		this.loggedIn = false;
 		this.currentUserID = 0;
+		this.loggedIn$.next(this.loggedIn);
 	}
 
 	public register(username: string, email: string, password: string, confirmPassword: string) {

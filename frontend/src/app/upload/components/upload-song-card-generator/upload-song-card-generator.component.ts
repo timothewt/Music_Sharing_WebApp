@@ -10,7 +10,7 @@ import { UploadSong } from 'src/app/models/uploadSong';
 })
 export class UploadSongCardGeneratorComponent implements OnInit {
 
-  @Input() genres !: string[];
+  @Input() tags !: string[];
   @Output() songAddEvent = new EventEmitter<UploadSong>();
 
   generateForm: FormGroup = this.formBuilder.group({
@@ -18,7 +18,7 @@ export class UploadSongCardGeneratorComponent implements OnInit {
   });
 
   currentSong: UploadSong = new UploadSong();
-  currentSongGenres: string[] = [];
+  currentSongTags: string[] = [];
 
   recordingFile: File = new File([], "");
 
@@ -35,21 +35,24 @@ export class UploadSongCardGeneratorComponent implements OnInit {
     }
   }
 
-  updateGenres(genres: string[]): void {
-    this.currentSongGenres = genres;
+  updateGenres(tags: string[]): void {
+    this.currentSongTags = tags;
   }
 
 
   public addSong() : void {
     const title: string = this.generateForm.get('title')?.value;
     this.currentSong.name = title;
-    let currentSongGenresCopy: string[] = this.currentSongGenres.slice();
-    this.currentSong.genres = currentSongGenresCopy;
+    let currentSongTagsCopy: string[] = this.currentSongTags.slice();
+    this.currentSong.tags = currentSongTagsCopy;
+    this.currentSong.recordingFile = this.recordingFile;
 
     this.songAddEvent.emit(this.currentSong);
 
     //Reset the song
     this.currentSong = new UploadSong();
+
+    
   }
 
 }

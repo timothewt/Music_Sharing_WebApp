@@ -13,7 +13,7 @@
         <input type="text" id="song-name" placeholder="Song Name" formControlName="title">
     
         <!--Song genre selection -->
-        <app-multiselect [items]="genres" (onSelectionChange)="updateGenres($event)"></app-multiselect>
+        <app-multiselect [items]="tags" (onSelectionChange)="updateGenres($event)"></app-multiselect>
         <!--Song add button to album-->
         <button (click)="addSong()">
             <img src="../../../assets/plus-icon.svg" alt="Add Song">

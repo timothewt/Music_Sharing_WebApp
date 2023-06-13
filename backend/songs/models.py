@@ -44,7 +44,7 @@ class Song(models.Model):
 	name = models.CharField(max_length=255)
 	album = models.ForeignKey(Album, on_delete=models.CASCADE)
 	recording_link = models.CharField(max_length=255, blank=True)
-	recording_file = models.FileField(upload_to="media/", blank=True)
+	recording_file = models.FileField(blank=True)
 	duration_ms = models.IntegerField(blank=True, default=0)
 	listenings = models.IntegerField(default=0)
 	lyrics = models.TextField(blank=True)
@@ -54,6 +54,7 @@ class Song(models.Model):
 	def save(self, *args, **kwargs):
 			
 		if bool(self.recording_file.name):  # checks if the file exists
+			print(self.recording_file.url)
 			self.recording_link = SERVER_URL + self.recording_file.url
 
 		super(Song, self).save(*args, **kwargs)

@@ -11,7 +11,7 @@ export class Song implements Deserializable {
 	lyrics: string;
 	listenings: number;
 	duration: number;
-	genres: string[];
+	tags: string[];
 
 	constructor(/*id: number, name: string, album: Album, releaseYear: number, recordingLink: string, lyrics: string, listenings: number*/) {
 		this.id = 0;
@@ -22,7 +22,7 @@ export class Song implements Deserializable {
 		this.lyrics = "";
 		this.listenings = 0;
 		this.duration = 0;
-		this.genres = [];
+		this.tags = [];
 	}
 
 	deserialize(input: any): this {

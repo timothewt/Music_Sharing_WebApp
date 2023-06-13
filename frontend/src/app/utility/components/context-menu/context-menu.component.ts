@@ -6,6 +6,8 @@ import { User } from 'src/app/models/user';
 import { Queue } from 'src/app/models/queue';
 import { SharedContextMenuService } from 'src/app/services/shared-context-menu.service';
 import { SharedPopUpService } from 'src/app/services/shared-pop-up.service';
+import { APIService } from 'src/app/services/api.service';
+import { SharedAuthService } from 'src/app/services/shared-auth.service';
 
 @Component({
 	selector: 'app-context-menu',
@@ -32,7 +34,11 @@ export class ContextMenuComponent implements OnInit {
 	public show: boolean = false;
 	public activated: boolean = false;
 
-	constructor(private sharedQueueService: SharedQueueService, private sharedContextMenuService: SharedContextMenuService, private sharedPopUpService: SharedPopUpService) {}
+	public isConnected: boolean = this.authService.currentUserID != 0;
+	public isSongFavorite: boolean = false;
+	public isAlbumFavorite: boolean = false;
+
+	constructor(private authService: SharedAuthService,private apiService: APIService, private sharedQueueService: SharedQueueService, private sharedContextMenuService: SharedContextMenuService, private sharedPopUpService: SharedPopUpService) {}
 
 	ngOnInit(): void {
 		this.onResize();
@@ -41,6 +47,23 @@ export class ContextMenuComponent implements OnInit {
 			(obj:{song?:Song, albumSongs?:Song[], artist?:User}) => {
 
 				this.obj = obj;
+				this.isConnected = this.authService.loggedIn;
+
+				if (obj.song) {
+					this.apiService.isFavoriteSong(obj.song.id, this.authService.getAccessToken()).subscribe(
+						(response: any) => {
+							this.isSongFavorite = response.is_favorite;
+						}
+					);
+				}
+
+				if (obj.albumSongs) {
+					this.apiService.isFavoriteAlbum(obj.albumSongs[0].album.id, this.authService.getAccessToken()).subscribe(
+						(response: any) => {
+							this.isAlbumFavorite = response.is_favorite;
+						}
+					);
+				}
 
 				if (obj.song || obj.albumSongs || obj.artist){
 					this.showContextMenu(obj);
@@ -150,4 +173,41 @@ export class ContextMenuComponent implements OnInit {
 		}
 		);
 	}
+
+	public likeSong(): void {
+		if (!this.obj.song) return;
+		this.apiService.addSongToFavorites(this.obj.song.id, this.authService.getAccessToken()).subscribe(
+			(response: any) => {
+				this.sharedPopUpService.showPopUp({message: 'Song added to favorites',  timedisplay: 1000});
+			}
+		);
+	}
+
+	public unlikeSong(): void {
+		if (!this.obj.song) return;
+		this.apiService.removeSongFromFavorites(this.obj.song.id, this.authService.getAccessToken()).subscribe(
+			(response: any) => {
+				this.sharedPopUpService.showPopUp({message: 'Song removed from favorites',  timedisplay: 1000});
+			}
+		);
+	}
+
+	public likeAlbum(): void {
+		if (!this.obj.albumSongs) return;
+		this.apiService.addAlbumToFavorites(this.obj.albumSongs[0].album.id, this.authService.getAccessToken()).subscribe(
+			(response: any) => {
+				this.sharedPopUpService.showPopUp({message: 'Album added to favorites',  timedisplay: 1000});
+			}
+		);
+	}
+
+	public unlikeAlbum(): void {
+		if (!this.obj.albumSongs) return;
+		this.apiService.removeAlbumFromFavorites(this.obj.albumSongs[0].album.id, this.authService.getAccessToken()).subscribe(
+			(response: any) => {
+				this.sharedPopUpService.showPopUp({message: 'Album removed from favorites',  timedisplay: 1000});
+			}
+		);
+	}
+	
 }

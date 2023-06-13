@@ -4,7 +4,7 @@
         <div class="upload-header-cover">
             <input type="file" id="album-cover" accept="image/*" (change)="onFileSelected($event)">
             <label for="album-cover">
-                <img src="../../../assets/image-placeholder.png" alt="Album Cover">
+                <img [src]="this.imagePreviewSrc" alt="Album Cover">
             </label>
         </div>
         <div class="upload-header-title">
@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="upload-board">
-        <app-upload-song-card-generator [genres]="genres" (songAddEvent)="addSongToUploadList($event)" ></app-upload-song-card-generator>
+        <app-upload-song-card-generator [tags]="tags" (songAddEvent)="addSongToUploadList($event)" ></app-upload-song-card-generator>
         <app-upload-song-card *ngFor="let song of uploadList; let index=index" [song]="song" [index]="index" (deleteSongEvent)="deleteSongAtPos($event)"></app-upload-song-card>
     </div>
 
