@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { APIGetOptions } from '../models/apiget-options';
 import { config } from "./config";
 import { Song } from '../models/song';
+import { UploadAlbum } from '../models/uploadAlbum';
+import { UploadSong } from '../models/uploadSong';
 
 @Injectable()
 export class APIService {
@@ -105,18 +107,44 @@ export class APIService {
 		return this.http.get(reqURL);
 	}
 
-	public postNewAlbum(name: string, authAccessToken: string, description: string, releaseYear: string, coverFile: File) {
+	public postNewAlbum(authAccessToken: string, albumUpload: UploadAlbum) {
 		let reqURL: string = this.apiURL + 'album/new/';
 		let formData: FormData = new FormData();
-		formData.append('name', name);
-		formData.append('description', description);
-		formData.append('release_year', releaseYear);
-		formData.append('cover_file', coverFile);
+
+		// Add album to form data
+		formData.append('name', albumUpload.name);
+		formData.append('description', albumUpload.description);
+		formData.append('release_year', albumUpload.releaseYear.toString());
+		formData.append('cover_file', albumUpload.coverFile);
+
 		return this.http.post(reqURL, formData, {
 			headers: new HttpHeaders({
 				'Authorization' : 'Bearer ' + authAccessToken
 			})
 		});
+	}
+
+	public postNewSong(authAccessToken: string, songUpload: UploadSong) {
+		let reqURL: string = this.apiURL + 'song/new/';
+		let formData: FormData = new FormData();
+
+		formData.append('album_id', songUpload.album.id.toString());
+		formData.append('name', songUpload.name);
+		formData.append('recording_file', songUpload.recordingFile);
+		formData.append('duration_ms', songUpload.duration.toString());
+		formData.append('release_year', songUpload.releaseYear.toString());
+
+		for (let tag of songUpload.genres) {
+			formData.append('tags', tag);
+		}
+		console.log(songUpload);
+
+		return this.http.post(reqURL, formData, {
+			headers: new HttpHeaders({
+				'Authorization' : 'Bearer ' + authAccessToken
+			})
+		});
+		
 	}
 
 	public addSongToFavorites(songID: number, authAccessToken: string) {

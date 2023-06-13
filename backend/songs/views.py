@@ -83,7 +83,6 @@ class AlbumViewset(ModelViewSet):
 			description=request.data['description'],
 			release_year=int(request.data['release_year']),
 		)
-
 		album.save()
 
 		serializer = AlbumSerializer(album)

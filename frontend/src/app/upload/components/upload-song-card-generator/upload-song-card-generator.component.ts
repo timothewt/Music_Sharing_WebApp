@@ -45,11 +45,14 @@ export class UploadSongCardGeneratorComponent implements OnInit {
     this.currentSong.name = title;
     let currentSongGenresCopy: string[] = this.currentSongGenres.slice();
     this.currentSong.genres = currentSongGenresCopy;
+    this.currentSong.recordingFile = this.recordingFile;
 
     this.songAddEvent.emit(this.currentSong);
 
     //Reset the song
     this.currentSong = new UploadSong();
+
+    
   }
 
 }
