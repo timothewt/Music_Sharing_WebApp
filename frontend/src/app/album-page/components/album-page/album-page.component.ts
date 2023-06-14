@@ -26,7 +26,9 @@ export class AlbumPageComponent implements OnInit{
 	constructor(private _Activatedroute: ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService, public authService: SharedAuthService, private router: Router) {}
 
 	ngOnInit() {
+
 		this._Activatedroute.paramMap.subscribe(params => {
+			this.isLoggedInUserAlbum = false;
 			this.songs.splice(0);
 			this.similarAlbums.splice(0);
 

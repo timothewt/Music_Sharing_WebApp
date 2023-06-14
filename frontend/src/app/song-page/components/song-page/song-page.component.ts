@@ -24,7 +24,9 @@ export class SongPageComponent implements OnInit {
 	constructor(private _Activatedroute:ActivatedRoute, public apiService: APIService, private sharedQueueService: SharedQueueService, public authService: SharedAuthService, private router: Router) {}
 
 	ngOnInit() {
+
 		this._Activatedroute.paramMap.subscribe(params => {
+			this.isLoggedInUserSong = false;
 			this.similarSongs.splice(0);
 
 			//Get the song id from the url
