@@ -65,7 +65,9 @@ $player_height: 12vh;
 			
 			img {
 				height: 100%;
+				aspect-ratio: 1/1;
 				margin-right: 10px;
+				object-fit: cover;
 			}
 		}
 

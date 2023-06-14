@@ -36,6 +36,9 @@
         }
 
         button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background: transparent;
             border: none;
             height: 100%;
