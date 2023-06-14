@@ -30,7 +30,9 @@ export class ArtistPageComponent implements OnInit {
 	favoriteSongs: Song[] = [];
 	favoriteAlbums: Album[] = [];
 
-	constructor(private _Activatedroute: ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService, public authService: SharedAuthService, private router:Router) {}
+	isDeleting = false;
+
+	constructor(private _Activatedroute: ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService, public authService: SharedAuthService, private router: Router) {}
 
 	ngOnInit(): void {
 		this._Activatedroute.paramMap.subscribe(params => {
@@ -120,4 +122,20 @@ export class ArtistPageComponent implements OnInit {
 		this.router.navigate(['/upload']);
 	}
 
+	deleteAccount(): void {
+		this.isDeleting = true;
+	}
+
+	handleDialogAnswer(answer: boolean): void {
+		if (answer) {
+			this.apiService.deleteUser(this.authService.getAccessToken()).subscribe(
+				(response: any) => {
+					this.logout();
+					this.router.navigate(['']);
+				}
+			);
+		} else {
+			this.isDeleting = false;
+		}
+	}
 }

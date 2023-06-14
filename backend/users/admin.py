@@ -3,7 +3,7 @@ from users.models import User
 
 
 class UserAdmin(admin.ModelAdmin):
-	readonly_fields = ('id',)
+	readonly_fields = ('id','favorite_songs','favorite_albums')
 	list_filter = ('username',)
 
 

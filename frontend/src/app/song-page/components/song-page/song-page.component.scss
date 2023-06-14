@@ -52,19 +52,23 @@
         justify-content: left;
 
         padding: 10px;
+        padding-top: 80px;
 
         .cover {
             display: flex;
             justify-content: center;
             align-items: center;
 
-            img {
-                width: 70%;
-                height: 70%;
-                object-fit: cover;
+            a {
+                margin-left: 20px;
+                margin-right: -50px;
+                img {
+                    width: 70%;
+                    height: 70%;
+                    object-fit: cover;
 
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+                }
             }
         }
 
@@ -96,8 +100,18 @@
 
         padding: 10px;
 
-
         background: rgba(28, 28, 28, 1);
+
+        .btn-delete {
+            color: white;
+            background-color:red;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            outline: none;
+            cursor: pointer;
+        }
 
         .actions {
             height: 10vh;

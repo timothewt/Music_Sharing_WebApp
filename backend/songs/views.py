@@ -190,6 +190,7 @@ class SongViewset(ModelViewSet):
 		return Response(serializer.data)
 
 
+	@action(methods=['post'], detail=True)
 	def delete(self, request, pk=None):
 
 		if not request.user.is_authenticated:

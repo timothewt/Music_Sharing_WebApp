@@ -3,7 +3,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from urllib.parse import unquote
-from rest_framework.status import HTTP_400_BAD_REQUEST
+from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_200_OK
 from songs.models import Song, Album
 from users.models import User
 from users.serializers import UserSerializer
@@ -253,15 +253,10 @@ class UserViewset(ModelViewSet):
 		return Response({'is_favorite': request.user.favorite_albums.filter(pk=int(album_id)).exists()})
 		
 
-	@action(methods=['post'], detail=True)
-	def delete_user(self, request, pk=None):
+	@action(methods=['post'], detail=False)
+	def delete(self, request, pk=None):
 		if not request.user.is_authenticated:
 			return Response({"detail": "Authentication credentials were not provided."}, status=401)
 
-		user = self.get_object()
-		if user != request.user:
-			return Response({'error': 'You can only delete your own account'},
-							status=HTTP_400_BAD_REQUEST)
-
-		user.delete()
+		self.request.user.delete()
 		return Response({'detail': 'User deleted successfully'}, status=HTTP_200_OK)

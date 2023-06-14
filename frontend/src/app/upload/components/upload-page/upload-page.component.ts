@@ -43,7 +43,6 @@ export class UploadPageComponent {
 	}
 
 	addSongToUploadList(song: UploadSong): void {
-		console.log(song.recordingFile);
 		this.uploadList.push(song);
 	}
 

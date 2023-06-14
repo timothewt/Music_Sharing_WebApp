@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Song } from 'src/app/models/song';
 import { Album } from 'src/app/models/album';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { APIService } from 'src/app/services/api.service';
 import { SharedQueueService } from 'src/app/services/shared-queue.service';
 import { SharedAuthService } from 'src/app/services/shared-auth.service';
@@ -18,10 +18,12 @@ export class AlbumPageComponent implements OnInit{
 	public songs: Song[] = [];
 	public color: string = "#000000";
 	public isFavorite: boolean = false;
+	public isLoggedInUserAlbum: boolean = false;
+	public isDeleting: boolean = false;
 
 	similarAlbums: Album[] = [];
 
-	constructor(private _Activatedroute:ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService, public authService: SharedAuthService) {}
+	constructor(private _Activatedroute: ActivatedRoute, private apiService: APIService, private sharedQueueService: SharedQueueService, public authService: SharedAuthService, private router: Router) {}
 
 	ngOnInit() {
 		this._Activatedroute.paramMap.subscribe(params => {
@@ -35,6 +37,10 @@ export class AlbumPageComponent implements OnInit{
 			this.apiService.getAlbumById(albumId).subscribe(
 				(response: any) => {
 					this.album.deserialize(response);
+				
+					if (this.authService.loggedIn && this.album.artist.id == this.authService.currentUserID) {
+						this.isLoggedInUserAlbum = true;
+					}
 
 					this.apiService.getSongs({albumId: this.album.id}).subscribe(
 						(response: any) => {
@@ -57,7 +63,7 @@ export class AlbumPageComponent implements OnInit{
 			);
 
 			if (this.authService.loggedIn) {
-				this.apiService.isFavoriteSong(albumId, this.authService.getAccessToken()).subscribe(
+				this.apiService.isFavoriteAlbum(albumId, this.authService.getAccessToken()).subscribe(
 					(response: any) => {
 						this.isFavorite = response.is_favorite;
 					}
@@ -90,5 +96,18 @@ export class AlbumPageComponent implements OnInit{
 				this.isFavorite = false;
 			}
 		);
+	}
+
+	public handleDialogAnswer(answer: boolean) {
+		if (answer) {
+			this.isDeleting = true;
+			this.apiService.deleteAlbum(this.album.id, this.authService.getAccessToken()).subscribe(
+				(response: any) => {
+					this.router.navigate(['/artist/' + this.album.artist.id]);
+				}
+			);
+		} else {
+			this.isDeleting = false;
+		}
 	}
 }

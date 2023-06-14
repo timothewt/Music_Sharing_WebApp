@@ -2,7 +2,9 @@
 
     <div class="song-header">
         <div class="cover">
-            <img src="{{this.song.album.cover}}" alt="">
+            <a routerLink="/album/{{this.song.album.id}}">
+                <img src="{{this.song.album.cover}}" alt="">
+            </a>
         </div>
         <div class="text">
             <h1 class="title">{{this.song.name}}</h1>
@@ -16,6 +18,10 @@
         </div> 
     </div>
     <div class="more-of-song">
+        <div *ngIf="isLoggedInUserSong">
+            <button class="btn-delete" (click)="isDeleting = true;">Delete song</button>
+            <app-delete-pop-up [toDeleteType]="'Song'" [objectToDelete]="song" (delete)="handleDialogAnswer($event)" *ngIf="isDeleting"></app-delete-pop-up>
+        </div>
         <div class="actions">
             <button class="play-button" (click)="playSong()">
                 <img src="../../assets/play-icon-2.svg" alt="Play">

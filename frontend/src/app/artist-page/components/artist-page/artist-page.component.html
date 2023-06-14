@@ -7,7 +7,10 @@
         <div class="profile-edition" *ngIf="authService.loggedIn && authService.currentUserID == artist.id">
             <button (click)="logout()" class="button-edition">Logout</button>
             <button (click)="upload()" class="button-edition">Upload new album</button>
+            <button (click)="deleteAccount()" class="button-edition btn-delete">Delete account</button>
+            <app-delete-pop-up [toDeleteType]="'Account'" [objectToDelete]="artist" (delete)="handleDialogAnswer($event)" *ngIf="isDeleting"></app-delete-pop-up>
         </div>
+            
 
         <div class="section" *ngIf="authService.loggedIn && authService.currentUserID == artist.id">
             <h2>

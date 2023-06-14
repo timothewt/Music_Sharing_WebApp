@@ -222,4 +222,30 @@ export class APIService {
 		return this.http.get(reqURL);
 	}
 
+	public deleteUser(authAccessToken: string) {
+		let reqURL: string = this.apiURL + 'user/delete/';
+		return this.http.post(reqURL, {}, {
+			headers: new HttpHeaders({
+				'Authorization' : 'Bearer ' + authAccessToken
+			})
+		});
+	}
+
+	public deleteAlbum(albumId: number, authAccessToken: string) {
+		let reqURL: string = this.apiURL + 'album/' + albumId + '/delete/';
+		return this.http.post(reqURL, {'album_id': albumId}, {
+			headers: new HttpHeaders({
+				'Authorization' : 'Bearer ' + authAccessToken
+			})
+		});
+	}
+
+	public deleteSong(songId: number, authAccessToken: string) {
+		let reqURL: string = this.apiURL + 'song/' + songId + '/delete/';
+		return this.http.post(reqURL, {'song_id': songId}, {
+			headers: new HttpHeaders({
+				'Authorization' : 'Bearer ' + authAccessToken
+			})
+		});
+	}
 }

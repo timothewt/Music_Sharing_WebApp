@@ -24,6 +24,8 @@
     .song-tags {
         display: flex;
         align-items: center;
+
+        overflow-x: auto;
         
         gap: 10px;
         color: white;

@@ -75,6 +75,17 @@
     .more-of-song {
         grid-area: more;
 
+        .btn-delete {
+            color: white;
+            background-color:red;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            outline: none;
+            cursor: pointer;
+        }
+
         display: flex;
         flex-direction: column;
         background: #1c1c1c;
