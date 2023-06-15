@@ -217,6 +217,19 @@ export class APIService {
 		});
 	}
 
+	public changeProfilePic(authAccessToken: string, pdpFile: File) {
+		let reqURL: string = this.apiURL + 'user/change_pdp/';
+		let formData: FormData = new FormData();
+
+		formData.append('pdp_file', pdpFile);
+
+		return this.http.post(reqURL, formData, {
+			headers: new HttpHeaders({
+				'Authorization' : 'Bearer ' + authAccessToken
+			})
+		});
+	}
+
 	public getTags() {
 		let reqURL: string = this.apiURL + 'tags/';
 		return this.http.get(reqURL);

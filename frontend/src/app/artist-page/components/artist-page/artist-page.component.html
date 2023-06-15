@@ -1,7 +1,16 @@
 <div class="artist-page">
     <div class="artist-infos">
+        <!--On over show input to change pp-->
+        <div class="hover-change">
+            <img class="pdp" [src]="artist.profilePic"> 
+            <div class="change-pdp" *ngIf="authService.loggedIn && authService.currentUserID == artist.id">
+                <input type="file" id="profile-pic" accept="image/*" (change)="changePDP($event)">
+                <label for="profile-pic">
+                    <img src="../../../assets/upload-icon.svg" alt="Upload">
+                </label>
+            </div>
+        </div>
         <h1 id="artist-name">{{artist.username}}</h1>
-        <img class="back" [src]="artist.profilePic"> 
     </div>
     <div class="more">
         <div class="profile-edition" *ngIf="authService.loggedIn && authService.currentUserID == artist.id">

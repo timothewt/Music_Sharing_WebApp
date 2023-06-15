@@ -47,6 +47,7 @@ export class ArtistPageComponent implements OnInit {
 			this.apiService.getUserById(userId).subscribe(
 				(response: any) => {
 					this.artist.deserialize(response);
+					console.log(this.artist);
 				}
 			);
 
@@ -136,6 +137,27 @@ export class ArtistPageComponent implements OnInit {
 			);
 		} else {
 			this.isDeleting = false;
+		}
+	}
+
+	changePDP(event:any): void {
+
+		if (event.target.files.length > 0) {
+			const file = event.target.files[0];
+
+			//Change backend image
+			this.apiService.changeProfilePic(this.authService.getAccessToken(), file).subscribe(
+				(response: any) => {
+						//Change local image
+						var reader = new FileReader();
+						reader.readAsDataURL(file);
+						reader.onload = (_event) => {
+							this.artist.profilePic = reader.result as string;
+						}
+						console.log(response);
+					}
+
+			);
 		}
 	}
 }
