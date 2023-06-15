@@ -1,8 +1,9 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SharedPopUpService } from 'src/app/services/shared-pop-up.service';
 import { UploadSong } from 'src/app/models/uploadSong';
+import { MultiselectComponent } from '../multiselect/multiselect.component';
 
 @Component({
 	selector: 'app-upload-song-card-generator',
@@ -24,6 +25,9 @@ export class UploadSongCardGeneratorComponent implements OnInit {
 	recordingFile: File = new File([], "");
 
 	uploadedSong: boolean = false;
+
+	@ViewChild(MultiselectComponent) multiselect!: MultiselectComponent;
+
 
 	constructor(private formBuilder: FormBuilder, private sharedPopUpService: SharedPopUpService) { }
 
@@ -63,6 +67,12 @@ export class UploadSongCardGeneratorComponent implements OnInit {
 
 		//Reset the song
 		this.currentSong = new UploadSong();
+
+		//Reset the multiselect form
+		this.multiselect.reset();
+
+		//Reset the form
+		this.generateForm.reset();
 	}
 
 }

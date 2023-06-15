@@ -25,6 +25,8 @@ export class UploadPageComponent {
 
 	uploadForm: FormGroup = this.formBuilder.group({
 		albumTitle: ['', Validators.required],
+		albumReleaseYear: ['', Validators.required],
+		albumDescription: '',
 		description: '',
 	});
 
@@ -67,6 +69,8 @@ export class UploadPageComponent {
 	upload(): void{
 		//Get the album title from the form group input text
 		const albumTitle: string = this.uploadForm.get('albumTitle')?.value;
+		const albumReleaseYear: number = this.uploadForm.get('albumReleaseYear')?.value;
+		const albumDescription: string = this.uploadForm.get('albumDescription')?.value;
 
 		if (albumTitle == "") {
 			this.sharedPopUpService.showPopUp({message:"Album title is required", timedisplay:3000, color:"red"});
@@ -78,12 +82,13 @@ export class UploadPageComponent {
 			return;
 		}
 
+
 		//Create the album upload 
 		const albumUpload: UploadAlbum = new UploadAlbum();
 		albumUpload.name = albumTitle;
 		albumUpload.coverFile = this.coverFile;
-		albumUpload.description = "";
-		albumUpload.releaseYear = 2021;
+		albumUpload.description = albumDescription;
+		albumUpload.releaseYear = albumReleaseYear;
 
 		this.apiService.postNewAlbum(this.authService.getAccessToken(), albumUpload).subscribe(
 			(response: any) => {
@@ -102,8 +107,5 @@ export class UploadPageComponent {
 			}
 		);
 	}
-
-	
-
 
 }

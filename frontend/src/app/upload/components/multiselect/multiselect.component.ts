@@ -79,4 +79,15 @@ export class MultiselectComponent implements OnInit {
     this.filteredItems = this.items.filter((item) => item.toLowerCase().includes(this.searchText.toLowerCase()));
   }
 
+  reset(): void {
+    /*
+    Empty the multiselect
+    * @return void
+    */
+    this.selectedItems = [];
+    this.searchText = "";
+    this.filterItems();
+  }
+
+
 }

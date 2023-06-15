@@ -60,6 +60,17 @@
                     filter: invert(100%);
                 }
             }
+
+            &.uploaded {
+                label {
+                    img {
+                        filter: invert(50%);
+                    }
+                }
+            }
         }
+
     }
 }
+
+

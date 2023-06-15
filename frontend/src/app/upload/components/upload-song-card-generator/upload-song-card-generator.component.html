@@ -2,7 +2,7 @@
     <form [formGroup]="generateForm" onsubmit="return false">
 
         <!--Song file input field-->
-        <div class="song-input-container">
+        <div class="song-input-container" [ngClass]="uploadedSong ? 'uploaded' : ''" >
             <label for="song-file">
                 <img src="../../../assets/upload-icon.svg" alt="Upload">
             </label>
@@ -14,6 +14,7 @@
     
         <!--Song genre selection -->
         <app-multiselect [items]="tags" (onSelectionChange)="updateGenres($event)"></app-multiselect>
+
         <!--Song add button to album-->
         <button (click)="addSong()">
             <img src="../../../assets/plus-icon.svg" alt="Add Song">
