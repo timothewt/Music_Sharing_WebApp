@@ -25,6 +25,15 @@ class Album(models.Model):
 		super(Album, self).save(*args, **kwargs)
 
 
+	def delete(self, *args, **kwargs):
+
+		if bool(self.cover_file.name):
+			self.cover_file.delete()
+			super(Album, self).save(*args, **kwargs)
+
+		super(Album, self).delete(*args, **kwargs)
+
+
 	class Meta:
 		constraints = [
 			models.UniqueConstraint(
@@ -58,6 +67,15 @@ class Song(models.Model):
 			self.recording_link = SERVER_URL + self.recording_file.url
 
 		super(Song, self).save(*args, **kwargs)
+
+
+	def delete(self, *args, **kwargs):
+
+		if bool(self.recording_file.name):
+			self.recording_file.delete()
+			super(Song, self).save(*args, **kwargs)
+
+		super(Song, self).delete(*args, **kwargs)
 
 
 	def __str__(self):

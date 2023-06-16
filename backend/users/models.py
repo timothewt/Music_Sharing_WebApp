@@ -29,5 +29,18 @@ class User(AbstractUser):
 			super(User, self).save(*args, **kwargs)
 
 
+	def delete(self, *args, **kwargs):
+
+		if bool(self.banner.name):
+			self.banner.delete()
+			super(User, self).save(*args, **kwargs)
+
+		if bool(self.profile_pic.name):
+			self.profile_pic.delete()
+			super(User, self).save(*args, **kwargs)
+
+		super(User, self).delete(*args, **kwargs)
+
+
 	def __str__(self):
 		return self.username
