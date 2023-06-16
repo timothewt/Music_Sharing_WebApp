@@ -8,7 +8,6 @@ import { config } from "./config";
 })
 export class SharedAuthService {
 
-
 	private apiURL: string = "";
 	private tokenURL: string = "";
 
@@ -26,28 +25,41 @@ export class SharedAuthService {
 		this.tokenURL = config.tokenURL;
 	}
 
-	public getRefreshToken(): string {
-		return this.refreshToken;
-	}
-
 	public getAccessToken(): string {
+		/**
+		 * @return The access token for the backend
+		 */
 		return this.accessToken;
 	}
 
-	public fetchTokensPair(username: string, password: string): Observable<Object> {
+	public fetchTokensPair(username: string, password: string): Observable<any> {
+		/**
+		 * Fetches the user's tokens pair from the backend using the user's username and password
+		 * @param username The user's username
+		 * @param password The user's password
+		 * @return the http request as an observable
+		 */
 		let headers = { 'content-type': 'application/json'}  
 		let body = {'username':username,'password':password};
 		let httpResponse: Observable<Object> = this.http.post(this.tokenURL, body,{'headers':headers});
 		return httpResponse;
 	}
 
-	public setTokens(refreshToken: string, accessToken: string) {
+	public setTokens(refreshToken: string, accessToken: string): void {
+		/**
+		 * Sets the refresh token and the access token in the current object
+		 * @param refreshToken The refresh token
+		 * @param accessToken The access token
+		 */
 		this.refreshToken = refreshToken;
 		this.accessToken = accessToken;
 		this.loggedIn = true;
 	}
 
-	public refreshAccessToken() {
+	public refreshAccessToken(): void {
+		/**
+		 * Refreshes the access token using the refresh token because the access token needs to be refreshed every 15 minutes
+		 */
 		if (this.refreshToken === "") return;
 		let headers = { 'content-type': 'application/json'}  
 		let body = {'refresh':this.refreshToken};
@@ -63,7 +75,11 @@ export class SharedAuthService {
 		);
 	}
 
-	public logout() {
+	public logout(): void {
+		/**
+		 * Logs the user out by clearing the refresh token, the access token, the logged in status and the user id
+		 * It also clears the interval that refreshes the access token
+		 */
 		clearInterval(this.refreshIntervalId);
 		this.refreshToken = "";
 		this.accessToken = "";
@@ -72,7 +88,15 @@ export class SharedAuthService {
 		this.loggedIn$.next(this.loggedIn);
 	}
 
-	public register(username: string, email: string, password: string, confirmPassword: string) {
+	public register(username: string, email: string, password: string, confirmPassword: string): Observable<any> {
+		/**
+		 * Registers the user using the user's username, email and password
+		 * @param username The user's username
+		 * @param email The user's email
+		 * @param password The user's password
+		 * @param confirmPassword The user's password confirmation
+		 * @return the http request as an observable
+		 */
 		let headers = { 'content-type': 'application/json'}  
 		let body = {'username':username,'email':email,'password':password,'confirm_password':confirmPassword};
 		let httpResponse = this.http.post(this.apiURL + 'user/register/', body,{'headers':headers});
