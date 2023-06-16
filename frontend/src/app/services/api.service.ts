@@ -217,11 +217,11 @@ export class APIService {
 		});
 	}
 
-	public changeProfilePic(authAccessToken: string, pdpFile: File) {
-		let reqURL: string = this.apiURL + 'user/change_pdp/';
+	public changeProfilePic(authAccessToken: string, pfpFile: File) {
+		let reqURL: string = this.apiURL + 'user/change_pfp/';
 		let formData: FormData = new FormData();
 
-		formData.append('pdp_file', pdpFile);
+		formData.append('pfp_file', pfpFile);
 
 		return this.http.post(reqURL, formData, {
 			headers: new HttpHeaders({

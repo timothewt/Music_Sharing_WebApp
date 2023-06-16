@@ -262,11 +262,11 @@ class UserViewset(ModelViewSet):
 		return Response({'detail': 'User deleted successfully'}, status=HTTP_200_OK)
 	
 	@action(methods=['post'], detail=False)
-	def change_pdp(self, request, pk=None):
+	def change_pfp(self, request, pk=None):
 		if not request.user.is_authenticated:
 			return Response({"detail": "Authentication credentials were not provided."}, status=401)
 
-		image = request.FILES.get('pdp_file')
+		image = request.FILES.get('pfp_file')
 		if image is None:
 			return Response({'error': 'Please provide image'},
 							status=HTTP_400_BAD_REQUEST)
@@ -275,5 +275,5 @@ class UserViewset(ModelViewSet):
 		#update the link to the image in the database
 		self.request.user.save(update_fields=['profile_pic', 'profile_pic_link'])
 
-		return Response({'detail': 'User pdp changed successfully'}, status=HTTP_200_OK)
+		return Response({'detail': 'User pfp changed successfully'}, status=HTTP_200_OK)
 	

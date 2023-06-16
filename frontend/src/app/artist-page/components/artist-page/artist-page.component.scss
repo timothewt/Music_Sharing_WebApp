@@ -26,14 +26,14 @@
 			height: 200px;
 			width: 200px;
 
-			img.pdp {
+			img.pfp {
 				height: 200px;
 				width: 200px;
 				border-radius: 50%;
 				object-fit: cover;
 			}
 
-			.change-pdp {
+			.change-pfp {
 				position: absolute;
 				top: 0;
 				left: 0;
@@ -60,17 +60,17 @@
 				}
 			}
 			&:hover {
-				.change-pdp {
+				.change-pfp {
 					display: flex;
 					align-items: center;
 					justify-content: center;
 				}
 			}
 
-			&:has(.change-pdp){
+			&:has(.change-pfp){
 
 				&:hover {
-					img.pdp {
+					img.pfp {
 						filter: brightness(0.5);
 					}
 				}
