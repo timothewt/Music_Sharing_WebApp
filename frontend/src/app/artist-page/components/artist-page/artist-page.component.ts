@@ -47,7 +47,6 @@ export class ArtistPageComponent implements OnInit {
 			this.apiService.getUserById(userId).subscribe(
 				(response: any) => {
 					this.artist.deserialize(response);
-					console.log(this.artist);
 				}
 			);
 
