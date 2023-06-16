@@ -59,7 +59,7 @@ class UserViewset(ModelViewSet):
 		confirm_password = request.data.get('confirm_password')
 		email = request.data.get('email')
 
-		if username is None or password is None or confirm_password is None or email is None:
+		if username is None or username == '' or password is None or password == "" or confirm_password is None or confirm_password == "" or email is None or email == "":
 			return Response({'error': 'Please provide username, password and email'},
 							status=HTTP_400_BAD_REQUEST)
 		if password != confirm_password:
