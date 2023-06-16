@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { APIService } from 'src/app/services/api.service';
 import { SharedAuthService } from 'src/app/services/shared-auth.service';
 import { Router } from '@angular/router';
@@ -24,17 +24,18 @@ export class UploadPageComponent {
 	imagePreviewSrc: string = "../../../assets/image-placeholder.png";
 
 	uploadForm: FormGroup = this.formBuilder.group({
-		albumTitle: ['', 
+		albumTitle: new FormControl('', [
 			Validators.required,
 			Validators.minLength(3),
-			Validators.maxLength(100)],
-		albumReleaseYear: ['', 
+			Validators.maxLength(100)]
+			),
+		albumReleaseYear: new FormControl('',[ 
 			Validators.required,
-			Validators.pattern("^[0-9]*$")],
-		albumDescription: ['',
+			Validators.pattern("^[0-9]*$")]),
+		albumDescription: new FormControl('',[
 			Validators.minLength(3),
 			Validators.maxLength(1000)
-		]
+		]),
 	});
 
 	coverFile: File = new File([], "")

@@ -2,7 +2,7 @@
     <div class="artist-infos">
         <!--On over show input to change pp-->
         <div class="hover-change">
-            <img class="pfp" [src]="artist.profilePic"> 
+            <img class="pfp" [src]="artist.profilePic" (onError)="invalidUrl()"> 
             <div class="change-pfp" *ngIf="authService.loggedIn && authService.currentUserID == artist.id">
                 <input type="file" id="profile-pic" accept="image/*" (change)="changePDP($event)">
                 <label for="profile-pic">

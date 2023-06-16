@@ -159,4 +159,8 @@ export class ArtistPageComponent implements OnInit {
 			);
 		}
 	}
+
+	invalidUrl() {
+		this.artist.profilePic = "assets/images/default_pfp.jpg";
+	}
 }

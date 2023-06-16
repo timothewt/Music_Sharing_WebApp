@@ -142,3 +142,18 @@
     
 }
 
+
+
+@media screen and (max-width: 800px) {
+    .track-details {
+        .play-or-index {
+            .index {
+                visibility: hidden;
+            }
+            .play {
+                visibility: visible;
+                transform: translate(-20%, 0);
+            }
+        }
+    }
+}
