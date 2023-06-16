@@ -39,7 +39,7 @@ export class UploadSongCardGeneratorComponent implements OnInit {
 		if (event.target.files.length > 0) {
 			const file = event.target.files[0];
 			// checking if it's an audio file
-			if (file.type != "audio/mpeg"){
+			if (file.type != "audio/*"){
 				this.sharedPopUpService.showPopUp({message:"Please only import audio files", timedisplay:3000, color:"red"});
 			} else {
 				this.recordingFile = file;
