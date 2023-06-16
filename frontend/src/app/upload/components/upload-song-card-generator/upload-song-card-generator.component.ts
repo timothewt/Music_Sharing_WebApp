@@ -31,15 +31,14 @@ export class UploadSongCardGeneratorComponent implements OnInit {
 
 	constructor(private formBuilder: FormBuilder, private sharedPopUpService: SharedPopUpService) { }
 
-	ngOnInit(): void {
-
-	} 
+	ngOnInit(): void {} 
 
 	onFileSelected(event: any) {
 		if (event.target.files.length > 0) {
 			const file = event.target.files[0];
 			// checking if it's an audio file
-			if (file.type != "audio/*"){
+			// if not, does not upload and shows an error message
+			if (file.type.match(/audio\/*/) == null) {
 				this.sharedPopUpService.showPopUp({message:"Please only import audio files", timedisplay:3000, color:"red"});
 			} else {
 				this.recordingFile = file;

@@ -15,7 +15,7 @@ class UserViewset(ModelViewSet):
 	serializer_class = UserSerializer
 
 	def get_queryset(self):
-
+		
 		queryset = User.objects.all()
 
 		search = self.request.GET.get('search')
@@ -39,12 +39,14 @@ class UserViewset(ModelViewSet):
 
 	@action(methods=['get'], detail=False)
 	def current_user(self, request):
+
 		serializer = UserSerializer(self.request.user)
 		return Response(serializer.data)
 
 
 	@action(methods=['post'], detail=True)
 	def listen(self, request, pk=None):
+
 		user = User.objects.filter(pk=pk).first()
 		user.listenings += 1
 		user.save()
@@ -54,6 +56,7 @@ class UserViewset(ModelViewSet):
 
 	@action(methods=['post'], detail=False)
 	def register(self, request):
+
 		username = request.data.get('username')
 		password = request.data.get('password')
 		confirm_password = request.data.get('confirm_password')
