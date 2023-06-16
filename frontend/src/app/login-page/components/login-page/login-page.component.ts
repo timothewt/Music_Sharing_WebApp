@@ -19,12 +19,20 @@ export class LoginPageComponent implements OnInit {
 	isButtonLoginActive: boolean = true;
 
 	loginForm: FormGroup = this.formBuilder.group({
-		username: '',
+		username: new FormControl('',[
+			Validators.required,
+			Validators.minLength(3),
+			Validators.maxLength(20),
+			Validators.pattern("^[a-zA-Z0-9 ]*$")]),
 		email: new FormControl('',[
 			Validators.required,
 			Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-		password: '',
-		confirmPassword: '',
+		password: new FormControl('',[
+			Validators.required,
+			Validators.maxLength(20)]),
+		confirmPassword: new FormControl('',[
+			Validators.required,
+			Validators.maxLength(20)])
 	});
 	
 	constructor(private authService: SharedAuthService, private formBuilder: FormBuilder, private router:Router, private apiService: APIService	, private http: HttpClient, private sharedPopUpService: SharedPopUpService) { }
@@ -60,6 +68,17 @@ export class LoginPageComponent implements OnInit {
 	}
 
 	loginUser(username: string, password: string): void {
+
+		if (this.loginForm.get('username')?.invalid) {
+			this.sharedPopUpService.showPopUp({message:"Username is required", color:"red"});
+			return;
+		}
+
+		if (this.loginForm.get('password')?.invalid) {
+			this.sharedPopUpService.showPopUp({message:"Password is required", color:"red"});
+			return;
+		}
+
 		this.isButtonLoginActive = false;
 		this.authService.fetchTokensPair(username, password).subscribe(
 			(response: any) => {
@@ -86,15 +105,33 @@ export class LoginPageComponent implements OnInit {
 	}
 
 	registerUser(username: string, email: string, password: string, confirmPassword: string): void {
-		if (this.loginForm.invalid) {
-			this.sharedPopUpService.showPopUp({message:"Forms informations incorrects", timedisplay: 3000, color:"red"});
+		
+		if (this.loginForm.get('email')?.invalid) {
+			this.sharedPopUpService.showPopUp({message:"Mail informations incorrect", timedisplay: 1000, color:"red"});
 			return;
 		}
+
+		if (this.loginForm.get('username')?.invalid) {
+			this.sharedPopUpService.showPopUp({message:"Username is invalid", color:"red"});
+			return;
+		}
+
+		if (this.loginForm.get('password')?.invalid) {
+			this.sharedPopUpService.showPopUp({message:"Password is invalid", color:"red"});
+			return;
+		}
+
+		if (this.loginForm.get('confirmPassword')?.invalid) {
+			this.sharedPopUpService.showPopUp({message:"Confirm password is invalid", color:"red"});
+			return;
+		}
+
+
 		this.isButtonLoginActive = false;
+
 		if (password !== confirmPassword) {
 			console.error('Passwords do not match');
 			return;
-			
 		}
 
 		this.authService.register(username, email, password, confirmPassword).subscribe(

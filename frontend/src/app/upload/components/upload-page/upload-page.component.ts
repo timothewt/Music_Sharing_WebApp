@@ -24,10 +24,17 @@ export class UploadPageComponent {
 	imagePreviewSrc: string = "../../../assets/image-placeholder.png";
 
 	uploadForm: FormGroup = this.formBuilder.group({
-		albumTitle: ['', Validators.required],
-		albumReleaseYear: ['', Validators.required],
-		albumDescription: '',
-		description: '',
+		albumTitle: ['', 
+			Validators.required,
+			Validators.minLength(3),
+			Validators.maxLength(100)],
+		albumReleaseYear: ['', 
+			Validators.required,
+			Validators.pattern("^[0-9]*$")],
+		albumDescription: ['',
+			Validators.minLength(3),
+			Validators.maxLength(1000)
+		]
 	});
 
 	coverFile: File = new File([], "")
@@ -35,6 +42,11 @@ export class UploadPageComponent {
 	constructor(private formBuilder: FormBuilder, private router:Router, private apiService: APIService, private authService: SharedAuthService, private sharedPopUpService: SharedPopUpService) { }
 
 	ngOnInit(): void {
+
+		if (!this.authService.loggedIn) {
+			this.router.navigate(['/login']);
+		}
+
 		this.apiService.getTags().subscribe(
 			(response: any) => {
 				response.forEach((tag: any) => {
@@ -72,8 +84,18 @@ export class UploadPageComponent {
 		const albumReleaseYear: number = this.uploadForm.get('albumReleaseYear')?.value;
 		const albumDescription: string = this.uploadForm.get('albumDescription')?.value;
 
-		if (albumTitle == "") {
-			this.sharedPopUpService.showPopUp({message:"Album title is required", timedisplay:3000, color:"red"});
+		if (this.uploadForm.get('albumTitle')?.invalid) {
+			this.sharedPopUpService.showPopUp({message:"Album title is invalid", timedisplay:3000, color:"red"});
+			return;
+		}
+
+		if (this.uploadForm.get('albumReleaseYear')?.invalid) {
+			this.sharedPopUpService.showPopUp({message:"Album release year is invalid", timedisplay:3000, color:"red"});
+			return;
+		}
+
+		if (this.uploadForm.get('albumDescription')?.invalid) {
+			this.sharedPopUpService.showPopUp({message:"Album description is invalid", timedisplay:3000, color:"red"});
 			return;
 		}
 
