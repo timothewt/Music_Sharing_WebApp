@@ -42,6 +42,10 @@
 				<app-album *ngFor="let album of similarAlbums" [album]="album"></app-album>
 			</div>
 		</div>
+		<div class="section" *ngIf="album.description.length > 0">
+			<h3>Description</h3>
+			<p>{{album.description}}</p>
+		</div>
 	</div>
 
  
