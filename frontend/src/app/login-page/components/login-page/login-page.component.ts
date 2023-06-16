@@ -86,6 +86,10 @@ export class LoginPageComponent implements OnInit {
 	}
 
 	registerUser(username: string, email: string, password: string, confirmPassword: string): void {
+		if (this.loginForm.invalid) {
+			this.sharedPopUpService.showPopUp({message:"Forms informations incorrects", timedisplay: 3000, color:"red"});
+			return;
+		}
 		this.isButtonLoginActive = false;
 		if (password !== confirmPassword) {
 			console.error('Passwords do not match');
