@@ -94,6 +94,7 @@ export class LoginPageComponent implements OnInit {
 		if (password !== confirmPassword) {
 			console.error('Passwords do not match');
 			return;
+			
 		}
 
 		this.authService.register(username, email, password, confirmPassword).subscribe(
