@@ -276,4 +276,3 @@ class UserViewset(ModelViewSet):
 		self.request.user.save(update_fields=['profile_pic', 'profile_pic_link'])
 
 		return Response({'detail': 'User pfp changed successfully'}, status=HTTP_200_OK)
-	
