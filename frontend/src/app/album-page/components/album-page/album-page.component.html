@@ -1,6 +1,6 @@
-<div class="song-page"> 
+<div class="album-page"> 
 
-	<div class="song-header">
+	<div class="album-header">
 		<div class="cover">
 			<img src="{{this.album.cover}}" alt="">
 		</div>
@@ -13,7 +13,7 @@
 			</div>
 		</div> 
 	</div>
-	<div class="more-of-song">
+	<div class="more-of-album">
 		<div *ngIf="isLoggedInUserAlbum">
 			<button class="btn-delete" (click)="isDeleting = true;">Delete album</button>
 			<app-delete-pop-up [toDeleteType]="'Album'" [objectToDelete]="album" (delete)="handleDialogAnswer($event)" *ngIf="isDeleting"></app-delete-pop-up>
@@ -47,6 +47,4 @@
 			<p>{{album.description}}</p>
 		</div>
 	</div>
-
- 
 </div>
