@@ -32,6 +32,11 @@ export class UploadSongCardComponent implements OnInit{
 	}
 
 	deleteSong(): void {
+		/*
+		* Emits the deleteSongEvent
+		* @param {void}
+		* @return {void}
+		*/
 		this.deleteSongEvent.emit(this.index);
 	}
 

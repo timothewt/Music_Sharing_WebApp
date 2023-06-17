@@ -16,17 +16,31 @@ export class SongComponent {
 	constructor(private sharedQueueService: SharedQueueService, private sharedContextMenuService: SharedContextMenuService) {}
 
 	public playSong(): void {
+		/*
+		* Plays the song
+		* @param {void}
+		* @return {void}
+		*/
 		let queue = this.sharedQueueService.getQueue();
 		queue.setSongs([this.song]);
-
 		this.sharedQueueService.setDoReloadPlayer(true);
 	}
 
 	public showContextMenu(): void {
+		/*
+		* Shows the context menu
+		* @param {void}
+		* @return {void}
+		*/
 		this.sharedContextMenuService.showContextMenu({song:this.song});
 	}
 
 	public showContextMenuOnRightClick(event: MouseEvent): void {
+		/*
+		* Shows the context menu on right click
+		* @param {MouseEvent} event
+		* @return {void}
+		*/
 		event.preventDefault();
 		this.sharedContextMenuService.showContextMenu({song:this.song});
 	}

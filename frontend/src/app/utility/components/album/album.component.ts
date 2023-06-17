@@ -18,7 +18,13 @@ export class AlbumComponent {
   
     constructor(private sharedQueueService: SharedQueueService, private apiService: APIService,private sharedContextMenuService: SharedContextMenuService) {}
 
-    public addAlbumToQueue(){
+    public addAlbumToQueue(): void {
+      /*
+      * Add the album to the queue
+      * @param {void}
+      * @return {void}
+      */
+    
       //Load the songs of the album from the backend if not already loaded
       if (this.songs.length == 0) {
         this.loadSongs().then(() => {
@@ -34,7 +40,12 @@ export class AlbumComponent {
 
     }
 
-    public async loadSongs() : Promise<void>{
+    public async loadSongs() : Promise<void> {
+      /* 
+      * Load the songs of the album from the backend
+      * @param {void}
+      * @return {Promise<void>}
+      */
       return new Promise<void>((resolve, reject) => {
         this.apiService.getSongs({albumId: this.album.id}).subscribe(
           (response: any) => {
@@ -51,17 +62,25 @@ export class AlbumComponent {
     }
 
     public addSongsToQueue(songIndex?: number): void {
+      /*
+      * Add the songs of the album to the queue
+      * @param {number} songIndex - The index of the song to play first
+      * @return {void}
+      */
       let queue = this.sharedQueueService.getQueue();
       queue.setSongs(this.songs);
       if (songIndex) {
         queue.setCurrentSongIndex(songIndex);
       }
-  
       this.sharedQueueService.setDoReloadPlayer(true);
-
     }
 
     public openContextMenu(event:Event): void {
+      /*
+      * Open the context menu for the album
+      * @param {Event} event - The event that triggered the opening of the context menu
+      * @return {void}
+      */
       event.preventDefault();
       this.loadSongs().then(() => {
         this.sharedContextMenuService.showContextMenu({albumSongs: this.songs});

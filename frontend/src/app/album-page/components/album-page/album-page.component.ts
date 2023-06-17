@@ -74,6 +74,11 @@ export class AlbumPageComponent implements OnInit{
 	}
 
 	public addAlbumToQueue(songIndex?: number): void {
+		/*
+		* Add the album to the queue.
+		* @param {number} songIndex - the index of the song to start playing from
+		* @return {void}
+		*/
 		let queue = this.sharedQueueService.getQueue();
 		queue.setSongs(this.songs);
 		if (songIndex) {
@@ -83,7 +88,12 @@ export class AlbumPageComponent implements OnInit{
 		this.sharedQueueService.setDoReloadPlayer(true);
 	}
 
-	public addToFavorites() {
+	public addToFavorites(): void {
+		/*
+		* Add the album to the user's favorites.
+		* @param {void}
+		* @return {void}
+		*/
 		this.apiService.addAlbumToFavorites(this.album.id, this.authService.getAccessToken()).subscribe(
 			(response: any) => {
 				this.isFavorite = true;
@@ -91,7 +101,12 @@ export class AlbumPageComponent implements OnInit{
 		);
 	}
 
-	public removeFromFavorites() {
+	public removeFromFavorites(): void {
+		/*
+		* Remove the album from the user's favorites.
+		* @param {void}
+		* @return {void}
+		*/
 		this.apiService.removeAlbumFromFavorites(this.album.id, this.authService.getAccessToken()).subscribe(
 			(response: any) => {
 				this.isFavorite = false;
@@ -99,7 +114,15 @@ export class AlbumPageComponent implements OnInit{
 		);
 	}
 
-	public handleDialogAnswer(answer: boolean) {
+	public handleDialogAnswer(answer: boolean): void {
+		/*
+		* Check if the user has confirmed the deletion of the album.
+		* If yes, delete the album from the backend and navigate to the artist page.
+		* If no, do nothing.
+		* @param {boolean} answer - the user's answer
+		* @return {void}
+		*/
+
 		if (answer) {
 			this.isDeleting = true;
 			this.apiService.deleteAlbum(this.album.id, this.authService.getAccessToken()).subscribe(

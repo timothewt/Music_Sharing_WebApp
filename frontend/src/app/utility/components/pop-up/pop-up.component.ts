@@ -32,9 +32,9 @@ export class PopUpComponent {
 
   public addToQueue(obj:{message:String, timedisplay?:number, color?:String, priority?:number}): void {
     /*
-    Add a pop up to the queue to be displayed
-    @param obj:{message:String, timedisplay?:number, color?:String, priority?:number} - The pop up to be added to the queue
-    @return void
+    * Add a pop up to the queue to be displayed
+    * @param {message:String, timedisplay?:number, color?:String, priority?:number} obj - The pop up to be added to the queue
+    * @return void
     */
 
     // Correctly setup the pop up object
@@ -65,8 +65,9 @@ export class PopUpComponent {
 
   public switchToNextPopUp(): void {
     /*
-    Switch to the next pop up in the queue
-    @return void
+    * Switch to the next pop up in the queue
+    * @param {void}
+    * @return {void}
     */
     if (this.queuePopUp.length > 0) {
       this.usePopUp(this.queuePopUp[0]);
@@ -78,22 +79,28 @@ export class PopUpComponent {
 
   public showPopUp(): void {
     /*
-    Show the pop up with the correct popup object
-    @return void
+    * Show the pop up with the correct popup object
+    * @param {void}
+    * @return {void}
     */
-    // Show the pop up
     this.visible = true;
   }
 
   public hidePopUp(): void {
     /*
     Hide the pop up
-    @return void
+    @param {void}
+    @return {void}
     */
     this.visible = false;
   }
 
   public usePopUp(obj:{message:String, timedisplay:number, color:String, priority:number, id:number}): void {
+    /*
+    * Use the pop up object to display the pop up
+    * @param {message:String, timedisplay:number, color:String, priority:number, id:number} obj - The pop up object to use
+    * @return {void}
+    */
     this.message = obj.message;
     this.displayTime = obj.timedisplay;
     this.color = obj.color;
@@ -104,9 +111,9 @@ export class PopUpComponent {
   public closeInXSeconds(idToClose:number, time:number): void {
     /*
     Close the pop up in x seconds
-    @param idToClose:number - The id of the pop up to close
-    @param time:number - The time in milliseconds to close the pop up
-    @return void
+    @param {number} idToClose - The id of the pop up to close
+    @param {number} time - The time in milliseconds to close the pop up
+    @return {void}
     */
     setTimeout(() => {
       if (this.id == idToClose) {

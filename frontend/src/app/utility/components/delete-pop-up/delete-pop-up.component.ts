@@ -30,10 +30,20 @@ export class DeletePopUpComponent implements OnInit {
 	}
 
 	onCancelClick() {
+		/*
+		* Emits the delete event
+		* @param {void}
+		* @return {void}
+		*/
 		this.delete.emit(false);
 	}
 
 	onConfirmClick() {
+		/*
+		* Emits the delete event
+		* @param {void}
+		* @return {void}
+		*/
 		this.delete.emit(true);
 	}
 

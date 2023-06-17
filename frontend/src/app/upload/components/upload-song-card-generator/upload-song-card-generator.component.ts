@@ -34,6 +34,10 @@ export class UploadSongCardGeneratorComponent implements OnInit {
 	ngOnInit(): void {} 
 
 	onFileSelected(event: any) {
+		/*
+		* This function is called when the user selects a file to upload
+		* @param {any} event - The event that triggered the function call
+		*/
 		if (event.target.files.length > 0) {
 			const file = event.target.files[0];
 			// checking if it's an audio file
@@ -48,11 +52,21 @@ export class UploadSongCardGeneratorComponent implements OnInit {
 	}
 
 	updateGenres(tags: string[]): void {
+		/*
+		* This function is called when the user selects a genre
+		* @param {string[]} tags - The tags that the user selected
+		* @returns {void}
+		*/
 		this.currentSongTags = tags;
 	}
 
 
 	public addSong() : void {
+		/*
+		* This function is called when the user clicks the add song button
+		* @param {void}
+		* @returns {void}
+		*/
 		const title: string = this.generateForm.get('title')?.value;
 
 		if (title == "" || !this.uploadedSong) return;

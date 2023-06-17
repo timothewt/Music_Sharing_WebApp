@@ -105,6 +105,15 @@ export class LoginPageComponent implements OnInit {
 	}
 
 	registerUser(username: string, email: string, password: string, confirmPassword: string): void {
+		/* 
+		* Register the user
+		* If the registration is successful, log in the user
+		* @param {string} username
+		* @param {string} email
+		* @param {string} password
+		* @param {string} confirmPassword
+		* @return {void}
+		*/
 		
 		if (this.loginForm.get('email')?.invalid) {
 			this.sharedPopUpService.showPopUp({message:"Mail informations incorrect", timedisplay: 1000, color:"red"});

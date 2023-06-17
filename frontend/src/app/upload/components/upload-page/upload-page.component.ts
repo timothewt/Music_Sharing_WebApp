@@ -58,14 +58,30 @@ export class UploadPageComponent {
 	}
 
 	addSongToUploadList(song: UploadSong): void {
+		/*
+		* Add the song to the upload list
+		* @param {UploadSong} song - The song to be added to the upload list
+		* @return {void}
+		*/
 		this.uploadList.push(song);
 	}
 
 	deleteSongAtPos(index:number): void {
+		/*
+		* Delete the song at the given index from the upload list
+		* @param {number} index - The index of the song to be deleted
+		* @return {void}
+		*/
 		this.uploadList.splice(index, 1);
 	}
 
-	onFileSelected(event: any) {
+	onFileSelected(event: any): void {
+		/*
+		* Set the image preview source to the selected file
+		* @param {any} event - The event that triggered the function
+		* @return {void}
+		*/
+
 		if (event.target.files.length > 0) {
 			const file = event.target.files[0];
 			this.coverFile = file;
@@ -79,7 +95,12 @@ export class UploadPageComponent {
 	}
 
 
-	upload(): void{
+	upload(): void {
+		/*
+		* Upload the album and the songs to the server
+		* @param {void}
+		* @return {void}
+		*/
 		//Get the album title from the form group input text
 		const albumTitle: string = this.uploadForm.get('albumTitle')?.value;
 		const albumReleaseYear: number = this.uploadForm.get('albumReleaseYear')?.value;

@@ -55,6 +55,11 @@ export class PlayerComponent implements OnInit {
 	}
 
 	public getQueue(): Queue {
+		/*
+		* Returns the queue from the sharedQueueService
+		* @param {void}
+		* @returns {Queue} The queue
+		*/
 		return this.sharedQueueService.getQueue();
 	}
 

@@ -27,8 +27,8 @@ export class MultiselectComponent implements OnInit {
 	onMouseClick(event: MouseEvent): void {
     /*
     Close the dropdown menu
-    * @param event - the mouse event
-    * @return void
+    * @param {MouseEvent} event - the mouse event
+    * @return {void}
     * */
     if (this.dropdownActive == false){
       this.dropdownOpen = false;
@@ -39,7 +39,8 @@ export class MultiselectComponent implements OnInit {
   openDropDown(): void {
     /*
     Open the dropdown menu
-    * @return void
+    * @param {void}
+    * @return {void}
     */
     this.dropdownOpen = true;
     this.dropdownActive = true;
@@ -48,8 +49,8 @@ export class MultiselectComponent implements OnInit {
   toggleSelection(item: string) {
     /*
     Toggle the selection of an item
-    * @param item - the item to toggle
-    * @return void
+    * @param {string} item - the item to toggle
+    * @return {void}
     * */
     const index = this.selectedItems.indexOf(item);
     if (index > -1) {
@@ -65,8 +66,8 @@ export class MultiselectComponent implements OnInit {
   isSelected(item: string): boolean {
     /*
     Check if the item is selected
-    * @param item - the item to check
-    * @return boolean - true if the item is selected, false otherwise
+    * @param {string} item - the item to check
+    * @return {boolean} - true if the item is selected, false otherwise
     */
     return this.selectedItems.indexOf(item) > -1;
   }
@@ -74,7 +75,8 @@ export class MultiselectComponent implements OnInit {
   filterItems() :void {
     /*
     Filter the items based on the search text
-    * @return void
+    * @param {void}
+    * @return {void}
     */
     this.filteredItems = this.items.filter((item) => item.toLowerCase().includes(this.searchText.toLowerCase()));
   }
@@ -82,7 +84,8 @@ export class MultiselectComponent implements OnInit {
   reset(): void {
     /*
     Empty the multiselect
-    * @return void
+    * @param {void}
+    * @return {void}
     */
     this.selectedItems = [];
     this.searchText = "";
