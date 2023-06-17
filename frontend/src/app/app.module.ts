@@ -8,15 +8,15 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { APIService } from "./services/api.service";
 import { ArrowsNavComponent } from './components/arrows-nav/arrows-nav.component';
 
-import { UtilityModule } from './utility/utility.module';
-import { ArtistPageRoutingModule } from './artist-page/artist-page-routing.module';
-import { AlbumPageRoutingModule } from './album-page/album-page-routing.module';
-import { SongPageRoutingModule } from './song-page/song-page-routing.module';
-import { PlayerModule } from './player/player.module';
-import { HomePageRoutingModule } from './home-page/home-page-routing.module';
-import { SearchPageRoutingModule } from './search-page/search-page-routing.module';
-import { LoginPageRoutingModule } from './login-page/login-page-routing.module';
-import { UploadPageRoutingModule } from './upload/upload-page-routing.module';
+import { UtilityModule } from './modules/utility/utility.module';
+import { ArtistPageRoutingModule } from './modules/pages/artist-page/artist-page-routing.module';
+import { AlbumPageRoutingModule } from './modules/pages/album-page/album-page-routing.module';
+import { SongPageRoutingModule } from './modules/pages/song-page/song-page-routing.module';
+import { PlayerModule } from './modules/player/player.module';
+import { HomePageRoutingModule } from './modules/pages/home-page/home-page-routing.module';
+import { SearchPageRoutingModule } from './modules/pages/search-page/search-page-routing.module';
+import { LoginPageRoutingModule } from './modules/pages/login-page/login-page-routing.module';
+import { UploadPageRoutingModule } from './modules/pages/upload/upload-page-routing.module';
 import { InfoLoginComponent } from './components/info-login/info-login.component';
 import { OverlayHeaderComponent } from './components/overlay-header/overlay-header.component';
 
