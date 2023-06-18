@@ -51,6 +51,18 @@ export class UploadSongCardGeneratorComponent implements OnInit {
 		}
 	}
 
+	emptyFile() {
+		/*
+		* This function clears the file input
+		* @param {void}
+		* @returns {void}
+		*/
+		this.uploadedSong = false;
+		this.recordingFile = new File([], "");
+	}
+
+
+
 	updateGenres(tags: string[]): void {
 		/*
 		* This function is called when the user selects a genre
@@ -86,6 +98,9 @@ export class UploadSongCardGeneratorComponent implements OnInit {
 
 		//Reset the form
 		this.generateForm.reset();
+
+		//Reset the file input
+		this.emptyFile();
 	}
 
 }

@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Song } from 'src/app/models/song';
 import { Album } from 'src/app/models/album';
 import { User } from 'src/app/models/user';
-
-import { ActivatedRoute } from '@angular/router';
 import { APIService } from 'src/app/services/api.service';
 import { SharedQueueService } from 'src/app/services/shared-queue.service';
 
@@ -30,7 +28,7 @@ export class HomePageComponent implements OnInit {
 			}
 		);
 		// Fetching popular albums
-		this.apiService.getAlbums({limit: 6, mostPopular: true}).subscribe(
+		this.apiService.getAlbums({limit: 8, mostPopular: true}).subscribe(
 			(response: any) => {
 				for(let i = 0; i < response.length; i++) {
 					let album = new Album().deserialize(response[i]);
@@ -39,7 +37,7 @@ export class HomePageComponent implements OnInit {
 			}
 		);
 		// Fetching popular artists
-		this.apiService.getUsers({limit: 6, mostPopular: true}).subscribe(
+		this.apiService.getUsers({limit: 8, mostPopular: true}).subscribe(
 			(response: any) => {
 				for(let i = 0; i < response.length; i++) {
 					let artist = new User().deserialize(response[i]);

@@ -57,14 +57,15 @@
                 img {
                     height: 5vh;
                     aspect-ratio: 1/1;
-                    filter: invert(100%);
+                    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
                 }
             }
 
             &.uploaded {
                 label {
                     img {
-                        filter: invert(50%);
+                        /* set color of svg to green */
+                        filter: invert(41%) sepia(96%) saturate(885%) hue-rotate(91deg) brightness(99%) contrast(95%);
                     }
                 }
             }
