@@ -14,7 +14,7 @@ import { SharedAuthService } from 'src/app/services/shared-auth.service';
 export class SongPageComponent implements OnInit {
 
 	public song: Song = new Song();
-	public color: string = "#000000";
+	public color: string = "#181818";
 	public isFavorite: boolean = false;
 	public isLoggedInUserSong: boolean = false;
 	public isDeleting: boolean = false;

@@ -38,6 +38,7 @@ The database of this web app uses django's built in sql database. We filled it w
 - Recommandation system based on songs tags similarities
 - Search system to navigate easily and find your favorite artist
 - Add music to your current songs queue, stop, resume, adjust the volume of the songs
+- Lazy loading (to optimize the SPA)
 
 # Getting Started
 
@@ -52,18 +53,15 @@ In order to start this website locally you will need :
 
 ## Installation
 
-Clone the repository locally 
+First, get the files of the project :
+
+Clone the repository locally (if you don't already have the .zip folder)
 
 ```cmd
-git clone 
+git clone https://github.com/timothewt/WE4B_Project/tree/dev1
 ```
 
 ### Install backend
-
-Go to the backend folder
-```cmd 
-cd backend
-```
 
 Using your python interpreter (or a virtual environment), make sure you have all the libraries needed
 ```cmd
