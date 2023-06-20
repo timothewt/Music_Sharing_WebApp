@@ -1,0 +1,128 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.login-page{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+
+    .title {
+        font-size: 30px;
+        font-weight: bold;
+
+        h1 {
+            color: white;
+        }
+    }
+
+    .options {
+        display: flex; 
+        flex-direction: row;
+        width: 30%;
+        justify-content: center;
+        gap: 20px;
+
+        button {
+            cursor: pointer;
+            padding: 10px;
+            border: none;
+            background: transparent;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        button.active {
+            border-bottom: 2px solid white;
+        }
+
+
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+
+        width: 30%;
+        gap: 20px;
+
+
+        padding: 10px;
+
+        input {
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            height: 40px;
+            padding: 10px;
+
+            &:focus {
+                background-color: #444;
+            }
+        }
+
+
+        button {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+            background-color: #333;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            height: auto;
+            width: 20%;
+            cursor: pointer;
+
+            img {
+                height: 20px;
+                width: 20px;
+                display: none;
+                filter: invert(100%);
+            }
+
+            span {
+                display: block;
+                color: white;
+                font-weight: bold;
+                font-size: 16px;
+            }
+
+            &:has(img.show){
+                img {
+                    display: block;
+                    animation: rotateSpinner 2s linear infinite;
+                }
+                span {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .login-page{
+        form {
+            width: 80%;
+        }
+    }
+}
+
+@keyframes rotateSpinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

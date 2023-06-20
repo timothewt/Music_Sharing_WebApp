@@ -1,0 +1,27 @@
+<div id="queue-container">
+	<div id="queue-title">
+		<h2>Songs Queue</h2>
+		<img src="../../assets/close-icon.svg" (click)="toggleQueueVisibility.emit()">
+	</div>
+	<div id="queue-songs">
+		<div class="queue-element" *ngFor="let song of getQueue().getSongs(); let index = index;" (click)="changeQueueSongIndex(index);" [style.backgroundColor]="(getQueue().getCurrentSongIndex() == index) ? '#333' : '#252525'">
+			<p class="song-index">{{index + 1}}</p>
+			<img [src]="song.album.cover">
+			<div class="song-titles">
+				<h3>
+					{{song.name}}
+				</h3>
+				<h4>
+					{{song.album.artist.username}}
+				</h4>
+			</div>
+			<div class="queue-controler">
+				<img src="../../assets/delete-icon.svg" (click)="deleteSongFromQueue($event, index)" class="delete-song-btn">
+				<div class="queue-reorder">
+					<img src="../../assets/triangle-icon.svg" class="move-song-before" (click)="moveSongInQueue($event, index, -1)">
+					<img src="../../assets/triangle-icon.svg" class="move-song-after" (click)="moveSongInQueue($event, index, +1)">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,50 @@
+<div class="album-page"> 
+
+	<div class="album-header">
+		<div class="cover">
+			<img src="{{this.album.cover}}" alt="">
+		</div>
+		<div class="text">
+			<h1 class="title">{{this.album.name}}</h1>
+			<div class="infos">
+				<a routerLink="/artist/{{this.album.artist.id}}" class="artist"> {{this.album.artist.username}}</a>
+				<p class="dot">-</p>
+				<p class="date"> {{this.album.releaseYear}} </p>
+			</div>
+		</div> 
+	</div>
+	<div class="more-of-album">
+		<div *ngIf="isLoggedInUserAlbum">
+			<button class="btn-delete" (click)="isDeleting = true;">Delete album</button>
+			<app-delete-pop-up [toDeleteType]="'Album'" [objectToDelete]="album" (delete)="handleDialogAnswer($event)" *ngIf="isDeleting"></app-delete-pop-up>
+		</div>
+		<div class="actions">
+			<button class="play-button" (click)="addAlbumToQueue()">
+				<img src="../../assets/play-icon-2.svg" alt="Play">
+			</button>
+
+            <button class="like-button" (click)="addToFavorites()" *ngIf="authService.loggedIn && !isFavorite">
+                <img src="../../assets/heart-icon.svg" alt="Like">
+            </button>
+
+            <button class="like-button" (click)="removeFromFavorites()" *ngIf="authService.loggedIn && isFavorite">
+                <img src="../../assets/heart-icon-full.svg" alt="Unlike">
+            </button>
+		</div>  
+		<div>
+			<div *ngFor="let song of songs; let index = index">
+				<app-song [song]="song" [index]="index+1"></app-song>
+			</div>
+		</div>
+		<div class="section">
+			<h2>Similar</h2>
+			<div class="list-style1">
+				<app-album *ngFor="let album of similarAlbums" [album]="album"></app-album>
+			</div>
+		</div>
+		<div class="section" *ngIf="album.description.length > 0">
+			<h3>Description</h3>
+			<p>{{album.description}}</p>
+		</div>
+	</div>
+</div>

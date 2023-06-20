@@ -1,0 +1,25 @@
+<form [formGroup]="uploadForm" class="upload-page">
+    <h1>Upload a new album</h1>
+    <div class="upload-header">
+        <div class="upload-header-cover">
+            <input type="file" id="album-cover" accept="image/*" (change)="onFileSelected($event)">
+            <label for="album-cover">
+                <img [src]="this.imagePreviewSrc" alt="Album Cover">
+            </label>
+        </div>
+        <div class="upload-header-title">
+            <input type="text" id="album-name" placeholder="Album name" formControlName="albumTitle">
+            <input type="text" id="album-release" placeholder="2023" formControlName="albumReleaseYear">
+            <input type="text" id="album-desc" placeholder="Album short description" formControlName="albumDescription">
+
+        </div>
+    </div>
+    <div class="upload-board">
+        <app-upload-song-card-generator [tags]="tags" (songAddEvent)="addSongToUploadList($event)" ></app-upload-song-card-generator>
+        <app-upload-song-card *ngFor="let song of uploadList; let index=index" [song]="song" [index]="index" (deleteSongEvent)="deleteSongAtPos($event)"></app-upload-song-card>
+    </div>
+
+    <div class="upload-button-container">
+        <button (click)="upload()">Upload</button>
+    </div>
+</form>

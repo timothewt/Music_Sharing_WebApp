@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: white;
+}
+
+.search-page {
+    // background-color: #282828;
+    overflow-y: auto;
+
+    height: 100%;
+    width: 100%;
+
+    padding-top: 10vh;
+
+    gap: 10px;
+
+    .search-zone {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;    
+        width: 100%;
+
+        gap: 10px;
+
+        .search-bar {
+            width: 80%;
+        }
+
+        .list-flair{
+            display: flex;
+            flex-direction: row;
+            justify-content: left;
+            gap: 10px;
+
+            .flair {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 5px 10px;
+                border-radius: 5px;
+                background-color: #333;
+                color: #fff;
+                font-size: 1.2rem;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+
+                &:hover {
+                    background-color: #444;
+                }
+
+                &.active {
+                    background-color: #444;
+                }
+
+                &.selected-flair {
+                    background-color: #BBB;
+                    p {
+                        color: black;
+                    }
+                }
+            }
+        }
+    }
+    .songs-list .search-results {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .artists-list .search-results, .albums-list .search-results {
+        display: flex;
+        flex-direction: row;
+        padding: 10px;
+        justify-content: left;
+        overflow-x: auto;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        padding: 10px;
+    }
+}
+
+
+@media only screen and (max-width: 800px) {
+    .search-page {
+        .search-zone {
+            .search-bar {
+                width: 100%;
+            }
+        }
+    }
+}

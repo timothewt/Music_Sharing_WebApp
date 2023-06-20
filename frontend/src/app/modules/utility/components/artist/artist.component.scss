@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    
+    &:hover {
+        text-decoration: underline;
+        color: inherit;
+    } 
+}
+
+
+.artist {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+    background-color: #181818;
+    border-radius: 7px;
+    width: 240px;
+    color: white;
+    transition: background-color 0.1s ease-in-out;
+
+    .img-zone {
+        padding: 10px;
+
+        .profile-picture {
+            width: 200px;
+            height: 200px;
+            border-radius: 100%;
+            box-shadow: 0px 0px 20px 0px black;
+            object-fit: cover;
+            cursor: pointer;
+        }    
+    }
+    
+    .album-infos {
+        padding: 10px;
+
+        .name {
+            display: block;
+            font-weight: bold;
+            color: white;
+        }
+    }
+
+    &:hover {
+        background-color: #222;
+    }
+}

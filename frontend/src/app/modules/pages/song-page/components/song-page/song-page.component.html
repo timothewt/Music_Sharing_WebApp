@@ -1,0 +1,46 @@
+<div class="song-page" [ngStyle]="{'background-color': this.color}"> 
+
+    <div class="song-header">
+        <div class="cover">
+            <a routerLink="/album/{{this.song.album.id}}">
+                <img src="{{this.song.album.cover}}" alt="">
+            </a>
+        </div>
+        <div class="text">
+            <h1 class="title">{{this.song.name}}</h1>
+            <div class="infos">
+                <a routerLink="/artist/{{this.song.album.artist.id}}" class="artist"> {{this.song.album.artist.username}}</a>
+                <p class="dot">-</p>
+                <p class="date"> {{this.song.releaseYear}} </p>
+                <p class="dot">-</p>
+                <p class="duration"> {{this.song.duration | nicetime}}</p>
+            </div>
+        </div> 
+    </div>
+    <div class="more-of-song">
+        <div *ngIf="isLoggedInUserSong">
+            <button class="btn-delete" (click)="isDeleting = true;">Delete song</button>
+            <app-delete-pop-up [toDeleteType]="'Song'" [objectToDelete]="song" (delete)="handleDialogAnswer($event)" *ngIf="isDeleting"></app-delete-pop-up>
+        </div>
+        <div class="actions">
+            <button class="play-button" (click)="playSong()">
+                <img src="../../assets/play-icon-2.svg" alt="Play">
+            </button>
+
+            <button class="like-button" (click)="addToFavorites()" *ngIf="authService.loggedIn && !isFavorite">
+                <img src="../../assets/heart-icon.svg" alt="Like">
+            </button>
+
+            <button class="like-button" (click)="removeFromFavorites()" *ngIf="authService.loggedIn && isFavorite">
+                <img src="../../assets/heart-icon-full.svg" alt="Unlike">
+            </button>
+        </div>
+
+        <div class="section">
+            <h2>Similar</h2>
+            <div class="list-style1">
+                <app-song *ngFor="let song of similarSongs; let index=index" [song]="song" [index]="index+1"></app-song>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="dialog-overlay">
+	<div class="dialog-content">
+		<h1>{{toDeleteType}} deletion</h1>
+		<p>Are you sure you want to delete your {{toDeleteTypeInContent}}? This action cannot be undone.</p>
+		<div class="dialog-actions">
+			<button (click)="onCancelClick()">Cancel</button>
+			<button class="btn-confirm" (click)="onConfirmClick()">Confirm</button>
+		</div>
+	</div>
+</div>

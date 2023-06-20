@@ -1,0 +1,159 @@
+.track-details {
+    /*Temp solution to width issue*/
+    min-height: 7vh;
+
+    display: grid;
+    grid-template-columns: .5fr .5fr 6fr .5fr 0.5fr;
+    grid-template-rows: 1fr;
+
+    flex-direction: row;
+    gap: 10px;
+    padding: 10px;
+    color: white;
+
+    border-radius: 10px;
+
+    transition: background-color 0.2s ease-in-out;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+
+    a {
+        text-decoration: none;
+        color: white;
+
+        &:hover {
+            text-decoration: underline;
+            color: white;
+        }
+    }
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+
+        .play-or-index {
+            .play {
+                visibility: visible;
+            }
+            .index {
+                visibility: hidden;
+            }
+        }
+
+    }
+    
+    img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+    }
+    
+    .play-or-index {
+
+        position: relative;
+
+        .index {
+            position: absolute;
+            visibility: visible;
+            width: 7%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .play {
+            height: 100%;
+            visibility: hidden;
+
+            position: absolute;
+            display: flex;
+
+            border: none;
+            background: none;
+            cursor: pointer;
+
+            img {
+                aspect-ratio: 1/1;
+                height: 70%;
+                width: auto;
+                transform: translate(-25%, 20%);
+            }
+        }
+    }
+
+    
+    .cover {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        a {
+            img {
+                aspect-ratio: 1/1;
+                height: 100%;
+            }
+        }
+    }
+    
+    .title {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+
+        font-size: 1.2rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    
+    .listened {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+    }
+
+    .more {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        button {
+            border: none;
+            background: none;
+            cursor: pointer;
+
+            img {
+                width: 20px;
+                height: 20px;
+                object-fit: cover;
+            }
+
+        }
+    }
+    
+}
+
+
+
+@media screen and (max-width: 800px) {
+    .track-details {
+        .play-or-index {
+            .index {
+                visibility: hidden;
+            }
+            .play {
+                visibility: visible;
+                transform: translate(-20%, 0);
+            }
+        }
+    }
+}

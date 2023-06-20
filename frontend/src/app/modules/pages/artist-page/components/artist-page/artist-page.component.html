@@ -1,0 +1,69 @@
+<div class="artist-page">
+    <div class="artist-infos">
+        <!--On over show input to change pp-->
+        <div class="hover-change">
+            <img class="pfp" [src]="artist.profilePic" (onError)="invalidUrl()"> 
+            <div class="change-pfp" *ngIf="authService.loggedIn && authService.currentUserID == artist.id">
+                <input type="file" id="profile-pic" accept="image/*" (change)="changePDP($event)">
+                <label for="profile-pic">
+                    <img src="../../../assets/upload-icon.svg" alt="Upload">
+                </label>
+            </div>
+        </div>
+        <h1 id="artist-name">{{artist.username}}</h1>
+    </div>
+    <div class="more">
+        <div class="profile-edition" *ngIf="authService.loggedIn && authService.currentUserID == artist.id">
+            <button (click)="logout()" class="button-edition">Logout</button>
+            <button (click)="upload()" class="button-edition">Upload new album</button>
+            <button (click)="deleteAccount()" class="button-edition btn-delete">Delete account</button>
+            <app-delete-pop-up [toDeleteType]="'Account'" [objectToDelete]="artist" (delete)="handleDialogAnswer($event)" *ngIf="isDeleting"></app-delete-pop-up>
+        </div>
+            
+
+        <div class="section" *ngIf="authService.loggedIn && authService.currentUserID == artist.id">
+            <h2>
+                Favorite Songs
+            </h2>
+            <div class="songs-list">
+                <app-song *ngFor="let song of favoriteSongs" [song]="song"></app-song>
+            </div>
+
+            <h2>
+                Favorite Albums
+            </h2>
+            <div class="list-style1">
+                <app-album *ngFor="let album of favoriteAlbums" [album]="album"></app-album>
+            </div>
+        </div>
+
+        <div class="section">
+            <div>
+                <h2>Popular</h2>
+                <button class="play-button" (click)="addArtistSongsToQueue()">
+                    <img src="../../../assets/play-icon-2.svg" alt="Play">
+                </button>
+            </div>
+            <div class="list-style2">
+                <div *ngFor="let song of artistSongs | slice:0:5; let index = index">
+                    <app-song [song]="song" [index]="index+1"></app-song>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Albums</h2>
+            <div class="list-style1">
+                <app-album *ngFor="let album of artistAlbums" [album]="album"></app-album>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Similar</h2>
+            <div class="list-style1">
+                <app-artist *ngFor="let artist of similarArtists" [artist]="artist"></app-artist>
+            </div>
+        </div>
+        
+    </div>
+</div>

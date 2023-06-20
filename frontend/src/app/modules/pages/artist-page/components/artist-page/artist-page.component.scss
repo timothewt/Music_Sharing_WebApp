@@ -1,0 +1,191 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.artist-page {
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: 0.2fr auto;
+	height: 100%;
+
+	.artist-infos {
+		margin-top: 7vh;
+		display: flex;
+		flex-direction: row;
+		padding: 10px;
+		gap: 10px;
+		align-items: flex-end;
+
+
+		.hover-change {
+			position: relative;
+			height: 200px;
+			width: 200px;
+
+			img.pfp {
+				height: 200px;
+				width: 200px;
+				border-radius: 50%;
+				object-fit: cover;
+			}
+
+			.change-pfp {
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 200px;
+				width: 200px;
+
+				display: none;
+
+				input {
+					display: none;
+				}
+
+				label {
+					img {
+						height: 50px;
+						width: 50px;
+						border-radius: 50%;
+						object-fit: cover;
+						filter: invert(100%);
+						position: absolute;
+						cursor: pointer;
+						transform: translate(-50%, -50%);
+					}
+				}
+			}
+			&:hover {
+				.change-pfp {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				}
+			}
+
+			&:has(.change-pfp){
+
+				&:hover {
+					img.pfp {
+						filter: brightness(0.5);
+					}
+				}
+			}
+		}
+
+
+		p {
+			color: white;
+		}
+			
+		h1 {
+			color: white;
+			font-size: 4em;
+			font-style: bold;
+		}
+	}
+	.list-style1 {
+		overflow-x: auto;
+		display: flex;
+		flex-direction: row;
+		gap: 10px;
+	}
+
+	.list-style2 {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+	
+	.more {
+
+		.profile-edition {
+			display: flex;
+			flex-direction: row;
+			gap: 10px;
+
+			width: 100%;
+
+			.button-edition {
+				padding: 10px;
+				border: none;
+				border-radius: 5px;
+				background-color: #333;
+				color: #fff;
+				font-size: 1.2rem;
+				outline: none;
+				transition: all 0.2s ease-in-out;
+				cursor: pointer;
+		
+				&:hover {
+					background-color: #444;
+				}
+
+				&.btn-delete {
+					background-color: red;
+				}
+			}
+		}
+
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		align-items: flex-start;
+		padding: 10px;
+
+		/*background: linear-gradient(180deg, rgba(16,29,27,1) 0%, rgba(18,18,18,1) 100%);*/
+		background: #1c1c1c;
+	
+		div {
+			h2 {
+				color: white;
+				font-size: 2em;
+				font-style: bold;   
+			}
+		}
+
+		.section {
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+			width: 100%;
+
+			.songs-list {
+				display: grid;
+				grid-template-columns: 1fr 1fr; 
+			}
+
+			> div:first-child {
+				display: flex;
+				align-items: center;
+
+				.play-button {
+					height: 50px;
+					background: none;
+					border: none;
+
+					img {
+						height: 100%;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	.artist-page {
+
+		.more {
+
+			.section {
+				.songs-list {
+					display: grid;
+					grid-template-columns: 1fr; 
+				}
+			}   
+		}
+	}
+}

@@ -1,0 +1,169 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.song-page {
+
+    position: relative;
+    display: grid;
+    grid-template-areas: 
+        "header"
+        "more";
+    grid-template-rows: 1fr 1.7fr;
+
+
+    height: 100%;
+
+    //Reset style of a tag
+    a {
+        text-decoration: none;
+        color: inherit;
+        
+        &:hover {
+            text-decoration: underline;
+            color: inherit;
+        }
+    }
+
+    .banner-img {
+        position: absolute;
+        top: -20%;
+        left: -40%;
+        width: 200%;
+        height: 120%;
+        overflow: hidden;
+
+        z-index: -100;
+
+        img {
+            width: 140%;
+            height: 140%;
+            object-fit: cover;
+            filter: brightness(0.5) blur(100px);
+        }
+    }
+    .song-header {
+        grid-area: header;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: left;
+
+        padding: 10px;
+        padding-top: 80px;
+
+        .cover {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            a {
+                margin-left: 20px;
+                margin-right: -50px;
+                img {
+                    width: 70%;
+                    height: 70%;
+                    object-fit: cover;
+
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+                }
+            }
+        }
+
+        .text {
+            
+            .title {
+                font-weight: bold;
+                font-size: 4rem;
+                color: white;
+                margin-bottom: 0;
+            }
+
+            .infos {
+                color: aliceblue;
+                display: flex;
+                flex-direction: row;
+                font-size: 1.2rem;
+
+                gap: 4px;
+            }
+        }
+    }
+    .more-of-song {
+        grid-area: more;
+
+        display: flex;
+        flex-direction: column;
+        background: #1c1c1c;
+
+        padding: 10px;
+
+        background: rgba(28, 28, 28, 1);
+
+        .btn-delete {
+            color: white;
+            background-color:red;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .actions {
+            height: 10vh;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
+            padding-left: 45px;
+
+            //Remove default style from buttons
+            button{
+                border: none;
+                background: none;
+            }
+
+            .like-button {
+                img {
+                    width: 50px;
+                    height: 50px;
+                    object-fit: cover;
+                }
+            }
+
+            .play-button {
+                img {
+                    width: 50px;
+                    height: 50px;
+                    object-fit: cover;
+                }
+            }
+        }
+
+        .section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px;
+            
+            h2 {
+                font-size: 2rem;
+                font-weight: bold;
+                color: white;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .song-page {
+        .song-header {
+            padding-top: 7vh;
+        }
+    }
+}

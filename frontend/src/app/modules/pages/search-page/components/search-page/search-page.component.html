@@ -1,0 +1,37 @@
+<div class="search-page">
+    <div class="search-zone">
+        <app-search-bar (searchEvent)="displaySearch($event)" class="search-bar"></app-search-bar>
+        <div class="list-flair">
+            <div class="flair" [ngClass]="searchType == 'all' ? 'selected-flair' : ''" (click)="changeSearchType('all')">
+                <p>All</p>
+            </div>
+            <div class="flair" [ngClass]="searchType == 'songs' ? 'selected-flair' : ''" (click)="changeSearchType('songs')">
+                <p>Songs</p>
+            </div>
+            <div class="flair" [ngClass]="searchType == 'artists' ? 'selected-flair' : ''" (click)="changeSearchType('artists')">
+                <p>Artists</p>
+            </div>
+            <div class="flair" [ngClass]="searchType == 'albums' ? 'selected-flair' : ''" (click)="changeSearchType('albums')">
+                <p>Albums</p>
+            </div>
+        </div>
+    </div>
+    <div class="songs-list" *ngIf="(searchType === 'all' || searchType === 'songs') && songsSearchResults.length > 0">
+        <h2 class="section-title">Songs</h2>
+        <div class="search-results">
+            <app-song *ngFor="let song of songsSearchResults; let index = index" [song]="song" [index]="index + 1"></app-song>
+        </div>
+    </div>
+    <div class="albums-list" *ngIf="(searchType === 'all' || searchType === 'albums') && albumsSearchResults.length > 0">
+        <h2 class="section-title">Albums</h2>
+        <div class="search-results">
+            <app-album *ngFor="let album of albumsSearchResults; let index = index" [album]="album"></app-album>
+        </div>
+    </div>
+    <div class="artists-list" *ngIf="(searchType === 'all' || searchType === 'artists') && artistsSearchResults.length > 0">
+        <h2 class="section-title">Artists</h2>
+        <div class="search-results">
+            <app-artist *ngFor="let artist of artistsSearchResults; let index = index" [artist]="artist"></app-artist>
+        </div>
+    </div>
+</div>

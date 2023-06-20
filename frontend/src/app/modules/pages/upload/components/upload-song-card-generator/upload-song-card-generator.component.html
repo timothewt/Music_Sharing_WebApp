@@ -1,0 +1,23 @@
+<div class="upload-song-generator">
+    <form [formGroup]="generateForm" onsubmit="return false">
+
+        <!--Song file input field-->
+        <div class="song-input-container" [ngClass]="uploadedSong ? 'uploaded' : ''" >
+            <label for="song-file">
+                <img src="../../../assets/upload-icon.svg" alt="Upload">
+            </label>
+            <input type="file" id="song-file" accept="audio/*" (change)="onFileSelected($event)">
+        </div>
+            
+        <!--Song name input field-->
+        <input type="text" id="song-name" placeholder="Song Name" formControlName="title">
+    
+        <!--Song genre selection -->
+        <app-multiselect [items]="tags" (onSelectionChange)="updateGenres($event)"></app-multiselect>
+
+        <!--Song add button to album-->
+        <button (click)="addSong()">
+            <img src="../../../assets/plus-icon.svg" alt="Add Song">
+        </button>
+    </form>
+</div>

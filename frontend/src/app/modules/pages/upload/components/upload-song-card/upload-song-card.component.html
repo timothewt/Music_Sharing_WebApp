@@ -1,0 +1,18 @@
+<div class="song-upload-card">
+    <h2 class="song-title">{{song.name}}</h2>
+
+    <!--Song tags-->
+    <div class="song-tags">
+        <span *ngFor="let tag of song.tags">{{tag}}</span>
+    </div>
+
+    <!--Audio preview-->
+    <audio controls>
+        <source [src]="songUrl" type="audio/mpeg">
+    </audio>
+    
+    <!--Delete icon-->
+    <div class="delete-icon-container">
+        <img src="../../../assets/delete-icon.svg" alt="Delete" (click)="deleteSong()">
+    </div>
+</div>

@@ -1,1 +1,43 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+	margin: 0;
+	overflow: hidden;
+	height: 100vh;
+	width: 100vw;
+    background-color: #181818;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Source+Sans+Pro&display=swap'); // importing google font families
+
+* {
+	font-family: 'Source Sans Pro', 'Montserrat', sans-serif;
+}
+
+// Changing the scrollbar in all the website
+
+::-webkit-scrollbar {
+	width: 4px;
+	height: 4px;
+
+}
+
+::-webkit-scrollbar-track {
+	background: #BBB; 
+}
+ 
+::-webkit-scrollbar-thumb {
+	background: #555;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #333; 
+}
+
+@media screen and (max-width: 800px) {
+	html, body {
+		width: 100vw;
+		height: 100vh;
+		margin: 0;
+		padding: 0;
+	}
+}
