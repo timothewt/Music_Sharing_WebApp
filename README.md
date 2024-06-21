@@ -1,4 +1,4 @@
-<h1 align="center">WE4B MUSIC SHARING WEBSITE</h1>
+<h1 align="center">MUSIC SHARING WEBSITE</h1>
 
 # Table of Contents
 - [About the Project](#about-the-project)
